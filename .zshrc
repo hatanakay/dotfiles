@@ -72,8 +72,8 @@ bindkey "^N" history-beginning-search-forward-end
 autoload -U compinit #補完機能
 compinit
 
-autoload -U predict-on # 先方予測機能
-predict-on
+#autoload -U predict-on # 先方予測機能
+#predict-on
 
 setopt auto_cd
 setopt auto_pushd
