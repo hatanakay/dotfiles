@@ -33,10 +33,11 @@ source $ZSH/oh-my-zsh.sh
 #=============================
 # PATH
 #=============================
-export PATH=/Users/h222/.rvm/gems/ruby-1.9.2-p290/bin:/Users/h222/.rvm/gems/ruby-1.9.2-p290@global/bin:/Users/h222/.rvm/rubies/ruby-1.9.2-p290/bin:/Users/h222/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+export PATH=/Users/Users/h222/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 export PATH=$PATH:/Users/h222/Developer/android-sdk-macosx/tools
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 export PATH=$HOME/.rvm/bin:$PATH
+export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 
 #=============================
 # Alias
@@ -116,6 +117,9 @@ zstyle ':completion:sudo:*' environ PATH="$SUDO_PATH:$PATH" # sudo時にはsudo�
 zstyle ':vcs_info:*' enable git # svn hg bzr # git以外ではvcs_infoを利用しない
 
 # set terminal title including current directory
+#
+
+#
 #
 case "${TERM}" in
     kterm*|xterm)
