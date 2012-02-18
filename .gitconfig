@@ -21,3 +21,7 @@
   editor = vim
 [http]
   sslVerify = false
+[tig "bind"]
+  generic = g move-first-line
+  generic = G move-last-line
+

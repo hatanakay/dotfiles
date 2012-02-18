@@ -5,6 +5,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+#ZSH_THEME="robbyrussell"
 ZSH_THEME="robbyrussell"
 
 # Set to this to use case-sensitive completion
@@ -24,7 +25,7 @@ ZSH_THEME="robbyrussell"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew autojump ruby rails )
+plugins=(git brew autojump ruby rails3 )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -33,11 +34,10 @@ source $ZSH/oh-my-zsh.sh
 #=============================
 # PATH
 #=============================
-export PATH=/Users/Users/h222/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
-export PATH=$PATH:/Users/h222/Developer/android-sdk-macosx/tools
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-export PATH=$HOME/.rvm/bin:$PATH
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+export PATH=$PATH:$HOME/.rbenv/bin
+eval "$(rbenv init -)"
 
 #=============================
 # Alias
