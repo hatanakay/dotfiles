@@ -194,6 +194,25 @@ set clipboard+=unnamed
 "powerline
 let g:Powerline_symbols='fancy'
 "---------------------------------------------------------------------------
+" Unite.vim
+let g:unite_enable_start_insert=1
+" バッファ一覧
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+" ファイル一覧
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+" レジスタ一覧
+nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+" 最近使用したファイル一覧
+nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
+" 常用セット
+nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
+" 全部乗せ
+nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+" colorscheme
+nnoremap <silent> ,uc :<C-u>Unite colorscheme<CR>
+
+"---------------------------------------------------------------------------
+
 "neobundle
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim
