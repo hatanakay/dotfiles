@@ -31,7 +31,8 @@ set hlsearch
 set showmatch
 " ビジュアルベル
 set visualbell
-
+"ファイル名補完
+set wildmode=list:longest
 "---------------------------------------------------------------------------
 " 検索の挙動に関する設定:
 "
@@ -194,6 +195,7 @@ set clipboard+=unnamed
 "powerline
 let g:Powerline_symbols='fancy'
 "---------------------------------------------------------------------------
+"Unite.vim
 " Unite.vim
 let g:unite_enable_start_insert=1
 " バッファ一覧
@@ -211,8 +213,9 @@ nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mr
 " colorscheme
 nnoremap <silent> ,uc :<C-u>Unite colorscheme<CR>
 
-"---------------------------------------------------------------------------
 
+
+"---------------------------------------------------------------------------
 "neobundle
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim
@@ -243,4 +246,5 @@ NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'Shougo/git-vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Shougo/vimfiler'
+NeoBundle 'https://github.com/banyan/Nonopaste.vim.git'
 
