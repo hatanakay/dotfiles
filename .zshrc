@@ -36,16 +36,30 @@ source $ZSH/oh-my-zsh.sh
 #=============================
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
-export PATH=$PATH:$HOME/.rbenv/bin
-eval "$(rbenv init -)"
+export NODE_PATH=/usr/local/lib/node_modules
+
+
+if [ -d ~/.rbenv ]; then
+    export PATH=$PATH:$HOME/.rbenv/bin
+    eval "$(rbenv init -)"
+fi
 
 #=============================
 # Alias
 #=============================
-alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias ls='ls -hal -G -w'
-alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
+case "${OSTYPE}" in
+    freebsd*|darwin*)
+        alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+        alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+        alias ls='ls -hal -G -w'
+        alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
+            ;;
+    linux*)
+        alias ls="ls --color"
+        ;;
+    solaris*)
+        alias ls='gls -F --color=auto '
+esac
 
 #=============================
 # history
