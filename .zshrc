@@ -60,6 +60,7 @@ case "${OSTYPE}" in
     solaris*)
         alias ls='gls -F --color=auto '
 esac
+alias irb='irb --simple-prompt'
 
 #=============================
 # history
