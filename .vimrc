@@ -222,6 +222,13 @@ augroup Shebang
 augroup END
 
 "---------------------------------------------------------------------------
+" memolist.vim
+map <Leader>mn  :MemoNew<CR>
+map <Leader>ml  :MemoList<CR>
+map <Leader>mg  :MemoGrep<CR>
+
+
+"---------------------------------------------------------------------------
 "neobundle
 if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim
@@ -254,4 +261,6 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'https://github.com/banyan/Nonopaste.vim.git'
 NeoBundle 'https://github.com/tpope/vim-surround.git'
+NeoBundle 'https://github.com/vim-scripts/SQLUtilities.git'
+NeoBundle 'glidenote/memolist.vim'
 

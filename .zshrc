@@ -150,3 +150,13 @@ if [ -f `brew --prefix`/etc/autojump ]; then
   . `brew --prefix`/etc/autojump
 fi
 
+#表示されているコマンドラインを
+#Ctrl-x Ctrl-pでクリップボードにコピー
+pbcopy-buffer(){ 
+    echo $BUFFER | pbcopy
+    zle -M "pbcopy: ${BUFFER}" 
+}
+
+zle -N pbcopy-buffer
+bindkey '^x^p' pbcopy-buffer
+
