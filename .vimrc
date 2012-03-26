@@ -227,7 +227,21 @@ map <Leader>mn  :MemoNew<CR>
 map <Leader>ml  :MemoList<CR>
 map <Leader>mg  :MemoGrep<CR>
 
+"---------------------------------------------------------------------------
+"FuzzyFinder
 
+nmap mf  :FufFile <C-r>=expand(g:memolist_path."/")<CR><CR>
+nnoremap <unique> <silent> <space>fb :FufBuffer!<CR>
+nnoremap <unique> <silent> <space>ff :FufFile!<CR>
+nnoremap <unique> <silent> <space>fm :FufMruFile!<CR>
+nnoremap <unique> <silent> <Space>fc :FufRenewCache<CR>
+autocmd FileType fuf nmap <C-c> <ESC>
+let g:fuf_patternSeparator = ' '
+let g:fuf_modesDisable = ['mrucmd']
+let g:fuf_mrufile_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
+let g:fuf_mrufile_maxItem = 100
+let g:fuf_enumeratingLimit = 20
+let g:fuf_file_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
 "---------------------------------------------------------------------------
 "neobundle
 if has('vim_starting')
@@ -263,4 +277,5 @@ NeoBundle 'https://github.com/banyan/Nonopaste.vim.git'
 NeoBundle 'https://github.com/tpope/vim-surround.git'
 NeoBundle 'https://github.com/vim-scripts/SQLUtilities.git'
 NeoBundle 'glidenote/memolist.vim'
-
+NeoBundle 'L9'
+NeoBundle 'FuzzyFinder'
