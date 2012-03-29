@@ -11,6 +11,8 @@ set cindent
 set shiftwidth=4
 " バックスペースでインデントや改行を削除
 set backspace=indent,eol,start
+"molokai
+let g:molokai_original = 1
 colorscheme molokai
 "---------------------------------------------------------------------------
 " 表示に関する設定:
@@ -57,28 +59,8 @@ filetype indent on
 filetype plugin on
 au FileType ruby set ts=2 sw=2 expandtab
 "vim-ruby
-set nocompatible
 compiler ruby
 let ruby_space_errors=1
-"---------------------------------------------------------------------------
-
-"タブ関連
-if has('gui_macvim')
-    set showtabline=2  "// タブを常に表示
-    set imdisable      "// IMを無効化
-    map <silent> gw :macaction selectNextWindow:
-    map <silent> gW :macaction selectPreviousWindow:
-    set lines=90 columns=200
-    augroup cch
-        autocmd! cch
-        autocmd WinLeave * set nocursorline
-        autocmd WinEnter,BufRead * set cursorline
-    augroup END
-    :hi clear CursorLine
-    :hi CursorLine gui=underline
-    highlight CursorLine ctermbg=black guibg=black
-
-endif
 "---------------------------------------------------------------------------
 " neocomplcache
 let g:acp_enableAtStartup = 0
@@ -95,22 +77,12 @@ highlight SignColumn guibg=#101020
 highlight CursorIM guifg=NONE guibg=Red
 highlight CursorLine guifg=NONE guibg=#505050
 
-" 自作snippets用ディレクトリを用意
-let g:NeoComplCache_SnippetsDir = $HOME . '/.vim/snippets'
-
 " <C-k> にマッピング http://vim-users.jp/2010/11/hack185/
 imap <C-k> <Plug>(neocomplcache_snippets_expand)
 smap <C-k> <Plug>(neocomplcache_snippets_expand)
 inoremap <expr><C-g> neocomplcache#undo_completion()
 inoremap <expr><C-l> neocomplcache#complete_common_string()
 "---------------------------------------------------------------------------
-"" changelog
-"
-let changelog_user = system("echo -n ${USER} @ `hostname -s`")
-let g:changelog_timeformat = "%Y-%m-%d"
-let g:changelog_username = changelog_user
-"-----------------------------------------------------------------------------
-
 "入力中のコマンドをステータスに表示する
 set showcmd
 " 括弧入力時の対応する括弧を表示
@@ -161,18 +133,6 @@ let g:quickrun_config['markdown'] = {
 \ 'command': 'bluecloth',
 \ 'exec': '%c -f %s'
 \ }
-
-"---------------------------------------------------------------------------
-"gui
-set antialias
-augroup cch
-    autocmd! cch
-    autocmd WinLeave * set nocursorline
-    autocmd WinEnter,BufRead * set cursorline
-augroup END
-:hi clear CursorLine
-:hi CursorLine gui=underline
-highlight CursorLine ctermbg=black guibg=black
 
 "clipbord-----------------------------------------------------------------
 " Vim(Mac)
