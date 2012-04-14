@@ -1,28 +1,42 @@
 [user]
-  name = hatanakay 
-  email = hatanaka.yoichi@gmail.com
+    name = hatanakay 
+    email = hatanaka.yoichi@gmail.com
 [color]
-  ui = auto
+    ui = auto
+    diff = auto
+    status = auto
+    branch = auto
+    grep = auto
 [alias]
-  ch = checkout
-  cm = commit -m
-  ca = commit -a
-  st = status
-  br = branch
-  df = diff
-  wh = whatchanged
-  hi = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  gr = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
-  stt = diff --stat
-  su = log --stat --summary
+    ch = checkout
+    cm = commit -m
+    ca = commit -a
+    st = status
+    br = branch
+    df = diff
+    wh = whatchanged
+    hi = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    gr = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
+    stt = diff --stat
+    su = log --stat --summary
+    co = checkout
+    ci = commit -v
+    di = diff
+    puhs = push
+    psuh = push
+    pus = push
+    puh = push
+    pl = !git pull && git submodule update --init
 [core]
-  excludesfile = ~/.gitignore
-  quotepath = false
-  editor = vim
+    excludesfile = /Users/lolipop-fukuoka/.gitignore
+    quotepath = false
+    editor = vim
 [http]
-  sslVerify = false
+    sslVerify = false
 [tig "bind"]
-  generic = g move-first-line
-  generic = G move-last-line
+    generic = g move-first-line
+    generic = G move-last-line
 [merge]
-  tool = vimdiff
+    tool = vimdiff
+[push]
+    default = current
