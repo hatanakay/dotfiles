@@ -35,6 +35,9 @@ set showmatch
 set visualbell
 "ファイル名補完
 set wildmode=list:longest
+"全角スペース表示
+highlight link ZenkakuSpace Error
+match ZenkakuSpace /　/
 "---------------------------------------------------------------------------
 " 検索の挙動に関する設定:
 "
@@ -239,3 +242,4 @@ NeoBundle 'https://github.com/vim-scripts/SQLUtilities.git'
 NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'L9'
 NeoBundle 'FuzzyFinder'
+NeoBundle 'php.vim'

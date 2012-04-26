@@ -53,6 +53,7 @@ case "${OSTYPE}" in
         alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
         alias ls='ls -hal -G -w'
         alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
+        alias lg="find . -type d -name .svn -prune -o -type f -print | xargs lgrep -n"
             ;;
     linux*)
         alias ls="ls --color"
@@ -159,4 +160,5 @@ pbcopy-buffer(){
 
 zle -N pbcopy-buffer
 bindkey '^x^p' pbcopy-buffer
+
 
