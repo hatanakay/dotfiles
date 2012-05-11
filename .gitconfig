@@ -28,7 +28,6 @@
     puh = push
     pl = !git pull && git submodule update --init
 [core]
-    excludesfile = /Users/lolipop-fukuoka/.gitignore
     quotepath = false
     editor = vim
 [http]
@@ -40,3 +39,5 @@
     tool = vimdiff
 [push]
     default = current
+[github]
+	user = hatanakay
