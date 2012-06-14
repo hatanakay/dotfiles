@@ -153,7 +153,7 @@ endif
 "---------------------------------------------------------------------------
 " clipboard
 set clipboard+=unnamed
-
+set pastetoggle=<C-e>
 "---------------------------------------------------------------------------
 "powerline
 let g:Powerline_symbols='fancy'
