@@ -1,6 +1,6 @@
 [user]
-    name = hatanakay 
-    email = hatanaka.yoichi@gmail.com
+	name = hatanakay
+	email = hatanaka.yoichi@gmail.com
 [color]
     ui = auto
     diff = auto
@@ -30,6 +30,7 @@
 [core]
     quotepath = false
     editor = vim
+	excludesfile = /Users/h222/.gitignore_global
 [http]
     sslVerify = false
 [tig "bind"]
@@ -41,3 +42,9 @@
     default = current
 [github]
 	user = hatanakay
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.localized/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
