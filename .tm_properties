@@ -1,0 +1,63 @@
+#-------------------------------------------------------------------------------
+# Drawer
+#-------------------------------------------------------------------------------
+myExtraIncludes = ".tm_properties,.htaccess,.gitignore"
+fileBrowserGlob  = "{*,$myExtraIncludes}"
+include = "{$include,$myExtraIncludes}"
+
+#-------------------------------------------------------------------------------
+# Search
+#-------------------------------------------------------------------------------
+myExtraExcludes = "log,vendor,tmp"
+excludeInFileChooser  = "{$excludeInFileChooser,$myExtraExcludes}" 
+excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes}" 
+
+#-------------------------------------------------------------------------------
+# Environment Variables
+#-------------------------------------------------------------------------------
+TM_GIT            = "/usr/local/bin/git"
+TM_SVN            = "/usr/local/bin/svn"
+TM_DRUPAL_API     = "http://api.drupal.org"
+TM_DRUPAL_VERSION = 7
+TM_COFFEE         = "$HOME/bin/coffee"
+TM_NODE           = "/usr/local/bin/node"
+PATH              = "$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/sbin:/usr/sbin:/sbin"
+
+#-------------------------------------------------------------------------------
+# Visual
+#-------------------------------------------------------------------------------
+theme          = "B5D09BEE-820F-4242-A28D-7086C0593A5F"
+fontName       = "Consolas" 
+fontSize       = 13
+tabSize        = 4
+softTabs       = false
+softWrap       = false
+windowTitle    = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/username\w+\/?(.*)|(.+))\z/${2:? – ${2/\A\/Users\/username/~/}:${1/\A(?=.)/ – /}}/}"
+
+#-------------------------------------------------------------------------------
+# Filetypes
+#-------------------------------------------------------------------------------
+[ text ]
+softWrap = false
+
+[ *.{txt,md,mdown,markdown} ]
+spellChecking    = true
+spellingLanguage = 'en'
+softWrap         = true
+
+[ *.{rb,coffee} ]
+spellChecking    = true
+spellingLanguage = 'en'
+tabSize          = 2
+softTabs         = true
+
+[ .git/COMMIT_EDITMSG ]
+softWrap         = true
+spellChecking    = true
+spellingLanguage = 'en'
+
+[ *.{icns,ico,jpg,jpeg,m4v,nib,pdf,png,psd,pyc,rtf,tif,tiff,xib} ]
+binary = true
+
+[ "{README,INSTALL,LICENSE,TODO,CNAME}" ]
+fileType = "text.plain"
