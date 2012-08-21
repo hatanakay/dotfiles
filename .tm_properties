@@ -15,21 +15,17 @@ excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes}"
 #-------------------------------------------------------------------------------
 # Environment Variables
 #-------------------------------------------------------------------------------
-TM_GIT            = "/usr/local/bin/git"
-TM_SVN            = "/usr/local/bin/svn"
-TM_DRUPAL_API     = "http://api.drupal.org"
-TM_DRUPAL_VERSION = 7
-TM_COFFEE         = "$HOME/bin/coffee"
-TM_NODE           = "/usr/local/bin/node"
-PATH              = "$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/sbin:/usr/sbin:/sbin"
+TM_GIT            = "/usr/bin/git"
+TM_SVN            = "/usr/bin/svn"
+PATH              = "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"
 
 #-------------------------------------------------------------------------------
 # Visual
 #-------------------------------------------------------------------------------
 theme          = "B5D09BEE-820F-4242-A28D-7086C0593A5F"
-fontName       = "Consolas" 
-fontSize       = 13
-tabSize        = 4
+fontName       = "Ricty" 
+fontSize       = 15
+tabSize        = 2
 softTabs       = false
 softWrap       = false
 windowTitle    = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/username\w+\/?(.*)|(.+))\z/${2:? – ${2/\A\/Users\/username/~/}:${1/\A(?=.)/ – /}}/}"
