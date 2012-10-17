@@ -6,10 +6,6 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/bundle/'))
 endif
 
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
 " Edit {{{
   " NERD_commenter.vim :最強コメント処理 (<Leader>c<space>でコメントをトグル)
   NeoBundle 'scrooloose/nerdcommenter.git'
