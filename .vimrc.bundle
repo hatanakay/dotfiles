@@ -192,12 +192,6 @@ call vundle#rc()
   " scala
   NeoBundle 'yuroyoro/vim-scala'
 
-  " clojure
-  Bundle 'jondistad/vimclojure'
-
-  " ghc-mod
-  Bundle 'eagletmt/ghcmod-vim'
-
   " syntax checking plugins exist for eruby, haml, html, javascript, php, python, ruby and sass.
   NeoBundle 'scrooloose/syntastic'
 " }}}
