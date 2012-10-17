@@ -207,42 +207,5 @@ let g:fuf_enumeratingLimit = 20
 let g:fuf_file_exclude = '\v\.DS_Store|\.git|\.swp|\.svn'
 "---------------------------------------------------------------------------
 "neobundle
-if has('vim_starting')
-    set runtimepath+=~/.vim/bundle/neobundle.vim
-    call neobundle#rc(expand('~/.vim/bundle'))
-endif
+source ~/.vimrc.bundle
 
-NeoBundle 'https://github.com/h1mesuke/unite-outline.git'
-NeoBundle 'https://github.com/kana/vim-smartchr.git'
-NeoBundle 'https://github.com/kchmck/vim-coffee-script.git'
-NeoBundle 'https://github.com/mattn/zencoding-vim.git'
-NeoBundle 'https://github.com/motemen/hatena-vim.git'
-NeoBundle 'https://github.com/othree/eregex.vim.git'
-NeoBundle 'https://github.com/Shougo/neobundle.vim.git'
-NeoBundle 'https://github.com/Shougo/neocomplcache.git'
-NeoBundle 'https://github.com/Shougo/unite.vim.git'
-NeoBundle 'https://github.com/thinca/vim-quickrun.git'
-NeoBundle 'https://github.com/tsukkee/unite-tag.git'
-NeoBundle 'https://github.com/ujihisa/shadow.vim.git'
-NeoBundle 'https://github.com/vim-scripts/JSON.vim.git'
-NeoBundle 'https://github.com/tsaleh/vim-align.git'
-NeoBundle 'https://github.com/vim-ruby/vim-ruby.git'
-NeoBundle 'https://github.com/mattn/sonictemplate-vim.git'
-NeoBundle 'https://github.com/vim-scripts/sudo.vim.git'
-NeoBundle 'https://github.com/tomtom/tcomment_vim.git'
-NeoBundle 'https://github.com/tpope/vim-markdown.git' 
-NeoBundle 'https://github.com/tyru/open-browser.vim.git'
-NeoBundle 'Lokaltog/vim-powerline'
-NeoBundle 'Shougo/git-vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'https://github.com/banyan/Nonopaste.vim.git'
-NeoBundle 'https://github.com/tpope/vim-surround.git'
-NeoBundle 'https://github.com/vim-scripts/SQLUtilities.git'
-NeoBundle 'glidenote/memolist.vim'
-NeoBundle 'L9'
-NeoBundle 'FuzzyFinder'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'mattn/gist-vim'
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'tpope/vim-rails'
