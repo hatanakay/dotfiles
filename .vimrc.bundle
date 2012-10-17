@@ -271,6 +271,7 @@ call vundle#rc()
 
 " ColorSchema{{{{
   NeoBundle 'tomasr/molokai'
+  colorscheme molokai
 " }}}
 
 " Unite {{{{
@@ -283,6 +284,7 @@ call vundle#rc()
   NeoBundle 'thinca/vim-unite-history'
   NeoBundle 'tsukkee/unite-tag'
   NeoBundle 'choplin/unite-vim_hacks'
+  NeoBundle 'ujihisa/unite-colorscheme'
 
 " }}}
 "

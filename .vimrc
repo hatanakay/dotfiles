@@ -11,9 +11,6 @@ set cindent
 set shiftwidth=4
 " バックスペースでインデントや改行を削除
 set backspace=indent,eol,start
-"molokai
-let g:molokai_original = 1
-colorscheme molokai
 "---------------------------------------------------------------------------
 " 表示に関する設定:
 "
@@ -189,6 +186,10 @@ augroup END
 map <Leader>mn  :MemoNew<CR>
 map <Leader>ml  :MemoList<CR>
 map <Leader>mg  :MemoGrep<CR>
+
+"---------------------------------------------------------------------------
+" Pydiction
+let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 
 "---------------------------------------------------------------------------
 "FuzzyFinder
