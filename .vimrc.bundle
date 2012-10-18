@@ -6,10 +6,6 @@ if has('vim_starting')
   call neobundle#rc(expand('~/.vim/bundle/'))
 endif
 
-
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
 " Edit {{{
   " NERD_commenter.vim :最強コメント処理 (<Leader>c<space>でコメントをトグル)
   NeoBundle 'scrooloose/nerdcommenter.git'
@@ -188,12 +184,6 @@ call vundle#rc()
 
   " scala
   NeoBundle 'yuroyoro/vim-scala'
-
-  " clojure
-  Bundle 'jondistad/vimclojure'
-
-  " ghc-mod
-  Bundle 'eagletmt/ghcmod-vim'
 
   " syntax checking plugins exist for eruby, haml, html, javascript, php, python, ruby and sass.
   NeoBundle 'scrooloose/syntastic'
