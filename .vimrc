@@ -11,6 +11,12 @@ set cindent
 set shiftwidth=4
 " バックスペースでインデントや改行を削除
 set backspace=indent,eol,start
+" コンマの後に自動的にスペースを挿入
+inoremap , ,<Space>
+"  Insert mode中で単語単位/行単位の削除をアンドゥ可能にする
+inoremap <C-u>  <C-g>u<C-u>
+inoremap <C-w>  <C-g>u<C-w>
+
 "---------------------------------------------------------------------------
 " 表示に関する設定:
 "
@@ -35,6 +41,22 @@ set wildmode=list:longest
 "全角スペース表示
 highlight link ZenkakuSpace Error
 match ZenkakuSpace /　/
+" ターミナルタイプによるカラー設定
+if &term =~ "xterm-256color" || "screen-256color"
+  " 256色
+  set t_Co=256
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+elseif &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
+  set t_Co=16
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+elseif &term =~ "xterm-color"
+  set t_Co=8
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+endif
+
 "---------------------------------------------------------------------------
 " 検索の挙動に関する設定:
 "
@@ -61,12 +83,181 @@ au FileType ruby set ts=2 sw=2 expandtab
 "vim-ruby
 compiler ruby
 let ruby_space_errors=1
+
+" vim-rails.vim
+let g:rails_some_option = 1
+let g:rails_level = 4
+let g:rails_syntax = 1
+let g:rails_statusline = 1
+let g:rails_url='http://localhost:3000'
+let g:rails_subversion=0
+" let g:dbext_default_SQLITE_bin = 'mysql2'
+let g:rails_default_file='config/database.yml'
+" let g:rails_ctags_arguments = ''
+function! SetUpRailsSetting()
+  nmap <buffer><C-C> <Nop>
+  imap <buffer><C-C> <Nop>
+  map <buffer><C-_><C-C> <Nop>
+
+  nmap <buffer><Space>r :R<CR>
+  nmap <buffer><Space>a :A<CR>
+  nmap <buffer><Space>m :Rmodel<Space>
+  nmap <buffer><Space>c :Rcontroller<Space>
+  nmap <buffer><Space>v :Rview<Space>
+  nmap <buffer><Space>s :Rspec<Space>
+  nmap <buffer><Space>p :Rpreview<CR>
+  nmap <buffer><Space>t :Runittest<CR>
+  au FileType ruby,eruby,ruby.rspec let g:neocomplcache_dictionary_filetype_lists = {
+        \'ruby' : $HOME.'/.vim/dict/rails.dict',
+        \'eruby' : $HOME.'/.vim/dict/rails.dict'
+        \}
+  setl dict+=~/.vim/dict/rails.dict
+  setl dict+=~/.vim/dict/ruby.dict
+endfunction
+autocmd User Rails call SetUpRailsSetting()
 "---------------------------------------------------------------------------
 " neocomplcache
+" AutoComplPopを無効にする
 let g:acp_enableAtStartup = 0
-let g:neocomplcache_enable_at_startup = 1 " 起動時に有効化
-let g:neocomplcache_enable_smart_case = 1 
+" NeoComplCacheを有効にする
+let g:neocomplcache_enable_at_startup = 1
+" 補完が自動で開始される文字数
+let g:neocomplcache_auto_completion_start_length = 3
+" smarrt case有効化。 大文字が入力されるまで大文字小文字の区別を無視する
+let g:neocomplcache_enable_smart_case = 1
+" camle caseを有効化。大文字を区切りとしたワイルドカードのように振る舞う
+let g:neocomplcache_enable_camel_case_completion = 1
+" _(アンダーバー)区切りの補完を有効化
 let g:neocomplcache_enable_underbar_completion = 1
+" シンタックスをキャッシュするときの最小文字長を3に
+let g:neocomplcache_min_syntax_length = 3
+" neocomplcacheを自動的にロックするバッファ名のパターン
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+" -入力による候補番号の表示
+let g:neocomplcache_enable_quick_match = 1
+" 補完候補の一番先頭を選択状態にする(AutoComplPopと似た動作)
+let g:neocomplcache_enable_auto_select = 1
+"ポップアップメニューで表示される候補の数。初期値は100
+let g:neocomplcache_max_list = 20
+
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'c' : $HOME.'/.vim/dict/c.dict',
+    \ 'cpp' : $HOME.'/.vim/dict/cpp.dict',
+    \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
+    \ 'perl' : $HOME.'/.vim/dict/perl.dict',
+    \ 'php' : $HOME.'/.vim/dict/php.dict',
+    \ 'vm' : $HOME.'/.vim/dict/vim.dict'
+    \ }
+
+" Define keyword.
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
+" ユーザー定義スニペット保存ディレクトリ
+let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
+
+" スニペット
+imap <C-y> <Plug>(neocomplcache_snippets_expand)
+smap <C-k> <Plug>(neocomplcache_snippets_expand)
+
+" 補完を選択しpopupを閉じる
+" inoremap <expr><C-y> neocomplcache#close_popup()
+" 補完をキャンセルしpopupを閉じる
+" inoremap <expr><C-e> neocomplcache#cancel_popup()
+" TABで補完できるようにする
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+" undo
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+" 補完候補の共通部分までを補完する
+inoremap <expr><C-s> neocomplcache#complete_common_string()
+" SuperTab like snippets behavior.
+imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+" C-kを押すと行末まで削除
+" inoremap <C-k> <C-o>D
+" C-nでneocomplcache補完
+inoremap <expr><C-n>  pumvisible() ? "\<C-n>" : "\<C-x>\<C-u>\<C-p>"
+" C-pでkeyword補完
+inoremap <expr><C-p> pumvisible() ? "\<C-p>" : "\<C-p>\<C-n>"
+" 補完候補が出ていたら確定、なければ改行
+inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "<CR>"
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-x><C-o> &filetype == 'vim' ? "\<C-x><C-v><C-p>" : neocomplcache#manual_omni_complete()
+
+" buffer開いたらneoconでcache
+autocmd BufReadPost,BufEnter,BufWritePost :NeoComplCacheCachingBuffer <buffer>
+
+" FileType毎のOmni補完を設定
+autocmd FileType python     setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html       setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css        setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml        setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php        setlocal omnifunc=phpcomplete#CompletePHP
+autocmd FileType c          setlocal omnifunc=ccomplete#Complete
+autocmd FileType ruby       setlocal omnifunc=rubycomplete#Complete
+
+" Enable heavy omni completion.
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
+let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
+
+"インクルードパスの指定
+let g:neocomplcache_include_paths = {
+  \ 'cpp'  : '.,/opt/local/include/gcc46/c++,/opt/local/include,/usr/include',
+  \ 'c'    : '.,/usr/include',
+  \ 'ruby' : '.,$HOME/.rvm/rubies/**/lib/ruby/1.8/',
+  \ }
+"インクルード文のパターンを指定
+let g:neocomplcache_include_patterns = {
+  \ 'cpp' : '^\s*#\s*include',
+  \ 'ruby' : '^\s*require',
+  \ 'perl' : '^\s*use',
+  \ }
+"インクルード先のファイル名の解析パターン
+let g:neocomplcache_include_exprs = {
+  \ 'ruby' : substitute(v:fname,'::','/','g')
+  \ }
+" ファイルを探す際に、この値を末尾に追加したファイルも探す。
+let g:neocomplcache_include_suffixes = {
+  \ 'ruby' : '.rb',
+  \ 'haskell' : '.hs'
+  \ }
+
+" for rsense
+if !exists('g:neocomplcache_omni_patterns')
+  let g:neocomplcache_omni_patterns = {}
+endif
+let g:rsenseUseOmniFunc = 1
+let g:rsenseHome = expand('~/src/rsense-0.3')
+
+"------------------------
+" 補完・履歴 Complete
+"------------------------
+set wildmenu               " コマンド補完を強化
+set wildchar=<tab>         " コマンド補完を開始するキー
+set wildmode=list:full     " リスト表示，最長マッチ
+set history=1000           " コマンド・検索パターンの履歴数
+set complete+=k            " 補完に辞書ファイル追加
+
+" Ex-modeでの<C-p><C-n>をzshのヒストリ補完っぽくする
+cnoremap <C-p> <Up>
+cnoremap <Up>  <C-p>
+cnoremap <C-n> <Down>
+cnoremap <Down>  <C-n>
+
 
 highlight Pmenu ctermbg=4
 highlight PmenuSel ctermbg=1
@@ -186,10 +377,6 @@ augroup END
 map <Leader>mn  :MemoNew<CR>
 map <Leader>ml  :MemoList<CR>
 map <Leader>mg  :MemoGrep<CR>
-
-"---------------------------------------------------------------------------
-" Pydiction
-let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 
 "---------------------------------------------------------------------------
 "FuzzyFinder

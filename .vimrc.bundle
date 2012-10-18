@@ -159,9 +159,6 @@ call vundle#rc()
   " rails.vim : rails的なアレ
   NeoBundle 'tpope/vim-rails'
 
-  " Pydiction : Python用の入力補完
-  NeoBundle 'Pydiction'
-
   " ソースコード上のメソッド宣言、変数宣言の一覧を表示
   NeoBundle 'taglist.vim'
 

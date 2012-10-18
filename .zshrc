@@ -1,8 +1,7 @@
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="frisk"
 
-plugins=(git brew autojump ruby rails3 )
-
+plugins=(git ruby gem brew rails3 node npm git-flow github vi-mode vagrant osx fabric deb compleat rbenv pow powder pip python cpanm)
 source $ZSH/oh-my-zsh.sh
 
 #=============================
