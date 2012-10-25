@@ -96,7 +96,8 @@ endif
   NeoBundle 'Shougo/neocomplcache'
 
   " neocomplcacheのsinpet補完
-  NeoBundle 'Shougo/neocomplcache-snippets-complete'
+  "NeoBundle 'Shougo/neocomplcache-snippets-complete'
+  NeoBundle 'Shougo/neosnippets'
 
   " for rsense
   NeoBundle 'm2ym/rsense'
