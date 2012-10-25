@@ -19,8 +19,6 @@ alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"
 # if [[ -s /Users/ozaki/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 eval "$(rbenv init -)"
 
-export REFE_DATA_DIR=/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/share/refe
-
 # node.js
 export NODE_PATH=/usr/local/lib/node:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
