@@ -1,16 +1,15 @@
+encoding = "UTF-8"
+	
 #-------------------------------------------------------------------------------
 # Drawer
 #-------------------------------------------------------------------------------
 myExtraIncludes = ".tm_properties,.htaccess,.gitignore"
-fileBrowserGlob  = "{*,$myExtraIncludes}"
-include = "{$include,$myExtraIncludes}"
 
 #-------------------------------------------------------------------------------
-# Search
+# フォントとサイズ
 #-------------------------------------------------------------------------------
-myExtraExcludes = "log,vendor,tmp"
-excludeInFileChooser  = "{$excludeInFileChooser,$myExtraExcludes}" 
-excludeInFolderSearch = "{$excludeInFolderSearch,$myExtraExcludes}" 
+fontName = "Ricty"
+fontSize = 15
 
 #-------------------------------------------------------------------------------
 # Environment Variables
@@ -19,22 +18,37 @@ TM_GIT            = "/usr/bin/git"
 TM_SVN            = "/usr/bin/svn"
 PATH              = "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"
 
+#for Ruby
+TM_RUBY = "$HOME/.rbenv/shims/ruby"
+PATH = "$HOME/.rbenv/bin:$PATH"
 #-------------------------------------------------------------------------------
 # Visual
 #-------------------------------------------------------------------------------
-theme          = "B5D09BEE-820F-4242-A28D-7086C0593A5F"
-fontName       = "Ricty" 
-fontSize       = 15
-tabSize        = 2
-softTabs       = false
-softWrap       = false
+theme          = "D8D5E82E-3D5B-46B5-B38E-8C841C21347D"
 windowTitle    = "$TM_DISPLAYNAME${TM_DIRECTORY/\A(?:\/Users\/username\w+\/?(.*)|(.+))\z/${2:? – ${2/\A\/Users\/username/~/}:${1/\A(?=.)/ – /}}/}"
 
 #-------------------------------------------------------------------------------
 # Filetypes
 #-------------------------------------------------------------------------------
-[ text ]
-softWrap = false
+
+
+[ *.{icns,ico,jpg,jpeg,m4v,nib,pdf,png,psd,pyc,rtf,tif,tiff,xib} ]
+binary = true
+
+[ "{README,INSTALL,LICENSE,TODO,CNAME}" ]
+fileType = "text.plain"
+
+[ text.html.markdown ]
+softWrap       = true
+wrapColumn     = "Use Window Frame"
+softTabs       = false
+tabSize        = 4
+
+[ text.plain ]
+softWrap       = true
+wrapColumn     = "Use Window Frame"
+softTabs       = false
+tabSize        = 4
 
 [ *.{txt,md,mdown,markdown} ]
 spellChecking    = true
@@ -47,13 +61,13 @@ spellingLanguage = 'en'
 tabSize          = 2
 softTabs         = true
 
+[ *.{php, phtml} ]
+spellChecking    = true
+spellingLanguage = 'en'
+tabSize          = 4
+softTabs         = true
+
 [ .git/COMMIT_EDITMSG ]
 softWrap         = true
 spellChecking    = true
 spellingLanguage = 'en'
-
-[ *.{icns,ico,jpg,jpeg,m4v,nib,pdf,png,psd,pyc,rtf,tif,tiff,xib} ]
-binary = true
-
-[ "{README,INSTALL,LICENSE,TODO,CNAME}" ]
-fileType = "text.plain"

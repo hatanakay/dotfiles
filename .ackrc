@@ -13,3 +13,8 @@
 --type-set=erb=.erb
 --type-set=haml=.haml
 --type-set=less=.less
+--type-set=txt=.txt
+--type-set=ini=.ini
+--type-set=csv=.csv
+--type-set=yaml=.yaml
+--type-set=yaml=.yml

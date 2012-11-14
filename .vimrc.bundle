@@ -260,6 +260,7 @@ endif
 " ColorSchema{{{{
   NeoBundle 'tomasr/molokai'
   colorscheme molokai
+  hi Visual ctermbg=19
 " }}}
 
 " Unite {{{{
