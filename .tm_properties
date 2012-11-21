@@ -41,27 +41,22 @@ fileType = "text.plain"
 [ text.html.markdown ]
 softWrap       = true
 wrapColumn     = "Use Window Frame"
-softTabs       = false
+softTabs       = true
 tabSize        = 4
 
 [ text.plain ]
 softWrap       = true
 wrapColumn     = "Use Window Frame"
-softTabs       = false
+softTabs       = true
 tabSize        = 4
 
-[ *.{txt,md,mdown,markdown} ]
-spellChecking    = true
-spellingLanguage = 'en'
-softWrap         = true
-
-[ *.{rb,coffee} ]
+[ source.ruby ]
 spellChecking    = true
 spellingLanguage = 'en'
 tabSize          = 2
 softTabs         = true
 
-[ *.{php, phtml} ]
+[ source.php ]
 spellChecking    = true
 spellingLanguage = 'en'
 tabSize          = 4
