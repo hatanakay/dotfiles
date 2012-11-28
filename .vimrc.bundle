@@ -38,7 +38,7 @@ endif
   NeoBundle 'Gundo'
 
   " surround.vim : テキストを括弧で囲む／削除する
-  NeoBundle 'tpope/surround.vim'
+  "NeoBundle 'tpope/surround.vim'
 
   " smartchr.vim : ==などの前後を整形
   NeoBundle 'smartchr'
@@ -97,7 +97,7 @@ endif
 
   " neocomplcacheのsinpet補完
   "NeoBundle 'Shougo/neocomplcache-snippets-complete'
-  NeoBundle 'Shougo/neosnippets'
+  NeoBundle 'Shougo/neosnippet.git'
 
   " for rsense
   NeoBundle 'm2ym/rsense'
