@@ -25,6 +25,12 @@ inoremap <C-u>  <C-g>u<C-u>
 inoremap <C-w>  <C-g>u<C-w>
 au FileType ruby set ts=2 sw=2 expandtab
 au FileType php  set ts=4 sw=4 expandtab
+
+"syntax Hilight
+syntax on
+filetype on
+filetype indent on
+filetype plugin on
 "---------------------------------------------------------------------------
 " 表示に関する設定:
 "
