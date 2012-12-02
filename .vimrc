@@ -188,11 +188,6 @@ highlight SignColumn guibg=#101020
 highlight CursorIM guifg=NONE guibg=Red
 highlight CursorLine guifg=NONE guibg=#505050
 
-" <C-k> にマッピング http://vim-users.jp/2010/11/hack185/
-imap <C-k> <Plug>(neocomplcache_snippets_expand)
-smap <C-k> <Plug>(neocomplcache_snippets_expand)
-inoremap <expr><C-g> neocomplcache#undo_completion()
-inoremap <expr><C-l> neocomplcache#complete_common_string()
 "---------------------------------------------------------------------------
 "入力中のコマンドをステータスに表示する
 set showcmd
@@ -247,7 +242,8 @@ let g:quickrun_config['markdown'] = {
 
 "clipbord-----------------------------------------------------------------
 set clipboard+=unnamed
-set pastetoggle=<C-e>
+set pastetoggle=<c-e>
+autocmd InsertLeave * set nopaste
 "---------------------------------------------------------------------------
 "powerline
 let g:Powerline_symbols='fancy'
@@ -278,28 +274,6 @@ augroup Shebang
   autocmd BufNewFile *.\(cc\|hh\) 0put =\"//\<nl>// \".expand(\"<afile>:t\").\" -- \<nl>//\<nl>\"|2|start!
 augroup END
 
-"---------------------------------------------------------------------------
-
-      let g:neocomplcache_enable_at_startup            = 1
-      let g:neocomplcache_enable_smart_case            = 1 " Use smartcase.
-      let g:neocomplcache_enable_camel_case_completion = 1 " Use camel case completion.
-      let g:neocomplcache_enable_underbar_completion   = 1 " Use underbar completion.
-      let g:neocomplcache_min_syntax_length            = 3 " Set minimum syntax keyword length.
-      let g:neocomplcache_lock_buffer_name_pattern     = '\*ku\*'
-      let g:neocomplcache_text_mode_filetypes = {'text': 1, 'javascript': 1, 'markdown': 1, 'perl': 1, 'html': 1, 'ruby': 1}
-      
-      " Plugin key-mappings.
-      imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-      smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-
-      " SuperTab like snippets behavior.
-      imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-      smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-      " For snippet_complete marker.
-      if has('conceal')
-        set conceallevel=2 concealcursor=i
-      endif
 "---------------------------------------------------------------------------
 "neobundle
 source ~/.vimrc.bundle
