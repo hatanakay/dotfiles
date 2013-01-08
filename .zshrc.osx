@@ -28,3 +28,9 @@ function ssh_tmux() {
     eval server=\${$#}
     eval tmux new-window -n "'${server}'" "'ssh $@'"
 }
+
+# z
+. `brew --prefix`/etc/profile.d/z.sh
+function precmd () {
+   z --add "$(pwd -P)"
+}
