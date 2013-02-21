@@ -20,7 +20,8 @@ PATH              = "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin"
 
 #for Ruby
 TM_RUBY = "$HOME/.rbenv/shims/ruby"
-PATH = "$HOME/.rbenv/bin:$PATH"
+PATH = "$HOME/.rbenv/shims:$PATH"
+
 #-------------------------------------------------------------------------------
 # Visual
 #-------------------------------------------------------------------------------

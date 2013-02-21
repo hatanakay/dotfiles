@@ -208,6 +208,8 @@ endif
 
 " Utility {{{
 
+  "http-status
+  NeoBundle "git@github.com:mattn/httpstatus-vim.git"
   " vimshell : vimのshell
   NeoBundle 'Shougo/vimshell.git'
 
@@ -259,6 +261,7 @@ endif
 
 " ColorSchema{{{{
   NeoBundle 'tomasr/molokai'
+  NeoBundle 'nanotech/jellybeans.vim.git'
   colorscheme molokai
   hi Visual ctermbg=19
 " }}}
