@@ -38,8 +38,8 @@ precmd() {
 #=============================
 # source auto-fu.zsh
 #=============================
-if [ -f ~/.zsh/plugins/auto-fu.zsh ]; then
-    source ~/.zsh/auto-fu.zsh
+if [ -f ~/.zsh/plugins/auto-fu/auto-fu.zsh ]; then
+    source ~/.zsh/plugins/auto-fu/auto-fu.zsh
     function zle-line-init () {
         auto-fu-init
     }
