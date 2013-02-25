@@ -91,7 +91,6 @@ endif
 " Completion {{{
   " 補完 autocomplpop.vim : insertmodeで自動で補完をpopup
   " NeoBundle 'AutoComplPop'
-
   " 補完 neocomplcache.vim : 究極のVim的補完環境
   NeoBundle 'Shougo/neocomplcache'
 
@@ -207,6 +206,14 @@ endif
 " }}}
 
 " Utility {{{
+  "sudo.vim
+  NeoBundle 'sudo.vim'
+
+  "ack.vim
+  NeoBundle 'ack.vim'
+  
+  "nonopaste
+  NeoBundle 'banyan/Nonopaste.vim'
 
   "http-status
   NeoBundle "git@github.com:mattn/httpstatus-vim.git"
