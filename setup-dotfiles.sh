@@ -1,10 +1,6 @@
 #!/bin/bash
 
-#git submodule
-git submodule init
-git submodule update
-
-#symlink
+symlink
 DOT_FILES=( .zsh .zshrc .zshrc.alias .zshrc.linux .zshrc.osx .gemrc .gitconfig .irbrc .pryrc .vimrc .vimrc.bundle .tmux.conf )
 
 for file in ${DOT_FILES[@]}
@@ -26,3 +22,9 @@ fi
 
 ln -s $HOME/dotfiles/.vim $HOME/.vim
 ln -s $HOME/dotfiles/.oh-my-zsh $HOME/.oh-my-zsh
+
+#git submodule
+git submodule init
+git submodule update
+
+#
