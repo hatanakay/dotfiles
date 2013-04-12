@@ -6,7 +6,3 @@
 	path = .oh-my-zsh
 	url = git@github.com:robbyrussell/oh-my-zsh.git
 
-[submodule "auto-fu.zsh"]
-	path = .zsh/plugins/auto-fu
-	url = git@github.com:hchbaw/auto-fu.zsh.git
-
