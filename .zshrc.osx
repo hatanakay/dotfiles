@@ -4,6 +4,11 @@ export PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
 
 # osx alias
 alias pbc='pbcopy'
+alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+alias lg="find . -type d -name .svn -prune -o -type f -print | xargs lgrep -n"
+alias ls='ls -G -w'
+alias cr="perl -pe 's/.+;//' ~/.zsh_history | awk 'BEGIN {FS=\"|\"} {print $1}' | sort | uniq -c | sort -nr | head -10" # command ranking
 
 # Terminal Colorの設定
 export CLICOLOR=1
@@ -11,9 +16,6 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 
 # vim
 export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
-alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-
 
 # Ruby
 # if [[ -s /Users/ozaki/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
@@ -35,14 +37,3 @@ precmd() {
   _z --add "$(pwd -P)"
 }
 
-#=============================
-# source auto-fu.zsh
-#=============================
-if [ -f ~/.zsh/plugins/auto-fu/auto-fu.zsh ]; then
-    source ~/.zsh/plugins/auto-fu/auto-fu.zsh
-    function zle-line-init () {
-        auto-fu-init
-    }
-    zle -N zle-line-init
-    zstyle ':completion:*' completer _oldlist _complete
-fi
