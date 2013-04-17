@@ -1,0 +1,10 @@
+source ~/.zsh/plugins/antigen/antigen.zsh
+
+# Bundles from the default repo
+antigen-lib
+
+antigen-bundle git
+antigen-bundle autojump
+antigen-bundle ruby
+
+antigen-theme frisk

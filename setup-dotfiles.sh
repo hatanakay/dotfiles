@@ -1,7 +1,7 @@
 #!/bin/bash
 
 symlink
-DOT_FILES=( .zsh .zshrc .zshrc.alias .zshrc.linux .zshrc.osx .gemrc .gitconfig .irbrc .pryrc .vimrc .vimrc.bundle .tmux.conf )
+DOT_FILES=( .zsh .zshrc .zshrc.alias .zshrc.linux .zshrc.osx .zshrc.antigen .gemrc .gitconfig .irbrc .pryrc .vimrc .vimrc.bundle .tmux.conf )
 
 for file in ${DOT_FILES[@]}
 do  
@@ -21,7 +21,6 @@ if [ -e ~/.oh-my-zsh ]; then
 fi
 
 ln -s $HOME/dotfiles/.vim $HOME/.vim
-ln -s $HOME/dotfiles/.oh-my-zsh $HOME/.oh-my-zsh
 
 #git submodule
 git submodule init
