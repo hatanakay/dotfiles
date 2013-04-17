@@ -1,4 +1,4 @@
-source ~/.zsh/plugins/antigen/antigen.zsh
+source $HOME/.antigen/antigen.zsh
 
 # Bundles from the default repo
 antigen-lib
