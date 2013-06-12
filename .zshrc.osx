@@ -1,6 +1,7 @@
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 export PATH=/opt/local/bin:/opt/local/sbin/:~/bin:$PATH
 export PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
+export PATH=/usr/local/phpenv/bin:$PATH
 
 # osx alias
 alias pbc='pbcopy'
@@ -20,20 +21,48 @@ export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
 # Ruby
 # if [[ -s /Users/ozaki/.rvm/scripts/rvm ]] ; then source $HOME/.rvm/scripts/rvm ; fi
 eval "$(rbenv init -)"
+eval "$(phpenv init -)"
 
 # node.js
 export NODE_PATH=/usr/local/lib/node:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
+export PATH=/usr/local/phpenv/bin:$PATH
 
 # sshしたら新規ウインドウでタブ名を接続名にする
 function ssh_tmux() {
     eval server=\${$#}
-    eval tmux new-window -n "'${server}'" "'ssh $@'"
+    eval tmux new-window -n "'${server}'" "'TERM=screen ssh $@'"
 }
+
+if [ $TERM = "screen" ] ; then
+    tmux lsw
+    if [ $? -eq 0 ] ; then
+        alias ssh=ssh_tmux
+    fi
+fi
 
 # z
 . /usr/local/etc/profile.d/z.sh
 precmd() {
   _z --add "$(pwd -P)"
+}
+
+#=============================
+# source auto-fu.zsh
+#=============================
+if [ -f ~/.zsh/auto-fu.zsh ]; then
+    source ~/.zsh/auto-fu.zsh
+    function zle-line-init () {
+        auto-fu-init
+    }
+    zle -N zle-line-init
+    zstyle ':completion:*' completer _oldlist _complete
+fi
+
+#export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+
+function compare {
+  local CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+  open "$(git remote -v | head -n 1 | sed -e 's|.*git@\(.*\):\(.*\)\.git.*|https://\1/\2|g')/compare/master...$CURRENT_BRANCH"
 }
 

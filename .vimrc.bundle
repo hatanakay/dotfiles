@@ -107,6 +107,9 @@ endif
 
   " A neocomplcache plugin for English, using look command
   " NeoBundle 'ujihisa/neco-look'
+  
+  "sonic template
+  NeoBundle 'mattn/sonictemplate-vim'
 " }}}
 
 " Searching/Moving{{{
@@ -206,6 +209,9 @@ endif
 " }}}
 
 " Utility {{{
+  "ctrlp
+  NeoBundle 'kien/ctrlp.vim'
+
   "sudo.vim
   NeoBundle 'sudo.vim'
 

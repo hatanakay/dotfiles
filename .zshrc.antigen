@@ -1,10 +1,26 @@
 source $HOME/.antigen/antigen.zsh
 
 # Bundles from the default repo
-antigen-lib
+antigen use oh-my-zsh
 
-antigen-bundle git
-antigen-bundle autojump
-antigen-bundle ruby
+case "${OSTYPE}" in
+    darwin*)
+        antigen bundle autojump
+        antigen bundle brew
+        antigen bundle ruby
+        antigen bundle rbenv
+        antigen bundle git
+        antigen bundle git-flow
+        antigen bundle osx
+        antigen bundle command-not-found
+        ;;
+    linux*)
+        antigen bundle history
+        antigen bundle command-not-found
+esac    
 
 antigen-theme frisk
+
+# Tell antigen that you're done.
+antigen-apply
+
