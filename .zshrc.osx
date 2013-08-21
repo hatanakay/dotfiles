@@ -1,7 +1,7 @@
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
 export PATH=/opt/local/bin:/opt/local/sbin/:~/bin:$PATH
 export PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
-export PATH=/usr/local/phpenv/bin:$PATH
+export PATH=$HOME/.phpenv/bin:$PATH
 
 # osx alias
 alias pbc='pbcopy'

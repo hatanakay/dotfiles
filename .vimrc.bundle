@@ -32,7 +32,7 @@ endif
   NeoBundle 'h1mesuke/vim-alignta'
 
   " YankRing.vim : ヤンクの履歴を管理し、順々に参照、出力できるようにする
-  NeoBundle 'YankRing.vim'
+  "NeoBundle 'YankRing.vim'
 
   " undo履歴を追える (need python support)
   NeoBundle 'Gundo'
@@ -50,7 +50,7 @@ endif
   NeoBundle 'operator-camelize'
 
   " operator-replace : yankしたものでreplaceする
-  NeoBundle 'operator-replace'
+  "NeoBundle 'operator-replace'
 
   " textobj-user : 簡単にVimエディタのテキストオブジェクトをつくれる
   NeoBundle 'textobj-user'
@@ -160,6 +160,9 @@ endif
 
   " ソースコード上のメソッド宣言、変数宣言の一覧を表示
   NeoBundle 'taglist.vim'
+  
+  " Gnu GLOBAL
+  NeoBundle 'vim-scripts/gtags.vim'
 
 " }}}
 "
@@ -209,8 +212,6 @@ endif
 " }}}
 
 " Utility {{{
-  "ctrlp
-  NeoBundle 'kien/ctrlp.vim'
 
   "sudo.vim
   NeoBundle 'sudo.vim'
@@ -267,7 +268,8 @@ endif
   NeoBundle 'tpope/vim-fugitive'
 
   " ステータスラインをカッコよくする
-  NeoBundle 'Lokaltog/vim-powerline'
+  "NeoBundle 'Lokaltog/vim-powerline'
+  NeoBundle 'bling/vim-airline'
 
 
 " }}}
@@ -277,6 +279,7 @@ endif
   NeoBundle 'nanotech/jellybeans.vim.git'
   colorscheme molokai
   hi Visual ctermbg=19
+  let g:molokai_original = 1
 " }}}
 
 " Unite {{{{

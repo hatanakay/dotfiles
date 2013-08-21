@@ -246,7 +246,8 @@ set pastetoggle=<c-e>
 autocmd InsertLeave * set nopaste
 "---------------------------------------------------------------------------
 "powerline
-let g:Powerline_symbols='fancy'
+"let g:Powerline_symbols='fancy'
+"let g:airline_powerline_fonts = 1
 "---------------------------------------------------------------------------
 "Unite.vim
 " Unite.vim
@@ -279,9 +280,20 @@ augroup END
 source ~/.vimrc.bundle
 "---------------------------------------------------------------------------
 
-"ctrlp
-let g:ctrlp_use_migemo = 1
-let g:ctrlp_clear_cache_on_exit = 0   " 終了時キャッシュをクリアしない
-let g:ctrlp_mruf_max            = 500 " MRUの最大記録数
-let g:ctrlp_open_new_file       = 1   " 新規ファイル作成時にタブで開く
+" Gtags
+" gtags
+    " 検索結果Windowを閉じる
+    nnoremap <C-q> <C-w><C-w><C-w>q
+    " Grep 準備
+    nnoremap <C-g> :Gtags -g
+    " このファイルの関数一覧                                                                                                                                                
+    nnoremap <C-l> :Gtags -f %<CR>
+    " カーソル以下の定義元を探す
+    nnoremap <C-j> :Gtags <C-r><C-w><CR>
+    " カーソル以下の使用箇所を探す
+    nnoremap <C-k> :Gtags -r <C-r><C-w><CR>
+    " 次の検索結果
+    nnoremap <C-n> :cn<CR>
+    " 前の検索結果
+    nnoremap <C-p> :cp<CR>
 
