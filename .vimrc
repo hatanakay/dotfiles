@@ -86,6 +86,20 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 set nobackup
 
 "---------------------------------------------------------------------------
+" ******** プラグイン ********
+"---------------------------------------------------------------------------
+"neobundle
+source ~/.vimrc.bundle
+"---------------------------------------------------------------------------
+"=
+colorscheme molokai
+hi Visual ctermbg=19
+let g:molokai_original = 1
+let g:Powerline_theme = 'dark'
+let g:Powerline_colorscheme = 'molokai'
+let g:airline_theme = 'dark'
+
+"---------------------------------------------------------------------------
 " neocomplcache
 "---------------------------------------------------------------------------
 
@@ -236,22 +250,31 @@ endif
 "vim markdown
 let g:quickrun_config = {}
 let g:quickrun_config['markdown'] = {
-\ 'command': 'bluecloth',
-\ 'exec': '%c -f %s'
+\ 'command': 'redcarpet',
+\ 'outputter': 'browser',
+\ 'cmdopt': '--parse-tables'
 \ }
-
 "clipbord-----------------------------------------------------------------
 set clipboard+=unnamed
 set pastetoggle=<c-e>
 autocmd InsertLeave * set nopaste
 "---------------------------------------------------------------------------
-"powerline
-"let g:Powerline_symbols='fancy'
-"let g:airline_powerline_fonts = 1
-"---------------------------------------------------------------------------
 "Unite.vim
-" Unite.vim
+" insert modeで開始
+let g:unite_enable_start_insert = 1
+
+" 大文字小文字を区別しない
+let g:unite_enable_ignore_case = 1
+let g:unite_enable_smart_case = 1
+
+
 let g:unite_enable_start_insert=1
+" grep検索
+nnoremap <silent> ,g  :<C-u>Unite grep:. -buffer-name=search-buffer<CR>
+" カーソル位置の単語をgrep検索
+nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W>
+" grep検索結果の再呼出
+nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
 " バッファ一覧
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 " ファイル一覧
@@ -267,6 +290,12 @@ nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mr
 " colorscheme
 nnoremap <silent> ,uc :<C-u>Unite colorscheme<CR>
 
+" unite grep に ag(The Silver Searcher) を使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+  let g:unite_source_grep_recursive_opt = ''
+endif
 
 augroup Shebang
   autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python\<nl># -*- coding: utf-8 -*-\<nl>\"|$
@@ -275,10 +304,6 @@ augroup Shebang
   autocmd BufNewFile *.\(cc\|hh\) 0put =\"//\<nl>// \".expand(\"<afile>:t\").\" -- \<nl>//\<nl>\"|2|start!
 augroup END
 
-"---------------------------------------------------------------------------
-"neobundle
-source ~/.vimrc.bundle
-"---------------------------------------------------------------------------
 
 " Gtags
 " gtags
@@ -296,4 +321,47 @@ source ~/.vimrc.bundle
     nnoremap <C-n> :cn<CR>
     " 前の検索結果
     nnoremap <C-p> :cp<CR>
+
+"startify
+    let g:startify_custom_header = [ 
+                \ '     __  __                            ________     __ __      ',
+                \ '    /\ \/\ \    __                    /\____   \   /\ \\ \     ',
+                \ '    \ \ \ \ \  /\_\     ___ ___       \/___/  /    \ \ \\ \    ',
+                \ '     \ \ \ \ \ \/\ \   / __` __`\         /  /      \ \ \\ \_  ',
+                \ '      \ \ \_/ \ \ \ \ /\ \/\ \/\ \       /  /    __  \ \__  __\',
+                \ '       \ `\___/  \ \_\\ \_\ \_\ \_\     /\_/    /\_\  \/_/\_\_/',
+                \ '        `\/__/    \/_/ \/_/\/_/\/_/     \//     \/_/     \/_/  ',
+                \ '',
+                \ '',
+                \ ]
+
+    let g:startify_bookmarks = [ '~/.vimrc', '~/.vimrc.bundle', '~/.zshrc']
+
+" open .vimrc
+command! Ev edit $MYVIMRC
+command! Rv source $MYVIMRC
+
+" smartchr.vim
+inoremap <expr> = smartchr#loop(' = ', ' == ', ' === ', '=')
+
+"-------------------------
+" vim-airline
+"-------------------------
+  if has('multi_byte')
+    let g:airline_powerline_fonts = 1
+  endif
+
+  let g:unite_force_overwrite_statusline = 0
+  let g:vimfiler_force_overwrite_statusline = 0
+
+  " old vim-powerline symbols
+  let g:airline_left_sep = '⮀'
+  " let g:airline_left_sep = '◤'
+  let g:airline_left_alt_sep = '⮁'
+  let g:airline_right_sep = '⮂'
+  " let g:airline_right_sep = '◥'
+  let g:airline_right_alt_sep = '⮃'
+  let g:airline#extensions#branch#symbol = '  ⭠ '
+  let g:airline#extensions#readonly#symbol = '⭤ '
+  let g:airline_linecolumn_prefix = ' ⭡ '
 
