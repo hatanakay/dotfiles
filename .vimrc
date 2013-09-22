@@ -193,11 +193,11 @@ cnoremap <C-n> <Down>
 cnoremap <Down>  <C-n>
 
 
-highlight Pmenu ctermbg=4
+highlight Pmenu ctermbg=233
 highlight PmenuSel ctermbg=1
 highlight PMenuSbar ctermbg=4
 highlight String ctermfg=brown guifg=Orange cterm=none gui=none
-highlight MatchParen guifg=Yellow guibg=DarkCyan
+highlight MatchParen guifg=Yellow guibg=darkgray
 highlight SignColumn guibg=#101020
 highlight CursorIM guifg=NONE guibg=Red
 highlight CursorLine guifg=NONE guibg=#505050
