@@ -97,7 +97,6 @@ endif
 " Buffer {{{
 " }}}
 
-
 " Encording {{{
   NeoBundle 'banyan/recognize_charcode.vim'
 " }}}
@@ -126,7 +125,6 @@ endif
       \    },
       \ }
 
-
   " vimdoc 日本語
   NeoBundle 'yuroyoro/vimdoc_ja'
 
@@ -136,7 +134,6 @@ endif
 
   " mhinz/vim-startify
   NeoBundle 'mhinz/vim-startify'
-
 
 " }}}
 
