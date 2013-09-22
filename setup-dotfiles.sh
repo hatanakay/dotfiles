@@ -3,8 +3,7 @@
 symlink
 DOT_FILES=( .zsh .zshrc .zshrc.alias .zshrc.linux .zshrc.osx .zshrc.antigen .gemrc .gitconfig .irbrc .pryrc .vimrc .vimrc.bundle .tmux.conf )
 
-for file in ${DOT_FILES[@]}
-do  
+for file in ${DOT_FILES[@]} do  
     if [ -e $HOME/$file ]; then
         unlink $HOME/$file
     fi
@@ -12,18 +11,17 @@ do
 done
 
 #Directory
-if [ -e ~/.vim ]; then
+if [ -d ~/.vim ]; then
     unlink $HOME/.vim
 fi
 
-if [ -e ~/.oh-my-zsh ]; then
-    unlink $HOME/.oh-my-zsh
+if [ -d ~/.antigen ]; then
+    unlink $HOME/.antigen
 fi
-
-ln -s $HOME/dotfiles/.vim $HOME/.vim
 
 #git submodule
 git submodule init
 git submodule update
 
-#
+ln -s $HOME/dotfiles/.vim $HOME/.vim
+ln -s $HOME/dotfiles/.antigen $HOME/.antigen
