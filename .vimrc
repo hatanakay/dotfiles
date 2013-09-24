@@ -102,9 +102,11 @@ colorscheme molokai
 hi Visual ctermbg=19
 let g:molokai_original = 1
 let g:Powerline_theme = 'dark'
+let g:Powerline_symbols = 'fancy'
 let g:Powerline_colorscheme = 'molokai'
+let g:Powerline_symbols = 'compatible'
 let g:airline_theme = 'dark'
-
+let g:Powerline_symbols='fancy'
 "---------------------------------------------------------------------------
 " 補完関連: neocomplcache neosnippet
 "---------------------------------------------------------------------------
@@ -249,8 +251,8 @@ nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mr
 nnoremap <silent> ,uc :<C-u>Unite colorscheme<CR>
 
 " unite grep に ag(The Silver Searcher) を使う
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
+if executable('sg')
+  let g:unite_source_grep_command = 'sg'
   let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
   let g:unite_source_grep_recursive_opt = ''
 endif
@@ -314,21 +316,19 @@ inoremap <expr> = smartchr#loop(' = ', ' == ', ' === ', '=')
 "---------------------------------------------------------------------------
 " vim-airline
 "---------------------------------------------------------------------------
-  if has('multi_byte')
+let g:airline#extensions#tabline#enabled = 1
+if has('multi_byte')
     let g:airline_powerline_fonts = 1
-  endif
+endif
 
-  let g:unite_force_overwrite_statusline = 0
-  let g:vimfiler_force_overwrite_statusline = 0
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
 
-  " old vim-powerline symbols
-  let g:airline_left_sep = '⮀'
-  " let g:airline_left_sep = '◤'
-  let g:airline_left_alt_sep = '⮁'
-  let g:airline_right_sep = '⮂'
-  " let g:airline_right_sep = '◥'
-  let g:airline_right_alt_sep = '⮃'
-  let g:airline#extensions#branch#symbol = '  ⭠ '
-  let g:airline#extensions#readonly#symbol = '⭤ '
-  let g:airline_linecolumn_prefix = ' ⭡ '
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_branch_prefix = ' ⭠ '
+let g:airline_readonly_symbol = ' ⭤ '
+let g:airline_linecolumn_prefix = ' ⭡ '
 

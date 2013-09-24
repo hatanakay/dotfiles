@@ -135,6 +135,8 @@ endif
   " mhinz/vim-startify
   NeoBundle 'mhinz/vim-startify'
 
+  "git
+  NeoBundle 'tpope/vim-fugitive'
 " }}}
 
 " ColorSchema{{{{
