@@ -95,6 +95,9 @@ endif
 " }}}
 
 " Buffer {{{
+ " minibufexpl.vim : タブエディタ風にバッファ管理ウィンドウを表示
+  "NeoBundle 'minibufexpl.vim'
+  NeoBundle 'bling/vim-bufferline'
 " }}}
 
 " Encording {{{

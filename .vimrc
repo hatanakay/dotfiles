@@ -316,7 +316,18 @@ inoremap <expr> = smartchr#loop(' = ', ' == ', ' === ', '=')
 "---------------------------------------------------------------------------
 " vim-airline
 "---------------------------------------------------------------------------
+" タブラインにもairlineを適用
 let g:airline#extensions#tabline#enabled = 1
+
+" （タブが一個の場合）バッファのリストをタブラインに表示する機能をオフ
+let g:airline#extensions#tabline#show_buffers = 0
+
+" 0でそのタブで開いてるウィンドウ数、1で左のタブから連番
+let g:airline#extensions#tabline#tab_nr_type = 1
+
+" タブに表示する名前（fnamemodifyの第二引数）
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 if has('multi_byte')
     let g:airline_powerline_fonts = 1
 endif
