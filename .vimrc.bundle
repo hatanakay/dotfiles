@@ -105,6 +105,8 @@ endif
 " }}}
 
 " Utility {{{
+  "memolist.vim
+  NeoBundle 'glidenote/memolist.vim'
 
   "sudo.vim
   NeoBundle 'sudo.vim'
@@ -145,6 +147,8 @@ endif
 " ColorSchema{{{{
   NeoBundle 'tomasr/molokai'
   NeoBundle 'nanotech/jellybeans.vim.git'
+  NeoBundle 'w0ng/vim-hybrid'
+  NeoBundle 'vim-scripts/Wombat'
 " }}}
 
 " Unite {{{{

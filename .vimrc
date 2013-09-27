@@ -253,10 +253,15 @@ nnoremap <silent> ,uc :<C-u>Unite colorscheme<CR>
 nnoremap <silent> ,e  :<C-u>Unite file_rec/async:!<CR>
 
 " unite grep に ag(The Silver Searcher) を使う
-if executable('sg')
-  let g:unite_source_grep_command = 'sg'
-  let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-  let g:unite_source_grep_recursive_opt = ''
+let g:unite_source_grep_default_opts = '-Hn --color=never'
+if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nocolor --nogroup'
+    let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_grep_max_candidates = 200
+elseif executable('ack-grep') || (has('mac') && executable('ack'))
+    let g:unite_source_grep_command = 'ack-grep'
+    let g:unite_source_grep_default_opts = '--no-heading --no-color -a'
 endif
 
 augroup Shebang
@@ -333,3 +338,13 @@ let g:airline_branch_prefix = ' ⭠ '
 let g:airline_readonly_symbol = ' ⭤ '
 let g:airline_linecolumn_prefix = ' ⭡ '
 let g:airline_paste_symbol = 'ρ'
+
+"---------------------------------------------------------------------------
+" memolist
+"---------------------------------------------------------------------------
+let g:memolist_path = "~/Dropbox/memo"
+nnoremap <silent> ,mn :<C-u>MemoNew<CR>
+nnoremap <silent> ,ml :<C-u>Unite file:<C-r>=expand(g:memolist_path."/")<CR><CR>
+nnoremap <silent> ,mg :<C-u>Unite grep:<C-r>=expand(g:memolist_path."/")<CR><CR>
+nnoremap <silent> ,mf :<C-u>VimFiler <C-r>=expand(g:memolist_path."/")<CR><CR>
+
