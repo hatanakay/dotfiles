@@ -253,9 +253,10 @@ nnoremap <silent> ,c :<C-u>Unite colorscheme<CR>
 nnoremap <silent> ,e  :<C-u>Unite file_rec/async:!<CR>
 
 " unite grep に ag(The Silver Searcher) を使う
+"
 let g:unite_source_grep_default_opts = '-Hn --color=never'
-if executable('ag')
-    let g:unite_source_grep_command = 'ag'
+if executable('sg')
+    let g:unite_source_grep_command = 'sg'
     let g:unite_source_grep_default_opts = '--nocolor --nogroup'
     let g:unite_source_grep_recursive_opt = ''
     let g:unite_source_grep_max_candidates = 200
