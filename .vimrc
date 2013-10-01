@@ -236,19 +236,19 @@ nnoremap <silent> ,cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W
 " grep検索結果の再呼出
 nnoremap <silent> ,r  :<C-u>UniteResume search-buffer<CR>
 " バッファ一覧
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> ,b :<C-u>Unite buffer<CR>
 " ファイル一覧
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,f :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
 " レジスタ一覧
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> ,r :<C-u>Unite -buffer-name=register register<CR>
 " 最近使用したファイル一覧
-nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
+nnoremap <silent> ,m :<C-u>Unite file_mru<CR>
 " 常用セット
-nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> ,u :<C-u>Unite buffer file_mru<CR>
 " 全部乗せ
-nnoremap <silent> ,ua :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> ,a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
 " colorscheme
-nnoremap <silent> ,uc :<C-u>Unite colorscheme<CR>
+nnoremap <silent> ,c :<C-u>Unite colorscheme<CR>
 " .git以下で絞り込み
 nnoremap <silent> ,e  :<C-u>Unite file_rec/async:!<CR>
 
