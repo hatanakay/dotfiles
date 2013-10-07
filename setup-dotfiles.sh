@@ -11,12 +11,16 @@ for file in ${DOT_FILES[@]} do
 done
 
 #Directory
-if [ -d ~/.vim ]; then
+if [ -d $HOME/.vim ]; then
     unlink $HOME/.vim
 fi
 
-if [ -d ~/.antigen ]; then
+if [ -d $HOME/.antigen ]; then
     unlink $HOME/.antigen
+fi
+
+if [ -d $HOME/.zsh ]; then
+    unlink $HOME/.zsh
 fi
 
 #git submodule
@@ -24,4 +28,5 @@ git submodule init
 git submodule update
 
 ln -s $HOME/dotfiles/.vim $HOME/.vim
+ln -s $HOME/dotfiles/.zsh $HOME/.zsh
 ln -s $HOME/dotfiles/.antigen $HOME/.antigen
