@@ -14,11 +14,11 @@ function history-all { history -E 1 }
 #=============================
 # Search History
 #=============================
-autoload history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
-bindkey "^P" history-beginning-search-backward-end
-bindkey "^N" history-beginning-search-forward-end
+#autoload history-search-end
+#zle -N history-beginning-search-backward-end history-search-end
+#zle -N history-beginning-search-forward-end history-search-end
+#bindkey "^P" history-beginning-search-backward-end
+#bindkey "^N" history-beginning-search-forward-end
 
 #=============================
 # setopt
@@ -120,6 +120,7 @@ alias gs='git status'
 alias gst='git status -s -b'
 alias gc='git commit'
 alias gci='git commit -a'
+alias gfp='git fetch && git pull origin master'
 
 # extract http://d.hatena.ne.jp/jeneshicc/20110215/1297778049
 extract () {
@@ -163,14 +164,4 @@ linux*)
     ;;
 esac
 
-#Ctrl-x Ctrl-pでクリップボードにコピー
-pbcopy-buffer(){ 
-    echo $BUFFER | pbcopy
-    zle -M "pbcopy: ${BUFFER}" 
-}
 
-zle -N pbcopy-buffer
-bindkey '^x^p' pbcopy-buffer
-
-
-fpath=(/usr/local/share/zsh-completions $fpath)

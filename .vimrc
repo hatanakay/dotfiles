@@ -28,6 +28,15 @@ syntax on
 filetype on
 filetype indent on
 filetype plugin on
+
+" EmacsのC-oと同じ動作
+nnoremap go :<C-u>call append('.', '')<CR>
+" ↑の逆バージョン
+nnoremap gO :normal! O<ESC>j
+
+"Ctrl-a Ctrl-x で常に10進として扱う
+set nf=""
+
 "---------------------------------------------------------------------------
 " 表示に関する設定:
 "---------------------------------------------------------------------------
@@ -199,9 +208,13 @@ highlight PMenuSbar ctermbg=4
 highlight String ctermfg=brown guifg=Orange cterm=none gui=none
 highlight MatchParen guifg=Yellow guibg=darkgray
 highlight SignColumn guibg=#101020
-highlight CursorIM guifg=NONE guibg=Red
-highlight CursorLine guifg=NONE guibg=#505050
 
+" カレント行ハイライトON
+set cursorline
+" アンダーラインを引く(color terminal)
+highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+" アンダーラインを引く(gui)
+highlight CursorLine gui=underline guifg=NONE guibg=NONE
 "---------------------------------------------------------------------------
 " quick run
 "---------------------------------------------------------------------------
@@ -268,6 +281,7 @@ endif
 augroup Shebang
   autocmd BufNewFile *.py 0put =\"#!/usr/bin/env python\<nl># -*- coding: utf-8 -*-\<nl>\"|$
   autocmd BufNewFile *.rb 0put =\"#!/usr/bin/env ruby\<nl># -*- coding: utf-8 -*-\<nl>\"|$
+  autocmd BufNewFile *.sh 0put =\"#!/bin/bash\<nl>\"
   autocmd BufNewFile *.tex 0put =\"%&plain\<nl>\"|$
   autocmd BufNewFile *.\(cc\|hh\) 0put =\"//\<nl>// \".expand(\"<afile>:t\").\" -- \<nl>//\<nl>\"|2|start!
 augroup END
@@ -349,3 +363,9 @@ nnoremap <silent> ,ml :<C-u>Unite file:<C-r>=expand(g:memolist_path."/")<CR><CR>
 nnoremap <silent> ,mg :<C-u>Unite grep:<C-r>=expand(g:memolist_path."/")<CR><CR>
 nnoremap <silent> ,mf :<C-u>VimFiler <C-r>=expand(g:memolist_path."/")<CR><CR>
 
+"---------------------------------------------------------------------------
+" gocode
+"---------------------------------------------------------------------------
+set rtp+=$GOROOT/misc/vim
+"golint
+exe "set rtp+=" . globpath($GOPATH, "/usr/local/opt/go/misc/vim")

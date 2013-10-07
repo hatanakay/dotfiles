@@ -48,21 +48,33 @@ precmd() {
 }
 
 #=============================
-# source auto-fu.zsh
+# percol
 #=============================
-if [ -f ~/.zsh/auto-fu.zsh ]; then
-    source ~/.zsh/auto-fu.zsh
-    function zle-line-init () {
-        auto-fu-init
-    }
-    zle -N zle-line-init
-    zstyle ':completion:*' completer _oldlist _complete
-fi
-
-#export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+# setting for percol
+source ~/.zsh/percol.zsh
+# ~/.zsh/percol.zsh
+# load percol sources
+for f (~/.zsh/percol-sources/*) source "${f}"
 
 function compare {
   local CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
   open "$(git remote -v | head -n 1 | sed -e 's|.*git@\(.*\):\(.*\)\.git.*|https://\1/\2|g')/compare/master...$CURRENT_BRANCH"
 }
+
+
+#=============================
+# source auto-fu.zsh
+#=============================
+if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
+    source ~/.zsh/auto-fu.zsh/auto-fu.zsh
+    function zle-line-init () {
+        auto-fu-init
+    }
+    zle -N zle-line-init
+    zstyle ':completion:*' completer _oldlist _complete
+    zstyle ':auto-fu:var' postdisplay $''
+fi
+
+#export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
+
 
