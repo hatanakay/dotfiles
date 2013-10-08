@@ -264,6 +264,9 @@ nnoremap <silent> ,a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru
 nnoremap <silent> ,c :<C-u>Unite colorscheme<CR>
 " .git以下で絞り込み
 nnoremap <silent> ,e  :<C-u>Unite file_rec/async:!<CR>
+" 現在のバッファを検索
+nnoremap <silent> ,l  :<C-u>Unite line<CR>
+
 
 " unite grep に ag(The Silver Searcher) を使う
 "
