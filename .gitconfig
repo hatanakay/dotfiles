@@ -30,6 +30,7 @@
 [core]
     quotepath = false
     editor = vim
+    pager = "nkf -w"
 [http]
     sslVerify = false
 [tig "bind"]
@@ -39,5 +40,3 @@
     tool = vimdiff
 [push]
     default = current
-[github]
-    user = hatanakay
