@@ -271,12 +271,12 @@ nnoremap <silent> ,l  :<C-u>Unite line<CR>
 let g:unite_source_grep_default_opts = '-Hn --color=never'
 if executable('sg')
     let g:unite_source_grep_command = 'sg'
-    let g:unite_source_grep_default_opts = '--nocolor --nogroup'
+    let g:unite_source_grep_default_opts = '-i --nocolor --nogroup'
     let g:unite_source_grep_recursive_opt = ''
     let g:unite_source_grep_max_candidates = 200
 elseif executable('ack-grep') || (has('mac') && executable('ack'))
     let g:unite_source_grep_command = 'ack-grep'
-    let g:unite_source_grep_default_opts = '--no-heading --no-color -a'
+    let g:unite_source_grep_default_opts = '-i --no-heading --no-color -a'
 endif
 
 augroup Shebang
