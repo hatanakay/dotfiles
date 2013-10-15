@@ -107,6 +107,7 @@ source ~/.vimrc.bundle
 "---------------------------------------------------------------------------
 " colorscheme
 "---------------------------------------------------------------------------
+autocmd ColorScheme * highlight Identifier ctermfg=210
 colorscheme molokai
 hi Visual ctermbg=19
 let g:molokai_original = 1
@@ -205,7 +206,6 @@ cnoremap <Down>  <C-n>
 highlight Pmenu ctermbg=233
 highlight PmenuSel ctermbg=1
 highlight PMenuSbar ctermbg=4
-highlight String ctermfg=brown guifg=Orange cterm=none gui=none
 highlight MatchParen guifg=Yellow guibg=darkgray
 highlight SignColumn guibg=#101020
 
@@ -332,9 +332,6 @@ augroup END
 " open .vimrc
 command! Ev edit $MYVIMRC
 command! Rv source $MYVIMRC
-
-" smartchr.vim
-inoremap <expr> = smartchr#loop(' = ', ' == ', ' === ', '=')
 
 "---------------------------------------------------------------------------
 " vim-airline
