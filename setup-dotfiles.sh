@@ -1,13 +1,13 @@
 #!/bin/bash
 
-symlink
-DOT_FILES=( .zsh .zshrc .zshrc.alias .zshrc.linux .zshrc.osx .zshrc.antigen .gemrc .gitconfig .irbrc .pryrc .vimrc .vimrc.bundle .tmux.conf )
+export DOTFILES=".zsh .zshrc .zshrc.alias .zshrc.linux .zshrc.osx .zshrc.antigen .gemrc .gitconfig .irbrc .pryrc .vimrc .vimrc.bundle .tmux.conf"
 
-for file in ${DOT_FILES[@]} do  
-    if [ -e $HOME/$file ]; then
-        unlink $HOME/$file
+for dotfile in $DOTFILES
+do  
+    if [ -e $HOME/$dotfile ]; then
+        unlink $HOME/$dotfile
     fi
-    ln -s $HOME/dotfiles/$file $HOME/$file
+    ln -s $HOME/dotfiles/$dotfile $HOME/$dotfile
 done
 
 #Directory
