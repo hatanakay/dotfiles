@@ -40,6 +40,7 @@ set nf=""
 "---------------------------------------------------------------------------
 " 表示に関する設定:
 "---------------------------------------------------------------------------
+autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
 set title
 " 行番号を表示
 set number
@@ -51,7 +52,7 @@ set showcmd
 set showmatch
 " タブや改行を表示
 set list
-set listchars=eol:$,tab:>-
+set listchars=tab:>-
 " 折り返し表示しない
 set nowrap
 " 検索結果をハイライト
@@ -230,6 +231,7 @@ let g:quickrun_config['markdown'] = {
 " clipbord
 "---------------------------------------------------------------------------
 set clipboard+=unnamed
+set clipboard+=autoselect
 set pastetoggle=<c-e>
 autocmd InsertLeave * set nopaste
 
@@ -367,3 +369,5 @@ nnoremap <silent> ,mf :<C-u>VimFiler <C-r>=expand(g:memolist_path."/")<CR><CR>
 set rtp+=$GOROOT/misc/vim
 "golint
 exe "set rtp+=" . globpath($GOPATH, "/usr/local/opt/go/misc/vim")
+
+
