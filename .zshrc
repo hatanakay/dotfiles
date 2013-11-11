@@ -121,6 +121,8 @@ alias gst='git status -s -b'
 alias gc='git commit'
 alias gci='git commit -a'
 alias gfp='git fetch && git pull origin master'
+alias diff='colordiff'
+alias diffs='colordiff --side-by-side --suppress-common-lines -W"`tput cols`"'
 
 # extract http://d.hatena.ne.jp/jeneshicc/20110215/1297778049
 extract () {
@@ -165,3 +167,29 @@ linux*)
 esac
 
 
+#=============================
+# tmux ssh
+#=============================
+# ssh wrapper that rename current tmux window to the hostname of the
+# remote host.
+ssh() {
+    # Do nothing if we are not inside tmux or ssh is called without arguments
+    if [[ $# == 0 || -z $TMUX ]]; then
+        command ssh $@
+        return
+    fi
+    # The hostname is the last parameter (i.e. ${(P)#})
+    local remote=${${(P)#}%.*}
+    local window_name="$(echo ${remote} | awk -F. '{ print $1}')"
+    local old_name="$(tmux display-message -p '#W')"
+    local renamed=0
+    # Save the current name
+    if [[ $remote != -* ]]; then
+        renamed=1
+        tmux rename-window "ssh-${window_name}"; 
+    fi
+    command ssh $@
+    if [[ $renamed == 1 ]]; then
+        tmux rename-window "$old_name"
+    fi
+}
