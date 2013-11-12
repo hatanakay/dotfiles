@@ -180,13 +180,20 @@ ssh() {
     fi
     # The hostname is the last parameter (i.e. ${(P)#})
     local remote=${${(P)#}%.*}
+    local full_host=$(sed -n "/${remote}/,/^  Hostname.*$/p" $HOME/.ssh/config | grep Hostname | cut -d' ' -f4)
+    local remote_ip
+    if [[ 0 == "${#full_host}" ]]; then
+        remote_ip=$(dig ${@} +short)
+    else
+        remote_ip=$(dig ${full_host} +short)
+    fi
     local window_name="$(echo ${remote} | awk -F. '{ print $1}')"
     local old_name="$(tmux display-message -p '#W')"
     local renamed=0
     # Save the current name
     if [[ $remote != -* ]]; then
         renamed=1
-        tmux rename-window "ssh-${window_name}"; 
+        tmux rename-window "ssh-${window_name}(${remote_ip})"; 
     fi
     command ssh $@
     if [[ $renamed == 1 ]]; then
