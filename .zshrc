@@ -179,21 +179,35 @@ ssh() {
         return
     fi
     # The hostname is the last parameter (i.e. ${(P)#})
-    local remote=${${(P)#}%.*}
-    local full_host=$(sed -n "/${remote}/,/^  Hostname.*$/p" $HOME/.ssh/config | grep Hostname | cut -d' ' -f4)
     local remote_ip
-    if [[ 0 == "${#full_host}" ]]; then
-        remote_ip=$(dig ${@} +short)
+    local full_host
+    local remote=${${(P)#}%.*}
+    if [[ $@ =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+        remote_ip=$@
+        full_host="NONE"
     else
-        remote_ip=$(dig ${full_host} +short)
+        full_host=$(sed -n "/${remote}/,/^  Hostname.*$/p" $HOME/.ssh/config | grep Hostname | cut -d' ' -f4)
+        if [[ 0 == "${#full_host}" ]]; then
+            remote_ip=$(dig ${@} +short)
+        else
+            remote_ip=$(dig ${full_host} +short)
+        fi
     fi
+
     local window_name="$(echo ${remote} | awk -F. '{ print $1}')"
     local old_name="$(tmux display-message -p '#W')"
     local renamed=0
     # Save the current name
     if [[ $remote != -* ]]; then
         renamed=1
-        tmux rename-window "ssh-${window_name}(${remote_ip})"; 
+        if [[ "NONE" == "${full_host}" ]]; then
+            tmux rename-window "ssh(${remote_ip})"; 
+        else
+            if [[ 0 == ${#full_host} ]]; then
+                full_host=$@
+            fi
+            tmux rename-window "ssh:#[fg=yellow]${full_host}#[fg=default](#[fg=red]${remote_ip}#[fg=default])"; 
+        fi
     fi
     command ssh $@
     if [[ $renamed == 1 ]]; then
