@@ -172,7 +172,37 @@ esac
 #=============================
 # ssh wrapper that rename current tmux window to the hostname of the
 # remote host.
+set_term_bgcolor(){
+    local R=$1
+    local G=$2
+    local B=$3
+    /usr/bin/osascript <<EOF > /dev/null 2>&1
+tell application "iTerm"
+  tell the current terminal
+    tell the current session
+      set background color to {$(($R*65535/255)), $(($G*65535/255)), $(($B*65535/255))}
+    end tell
+  end tell
+end tell
+EOF
+}
+
+is_production() {
+    if [[ -f ~/.production_hosts ]]; then
+        for i in `cat ~/.production_hosts`; do
+            if [[ "$@" =~ $i ]]; then
+                return 0
+            fi
+        done
+    fi
+    return 1
+}
+
 ssh() {
+    if is_production "$@"; then
+        set_term_bgcolor 0 102 0    
+    fi
+
     # Do nothing if we are not inside tmux or ssh is called without arguments
     if [[ $# == 0 || -z $TMUX ]]; then
         command ssh $@
@@ -186,7 +216,7 @@ ssh() {
         remote_ip=$@
         full_host="NONE"
     else
-        full_host=$(sed -n "/${remote}/,/^  Hostname.*$/p" $HOME/.ssh/config | grep Hostname | cut -d' ' -f4)
+        full_host=$(sed -n "/^Host ${remote}/,/^  Hostname.*$/p" $HOME/.ssh/config | grep Hostname | cut -d' ' -f4)
         if [[ 0 == "${#full_host}" ]]; then
             remote_ip=$(dig ${@} +short)
         else
@@ -211,6 +241,7 @@ ssh() {
     fi
     command ssh $@
     if [[ $renamed == 1 ]]; then
+        set_term_bgcolor 0 0 0
         tmux rename-window "$old_name"
     fi
 }
