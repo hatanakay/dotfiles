@@ -133,6 +133,7 @@ endif
   NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
       \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f unix_mac.mak',
       \    },
       \ }
 
