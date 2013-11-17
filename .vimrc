@@ -221,12 +221,13 @@ highlight CursorLine gui=underline guifg=NONE guibg=NONE
 "---------------------------------------------------------------------------
 "vim markdown
 let g:quickrun_config = {}
-let g:quickrun_config['markdown'] = {
-\ 'command': 'redcarpet',
-\ 'outputter': 'browser',
-\ 'cmdopt': '--parse-tables'
-\ }
-
+let g:quickrun_config.markdown = {
+      \ 'outputter' : 'null',
+      \ 'command'   : 'open',
+      \ 'cmdopt'    : '-a',
+      \ 'args'      : 'Marked',
+      \ 'exec'      : '%c %o %a %s',
+      \ }
 "---------------------------------------------------------------------------
 " clipbord
 "---------------------------------------------------------------------------
@@ -369,5 +370,5 @@ nnoremap <silent> ,mf :<C-u>VimFiler <C-r>=expand(g:memolist_path."/")<CR><CR>
 set rtp+=$GOROOT/misc/vim
 "golint
 exe "set rtp+=" . globpath($GOPATH, "/usr/local/opt/go/misc/vim")
-
+auto BufWritePre *.go Fmt
 
