@@ -172,7 +172,11 @@ lstat(){
     else
         if [[ -d $@ ]]; then
             local dir=$(echo $@ | sed -e 's/\(^.*\)\/$/\1/g')
-            command gstat --printf "%A:%a %U:%G %.19y %n \n" $dir/.* $dir/*
+            if [[ -f $dir/.* ]]; then
+                command gstat --printf "%A:%a %U:%G %.19y %n \n" $dir/.* $dir/*
+            else
+                command gstat --printf "%A:%a %U:%G %.19y %n \n" $dir/*
+            fi
         else
             command gstat --printf "%A:%a %U:%G %.19y %n \n" $@
         fi 
