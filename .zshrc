@@ -166,7 +166,18 @@ linux*)
     ;;
 esac
 
-
+lstat(){
+    if [[ $# == 0 ]]; then
+        command gstat --printf "%A:%a %U:%G %.19y %n \n" .* *
+    else
+        if [[ -d $@ ]]; then
+            local dir=$(echo $@ | sed -e 's/\(^.*\)\/$/\1/g')
+            command gstat --printf "%A:%a %U:%G %.19y %n \n" $dir/.* $dir/*
+        else
+            command gstat --printf "%A:%a %U:%G %.19y %n \n" $@
+        fi 
+    fi
+}
 #=============================
 # tmux ssh
 #=============================
