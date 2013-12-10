@@ -375,3 +375,11 @@ set rtp+=$GOROOT/misc/vim
 exe "set rtp+=" . globpath($GOPATH, "/usr/local/opt/go/misc/vim")
 auto BufWritePre *.go Fmt
 
+" バッファをを移動した時に自動的にプロジェクトルートをカレントディレクトリにする
+"  http://qiita.com/kentaro/items/6aa9f108df825b2a8b39
+function! ChangeCurrentDirectoryToProjectRoot()
+    let root = unite#util#path2project_directory(expand('%'))
+    execute 'lcd' root
+endfunction
+:au BufEnter * :call ChangeCurrentDirectoryToProjectRoot()
+

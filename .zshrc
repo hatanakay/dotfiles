@@ -214,10 +214,6 @@ is_production() {
 }
 
 ssh() {
-    if is_production "$@"; then
-        set_term_bgcolor 0 102 0    
-    fi
-
     # Do nothing if we are not inside tmux or ssh is called without arguments
     if [[ $# == 0 || -z $TMUX ]]; then
         command ssh $@
@@ -226,17 +222,30 @@ ssh() {
     # The hostname is the last parameter (i.e. ${(P)#})
     local remote_ip
     local full_host
-    local remote=${${(P)#}%.*}
-    if [[ $@ =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+    local remote
+    local user
+    if [[ "$@" =~ ^.*\@.*$ ]]; then
+        local wk_host=${${(P)#}%}
+        remote=$(echo ${wk_host} | cut -d '@' -f2)
+        user=$(echo ${wk_host} | cut -d '@' -f1 )
+    else
+        remote=${${(P)#}%}
+    fi
+
+    if [[ $remote =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
         remote_ip=$@
         full_host="NONE"
     else
         full_host=$(sed -n "/^Host ${remote}/,/^  Hostname.*$/p" $HOME/.ssh/config | grep Hostname | cut -d' ' -f4)
         if [[ 0 == "${#full_host}" ]]; then
-            remote_ip=$(dig ${@} +short)
+            remote_ip=$(dig ${remote} +short)
         else
             remote_ip=$(dig ${full_host} +short)
         fi
+    fi
+    
+    if is_production "$remote"; then
+        set_term_bgcolor 0 102 0    
     fi
 
     local window_name="$(echo ${remote} | awk -F. '{ print $1}')"
@@ -251,7 +260,11 @@ ssh() {
             if [[ 0 == ${#full_host} ]]; then
                 full_host=$@
             fi
-            tmux rename-window "ssh:#[fg=yellow]${full_host}#[fg=default](#[fg=red]${remote_ip}#[fg=default])"; 
+            if is_production "$remote"; then
+               tmux rename-window "ssh:#[fg=yellow]${full_host}#[fg=default](#[fg=red]${remote_ip}#[fg=default])"; 
+            else
+               tmux rename-window "ssh:#[fg=white]${full_host}#[fg=default](#[fg=colour153]${remote_ip}#[fg=default])"; 
+            fi
         fi
     fi
     command ssh $@
@@ -260,3 +273,39 @@ ssh() {
         tmux rename-window "$old_name"
     fi
 }
+
+## tmux自動起動
+# http://d.hatena.ne.jp/tyru/20100828/run_tmux_or_screen_at_shell_startup
+is_screen_running() {
+    # tscreen also uses this varariable.
+    [ ! -z "$WINDOW" ]
+}
+is_tmux_runnning() {
+    [ ! -z "$TMUX" ]
+}
+is_screen_or_tmux_running() {
+    is_screen_running || is_tmux_runnning
+}
+shell_has_started_interactively() {
+    [ ! -z "$PS1" ]
+}
+resolve_alias() {
+    cmd="$1"
+    while \
+        whence "$cmd" >/dev/null 2>/dev/null \
+        && [ "$(whence "$cmd")" != "$cmd" ]
+do
+    cmd=$(whence "$cmd")
+done
+echo "$cmd"
+}
+
+
+if ! is_screen_or_tmux_running && shell_has_started_interactively; then
+    for cmd in tmux tscreen screen; do
+        if whence $cmd >/dev/null 2>/dev/null; then
+            $(resolve_alias "$cmd")
+            break
+        fi
+    done
+fi
