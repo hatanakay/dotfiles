@@ -275,8 +275,8 @@ nnoremap <silent> ,o  :<C-u>Unite outline<CR>
 " unite grep に ag(The Silver Searcher) を使う
 "
 let g:unite_source_grep_default_opts = '-Hn --color=never'
-if executable('sg')
-    let g:unite_source_grep_command = 'sg'
+if executable('pt')
+    let g:unite_source_grep_command = 'pt'
     let g:unite_source_grep_default_opts = '-i --nocolor --nogroup'
     let g:unite_source_grep_recursive_opt = ''
     let g:unite_source_grep_max_candidates = 200
@@ -375,11 +375,4 @@ set rtp+=$GOROOT/misc/vim
 exe "set rtp+=" . globpath($GOPATH, "/usr/local/opt/go/misc/vim")
 auto BufWritePre *.go Fmt
 
-" バッファをを移動した時に自動的にプロジェクトルートをカレントディレクトリにする
-"  http://qiita.com/kentaro/items/6aa9f108df825b2a8b39
-function! ChangeCurrentDirectoryToProjectRoot()
-    let root = unite#util#path2project_directory(expand('%'))
-    execute 'lcd' root
-endfunction
-:au BufEnter * :call ChangeCurrentDirectoryToProjectRoot()
 

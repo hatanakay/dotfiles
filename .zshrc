@@ -168,7 +168,11 @@ esac
 
 lstat(){
     if [[ $# == 0 ]]; then
-        command gstat --printf "%A:%a %U:%G %.19y %n \n" .* *
+        if [[ -f ./.* ]]; then
+            command gstat --printf "%A:%a %U:%G %.19y %n \n" .* *
+        else
+            command gstat --printf "%A:%a %U:%G %.19y %n \n" *
+        fi
     else
         if [[ -d $@ ]]; then
             local dir=$(echo $@ | sed -e 's/\(^.*\)\/$/\1/g')

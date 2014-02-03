@@ -50,7 +50,9 @@ for f (~/.zsh/percol-sources/*) source "${f}"
 
 function compare {
   local CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
-  open "$(git remote -v | head -n 1 | sed -e 's|.*git@\(.*\):\(.*\)\.git.*|http://\1/\2|g')/compare/master...$CURRENT_BRANCH"
+  # http://ghe.tokyo.pb/lolipop/lolipop-api/compare/muu-easy-order
+
+  open "$(git remote -v | head -n 1 | sed -e 's|.*git@\(.*\):\(.*\)\.git.*|http://\1/\2|g')/compare/$CURRENT_BRANCH"
 }
 
 

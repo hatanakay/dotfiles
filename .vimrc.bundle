@@ -108,6 +108,9 @@ endif
 " }}}
 
 " Utility {{{
+  "calender vim
+  NeoBundle 'itchyny/calendar.vim'
+
   "terryma/vim-multiple-cursors 
   NeoBundle 'terryma/vim-multiple-cursors'
 
