@@ -1,5 +1,4 @@
-export PATH=/usr/local/bin:/usr/local/sbin:$HOME/bin:$PATH
-export PATH=/opt/local/bin:/opt/local/sbin/:~/bin:$PATH
+export R_HOME=/Library/Frameworks/R.framework/Resources
 
 if [ -d $HOME/.rbenv ]; then
     export PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
