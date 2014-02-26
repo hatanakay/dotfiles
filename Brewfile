@@ -16,6 +16,8 @@ install tmux
 install reattach-to-user-namespace
 install hub
 install ack
+install spark
+install grc
 install htop-osx
 install tree
 install imagemagick
