@@ -13,6 +13,7 @@ case "${OSTYPE}" in
         antigen bundle git-flow
         antigen bundle osx
         antigen bundle command-not-found
+        antigen-bundle zsh-users/zsh-syntax-highlighting
         ;;
     linux*)
         antigen bundle history

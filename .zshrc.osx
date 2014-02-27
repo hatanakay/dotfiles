@@ -1,9 +1,5 @@
+export PATH=$HOME/bin:$PATH
 export R_HOME=/Library/Frameworks/R.framework/Resources
-
-if [ -d $HOME/.rbenv ]; then
-    export PATH=$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH
-    eval "$(rbenv init -)"
-fi
 
 if [ -d $HOME/.phpenv ]; then
     export PATH=$HOME/.phpenv/bin:$PATH
@@ -22,7 +18,6 @@ alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"
 alias lg="find . -type d -name .svn -prune -o -type f -print | xargs lgrep -n"
 alias ls='ls -G -w'
 alias cr="perl -pe 's/.+;//' ~/.zsh_history | awk 'BEGIN {FS=\"|\"} {print $1}' | sort | uniq -c | sort -nr | head -10" # command ranking
-alias tmuxn="tmux new-session \; source-file ~/.tmux/session"
 alias tmuxv="tmux new-session \; split-window -h \; split-window -d -d \;"
 
 # Terminal Colorの設定
@@ -33,20 +28,26 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
 
 # z
-. /usr/local/etc/profile.d/z.sh
-precmd() {
-  _z --add "$(pwd -P)"
-}
+if [ -f /usr/local/etc/profile.d/z.sh ]; then
+  _Z_CMD=j
+  source /usr/local/etc/profile.d/z.sh
+  precmd() {
+    _z --add "$(pwd -P)"
+  }
+  compctl -U -K _z_zsh_tab_completion "$_Z_CMD"
+fi
 
 #=============================
 # percol
 #=============================
-# setting for percol
-source ~/.zsh/percol.zsh
-# ~/.zsh/percol.zsh
-# load percol sources
-for f (~/.zsh/percol-sources/*) source "${f}"
+if [ -f $HOME/.zsh/.percol.zsh ]; then
+    source ~/.zsh/percol.zsh
+    for f (~/.zsh/percol-sources/*) source "${f}"
+fi
 
+#=============================
+# compare for github
+#=============================
 function compare {
   local CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
   # http://ghe.tokyo.pb/lolipop/lolipop-api/compare/muu-easy-order
@@ -58,15 +59,15 @@ function compare {
 #=============================
 # source auto-fu.zsh
 #=============================
-if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
-    source ~/.zsh/auto-fu.zsh/auto-fu.zsh
-    function zle-line-init () {
-        auto-fu-init
-    }
-    zle -N zle-line-init
-    zstyle ':completion:*' completer _oldlist _complete
-    zstyle ':auto-fu:var' postdisplay $''
-fi
+#if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
+    #source ~/.zsh/auto-fu.zsh/auto-fu.zsh
+    #function zle-line-init () {
+        #auto-fu-init
+    #}
+    #zle -N zle-line-init
+    #zstyle ':completion:*' completer _oldlist _complete
+    #zstyle ':auto-fu:var' postdisplay $''
+#fi
 
 #export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 
@@ -78,4 +79,26 @@ if [ -f $HOME/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
 
-
+#=============================
+# sudo.vim   http://blog.monoweb.info/article/2011120320.html
+#=============================
+sudo() {
+  local args
+  case $1 in
+    vi|vim)
+      args=()
+      for arg in $@[2,-1]
+      do
+        if [ $arg[1] = '-' ]; then
+          args[$(( 1+$#args ))]=$arg
+        else
+          args[$(( 1+$#args ))]="sudo:$arg"
+        fi
+      done
+      command vim $args
+      ;;
+    *)
+      command sudo $@
+      ;;
+  esac
+}
