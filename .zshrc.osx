@@ -29,7 +29,7 @@ export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
 
 # z
 if [ -f /usr/local/etc/profile.d/z.sh ]; then
-  _Z_CMD=j
+  _Z_CMD=z
   source /usr/local/etc/profile.d/z.sh
   precmd() {
     _z --add "$(pwd -P)"
