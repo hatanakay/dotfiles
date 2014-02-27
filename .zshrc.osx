@@ -40,8 +40,7 @@ fi
 #=============================
 # percol
 #=============================
-if [ -f $HOME/.zsh/.percol.zsh ]; then
-    source ~/.zsh/percol.zsh
+if [ -d $HOME/.zsh/percol-sources ]; then
     for f (~/.zsh/percol-sources/*) source "${f}"
 fi
 
