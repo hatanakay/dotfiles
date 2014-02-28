@@ -30,7 +30,7 @@ setopt auto_cd           # 指定したコマンド名がなく、ディレク�
 setopt auto_list         # 補完候補が複数ある時に、一覧表示する
 setopt auto_menu         # 補完キー（Tab,  Ctrl+I) を連打するだけで順に補完候補を自動で補完する
 setopt auto_param_keys   # カッコの対応などを自動的に補完する
-setopt auto_param_slash  # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
+#setopt auto_param_slash  # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
 setopt auto_pushd        # cd でTabを押すとdir list を表示
 setopt brace_ccl         # {a-c} を a b c に展開する機能を使えるようにする
 setopt complete_aliases  # エイリアスを設定したコマンドでも補完機能を使えるようにする
