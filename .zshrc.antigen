@@ -10,7 +10,8 @@ case "${OSTYPE}" in
         antigen bundle ruby
         antigen bundle rbenv
         antigen bundle git
-        antigen bundle git-flow
+        antigen-bundle github
+        antigen-bundle gnu-utils
         antigen bundle osx
         antigen bundle command-not-found
         antigen-bundle zsh-users/zsh-syntax-highlighting
