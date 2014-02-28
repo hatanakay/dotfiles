@@ -44,6 +44,7 @@ autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
 set title
 " 行番号を表示
 set number
+
 " ルーラーを表示
 set ruler
 "入力中のコマンドをステータスに表示する
@@ -110,7 +111,12 @@ source ~/.vimrc.bundle
 "---------------------------------------------------------------------------
 autocmd ColorScheme * highlight Identifier ctermfg=210
 colorscheme molokai
+
+"molokaiの内容を一部修正
 hi Visual ctermbg=19
+highlight LineNr ctermfg=245 ctermbg=0
+highlight CursorLineNr ctermfg=5 ctermbg=0
+
 let g:molokai_original = 1
 let g:Powerline_theme = 'dark'
 let g:Powerline_symbols = 'fancy'
@@ -212,6 +218,7 @@ highlight SignColumn guibg=#101020
 
 " カレント行ハイライトON
 set cursorline
+set nocursorcolumn
 " アンダーラインを引く(color terminal)
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 " アンダーラインを引く(gui)
