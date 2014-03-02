@@ -11,10 +11,6 @@ if [ -d $HOME/.golang ]; then
     PATH=$GOPATH/bin:$PATH
 fi
 
-if [ -d $HOME/.rbenv  ] ; then
-  export PATH=$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH
-  eval "$(rbenv init -)"
-fi
 typeset -gxU PATH R_HOME GOPATH
 
 # osx alias
