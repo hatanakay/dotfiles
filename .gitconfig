@@ -70,3 +70,5 @@
     gn            = grep -n
 [push]
 	default = simple
+[init]
+	templatedir = ~/.gittmp
