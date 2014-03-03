@@ -44,6 +44,7 @@ autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
 set title
 " 行番号を表示
 set number
+
 " ルーラーを表示
 set ruler
 "入力中のコマンドをステータスに表示する
@@ -110,7 +111,12 @@ source ~/.vimrc.bundle
 "---------------------------------------------------------------------------
 autocmd ColorScheme * highlight Identifier ctermfg=210
 colorscheme molokai
+
+"molokaiの内容を一部修正
 hi Visual ctermbg=19
+highlight LineNr ctermfg=245 ctermbg=0
+highlight CursorLineNr ctermfg=5 ctermbg=0
+
 let g:molokai_original = 1
 let g:Powerline_theme = 'dark'
 let g:Powerline_symbols = 'fancy'
@@ -212,6 +218,7 @@ highlight SignColumn guibg=#101020
 
 " カレント行ハイライトON
 set cursorline
+set nocursorcolumn
 " アンダーラインを引く(color terminal)
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 " アンダーラインを引く(gui)
@@ -239,6 +246,8 @@ autocmd InsertLeave * set nopaste
 "---------------------------------------------------------------------------
 "Unite.vim
 "---------------------------------------------------------------------------
+"yank 履歴
+let g:unite_source_history_yank_enable =1
 " insert modeで開始
 let g:unite_enable_start_insert = 1
 " 大文字小文字を区別しない
@@ -269,8 +278,10 @@ nnoremap <silent> ,e  :<C-u>Unite file_rec/async:!<CR>
 nnoremap <silent> ,l  :<C-u>Unite line<CR>
 " outline
 nnoremap <silent> ,o  :<C-u>Unite outline<CR>
-
-
+" tags一覧
+nnoremap <silent> ,t :<C-u>Unite -buffer-name=tags tag<CR>
+" yank履歴
+nnoremap <silent> ,y :<C-u>Unite history/yank<CR>
 
 " unite grep に ag(The Silver Searcher) を使う
 "
@@ -280,8 +291,13 @@ if executable('pt')
     let g:unite_source_grep_default_opts = '--nocolor --nogroup'
     let g:unite_source_grep_recursive_opt = ''
     let g:unite_source_grep_max_candidates = 200
+elseif executable('ag')
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nocolor --nogroup'
+    let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_grep_max_candidates = 200
 elseif executable('ack-grep') || (has('mac') && executable('ack'))
-    let g:unite_source_grep_command = 'ack-grep'
+    let g:unite_source_grep_command = 'ack'
     let g:unite_source_grep_default_opts = '-i --no-heading --no-color -a'
 endif
 
@@ -293,26 +309,14 @@ augroup Shebang
   autocmd BufNewFile *.\(cc\|hh\) 0put =\"//\<nl>// \".expand(\"<afile>:t\").\" -- \<nl>//\<nl>\"|2|start!
 augroup END
 
+"---------------------------------------------------------------------------
+" unite-tag
+"---------------------------------------------------------------------------
+autocmd BufEnter *
+      \   if empty(&buftype)
+      \|     noremap <silent> <C-J><C-K> :<C-u>UniteWithCursorWord -immediately tag<CR>
+      \|  endif
 
-"---------------------------------------------------------------------------
-" GNU GLOBAL gtags.vim
-"---------------------------------------------------------------------------
-" Gtags
-" gtags
-    " 検索結果Windowを閉じる
-    nnoremap <C-q> <C-w><C-w><C-w>q
-    " Grep 準備
-    nnoremap <C-g> :Gtags -g
-    " このファイルの関数一覧                                                                                                                                                
-    nnoremap <C-l> :Gtags -f %<CR>
-    " カーソル以下の定義元を探す
-    nnoremap <C-j> :Gtags <C-r><C-w><CR>
-    " カーソル以下の使用箇所を探す
-    nnoremap <C-k> :Gtags -r <C-r><C-w><CR>
-    " 次の検索結果
-    nnoremap <C-n> :cn<CR>
-    " 前の検索結果
-    nnoremap <C-p> :cp<CR>
 
 "---------------------------------------------------------------------------
 " vim-startify
@@ -374,5 +378,4 @@ set rtp+=$GOROOT/misc/vim
 "golint
 exe "set rtp+=" . globpath($GOPATH, "/usr/local/opt/go/misc/vim")
 auto BufWritePre *.go Fmt
-
 

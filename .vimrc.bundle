@@ -33,6 +33,7 @@ endif
   " neocomplcacheのsinpet補完
   "NeoBundle 'Shougo/neocomplcache-snippets-complete'
   NeoBundle 'Shougo/neosnippet.git'
+  NeoBundle 'Shougo/neosnippet-snippets'
 
 " }}}
 
@@ -58,10 +59,7 @@ endif
   NeoBundle 'tpope/vim-rails'
 
   " ソースコード上のメソッド宣言、変数宣言の一覧を表示
-  NeoBundle 'taglist.vim'
-  
-  " Gnu GLOBAL
-  NeoBundle 'vim-scripts/gtags.vim'
+  "NeoBundle 'taglist.vim'
 
 " }}}
 "
