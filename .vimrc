@@ -146,14 +146,6 @@ autocmd FileType python        setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType ruby          setlocal omnifunc=rubycomplete#Complete
 autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
 
-" RSense
-let g:rsenseUseOmniFunc = 1
-if filereadable(expand('/usr/local/bin/rsense'))
-    let g:rsenseHome = expand('/usr/local/Cellar/rsense/0.3/libexec')
-
-    " let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-endif
-
 if !exists('g:neocomplcache_omni_patterns')
     let g:neocomplcache_omni_patterns = {}
 endif
@@ -247,7 +239,7 @@ autocmd InsertLeave * set nopaste
 "Unite.vim
 "---------------------------------------------------------------------------
 "yank 履歴
-let g:unite_source_history_yank_enable =1
+"let g:unite_source_history_yank_enable =1
 " insert modeで開始
 let g:unite_enable_start_insert = 1
 " 大文字小文字を区別しない
@@ -279,9 +271,9 @@ nnoremap <silent> ,l  :<C-u>Unite line<CR>
 " outline
 nnoremap <silent> ,o  :<C-u>Unite outline<CR>
 " tags一覧
-nnoremap <silent> ,t :<C-u>Unite -buffer-name=tags tag<CR>
+"nnoremap <silent> ,t :<C-u>Unite -buffer-name=tags tag<CR>
 " yank履歴
-nnoremap <silent> ,y :<C-u>Unite history/yank<CR>
+"nnoremap <silent> ,y :<C-u>Unite history/yank<CR>
 
 " unite grep に ag(The Silver Searcher) を使う
 "
