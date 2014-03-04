@@ -11,8 +11,6 @@ if [ -d $HOME/.golang ]; then
     PATH=$GOPATH/bin:$PATH
 fi
 
-source ~/.zshenv
-
 typeset -gxU PATH R_HOME GOPATH
 
 # osx alias
