@@ -11,6 +11,9 @@ if [ -d $HOME/.golang ]; then
     PATH=$GOPATH/bin:$PATH
 fi
 
+#rbenvのPATHが後になってしまうので一旦追加...
+source ~/.zprofile
+
 typeset -gxU PATH R_HOME GOPATH
 
 # osx alias
