@@ -75,6 +75,19 @@ zstyle ':vcs_info:*' enable git # svn hg bzr # git以外ではvcs_infoを利用�
 #=============================
 
 # ls
+case "${OSTYPE}" in
+freebsd*)
+  alias ls="ls -G -w"
+  ;;
+darwin*)
+  alias ls="ls -G -w"
+  alias gvim='env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app "$@"'
+  alias tmux='tmux -2 -f ~/.tmux/osx.conf'
+  ;;
+linux*)
+  alias ls="ls --color"
+  ;;
+esac
 alias la="ls -a"
 alias lf="ls -F"
 alias ll="ls -l"
