@@ -83,6 +83,14 @@ elseif &term =~ "xterm-color"
   set t_Sb=[4%dm
 endif
 
+" カレント行ハイライトON
+set cursorline
+set nocursorcolumn
+" アンダーラインを引く(color terminal)
+highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+" アンダーラインを引く(gui)
+highlight CursorLine gui=underline guifg=NONE guibg=NONE
+
 "---------------------------------------------------------------------------
 " 検索の挙動に関する設定:
 "---------------------------------------------------------------------------
@@ -136,85 +144,24 @@ let g:neocomplcache_min_syntax_length            = 3 " Set minimum syntax keywor
 let g:neocomplcache_lock_buffer_name_pattern     = '\*ku\*'
 let g:neocomplcache_text_mode_filetypes = {'text': 1, 'javascript': 1, 'markdown': 1, 'perl': 1, 'html': 1, 'ruby': 1}
 
-"autocmd FileType python     setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType c             setlocal omnifunc=ccomplete#Complete
-autocmd FileType css           setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript    setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType php           setlocal omnifunc=phpcomplete#CompletePHP
-autocmd FileType python        setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType ruby          setlocal omnifunc=rubycomplete#Complete
-autocmd FileType xml           setlocal omnifunc=xmlcomplete#CompleteTags
-
-if !exists('g:neocomplcache_omni_patterns')
-    let g:neocomplcache_omni_patterns = {}
-endif
-
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'c' : $HOME.'/.vim/dict/c.dict',
-    \ 'cpp' : $HOME.'/.vim/dict/cpp.dict',
-    \ 'javascript' : $HOME.'/.vim/dict/javascript.dict',
-    \ 'perl' : $HOME.'/.vim/dict/perl.dict',
-    \ 'php' : $HOME.'/.vim/dict/php.dict',
-    \ 'vm' : $HOME.'/.vim/dict/vim.dict'
-    \ }
-
-" ユーザー定義スニペット保存ディレクトリ
-let g:neocomplcache_snippets_dir = $HOME.'/.vim/snippets'
-
-" Enable heavy omni completion.
-if !exists('g:neocomplcache_omni_patterns')
-  let g:neocomplcache_omni_patterns = {}
-endif
-
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
-let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
-
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
-imap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
 
 " For snippet_complete marker.
 if has('conceal')
-    set conceallevel=2 concealcursor=i
+  set conceallevel=2 concealcursor=i
 endif
 
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/snippets'
-
-set wildmenu               " コマンド補完を強化
-set wildchar=<tab>         " コマンド補完を開始するキー
-set wildmode=list:full     " リスト表示，最長マッチ
-set history=1000           " コマンド・検索パターンの履歴数
-set complete+=k            " 補完に辞書ファイル追加
-
-" Ex-modeでの<C-p><C-n>をzshのヒストリ補完っぽくする
-cnoremap <C-p> <Up>
-cnoremap <Up>  <C-p>
-cnoremap <C-n> <Down>
-cnoremap <Down>  <C-n>
-
-highlight Pmenu ctermbg=233
-highlight PmenuSel ctermbg=1
-highlight PMenuSbar ctermbg=4
-highlight MatchParen guifg=Yellow guibg=darkgray
-highlight SignColumn guibg=#101020
-
-" カレント行ハイライトON
-set cursorline
-set nocursorcolumn
-" アンダーラインを引く(color terminal)
-highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
-" アンダーラインを引く(gui)
-highlight CursorLine gui=underline guifg=NONE guibg=NONE
 "---------------------------------------------------------------------------
 " quick run
 "---------------------------------------------------------------------------
