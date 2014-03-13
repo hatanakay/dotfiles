@@ -120,11 +120,6 @@ source ~/.vimrc.bundle
 autocmd ColorScheme * highlight Identifier ctermfg=210
 colorscheme molokai
 
-"molokaiの内容を一部修正
-hi Visual ctermbg=19
-highlight LineNr ctermfg=245 ctermbg=0
-highlight CursorLineNr ctermfg=5 ctermbg=0
-
 let g:molokai_original = 1
 let g:Powerline_theme = 'dark'
 let g:Powerline_symbols = 'fancy'
@@ -132,6 +127,15 @@ let g:Powerline_colorscheme = 'molokai'
 let g:Powerline_symbols = 'compatible'
 let g:airline_theme = 'dark'
 let g:Powerline_symbols='fancy'
+
+"molokaiの内容を一部修正
+hi Visual ctermbg=19
+hi Normal ctermbg=232
+highlight LineNr ctermfg=245 ctermbg=0
+highlight CursorLineNr ctermfg=1 ctermbg=0
+highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+hi Identifier ctermfg=151515151515151515151515151515 cterm=none
+
 "---------------------------------------------------------------------------
 " 補完関連: neocomplcache neosnippet
 "---------------------------------------------------------------------------
