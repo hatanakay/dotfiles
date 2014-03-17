@@ -9,6 +9,7 @@ case "${OSTYPE}" in
         antigen bundle brew
         antigen bundle ruby
         antigen bundle rbenv
+        antigen-bundle bundler
         antigen bundle git
         antigen bundle github
         antigen-bundle gnu-utils
