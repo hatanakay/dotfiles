@@ -12,6 +12,7 @@
     pager = "nkf -w"
     editor        = vim -c \"set fenc=utf-8\"
     autocrlf      = input                 # CRLFを自動変換
+	precomposeunicode = true
 [http]
     sslVerify = false
 [tig "bind"]
@@ -72,3 +73,5 @@
 	default = simple
 [init]
 	templatedir = ~/.gittmp
+[diff]
+	noprefix = true
