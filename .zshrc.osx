@@ -156,7 +156,17 @@ fi
 function weechat {
   if [ -x `which weechat-curses` ]; then
     if ! (ps aux | grep '[w]eechat-curses' 2>&1 > /dev/null); then
-      tmux new-window -t ${WEECHAT_TMUX_WINNUM:-9} weechat
+      tmux new-window -n 'weechat' -t ${WEECHAT_TMUX_WINNUM:-9} 'TERM=screen-256color weechat-curses' 
     fi
   fi
+}
+
+function termcolor {
+  for fgbg in 38 48; do
+      for color in {000..255}; do
+          echo -en "\e[${fgbg};5;${color}m${color} \e[0m"
+          [ $((`expr $color + 1` % 16)) -eq 0 ] && echo
+      done
+      echo
+  done
 }
