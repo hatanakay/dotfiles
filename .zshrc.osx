@@ -170,3 +170,8 @@ function termcolor {
       echo
   done
 }
+#rbenv install
+rb_install() {
+  CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline`" rbenv install $1
+}
+
