@@ -135,6 +135,7 @@ alias gci='git commit -a'
 alias gfp='git fetch && git pull origin master'
 alias diff='colordiff'
 alias diffs='colordiff --side-by-side --suppress-common-lines -W"`tput cols`"'
+alias gitkeep='find . -type d -empty -print0 |xargs -0 -I % touch %/.'
 
 #util
 alias sed="gsed"
@@ -270,6 +271,9 @@ ssh() {
         set_term_bgcolor 0 102 0    
     fi
 
+    if [[ "" == "${remote_ip}" ]]; then
+        remote_ip="vagrant"
+    fi
     local window_name="$(echo ${remote} | awk -F. '{ print $1}')"
     local old_name="$(tmux display-message -p '#W')"
     local renamed=0
