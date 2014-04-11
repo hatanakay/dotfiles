@@ -80,7 +80,7 @@ freebsd*)
   alias ls="ls -G -w"
   ;;
 darwin*)
-  alias ls="ls -G -w"
+  alias ls="ls -G"
   alias gvim='env LANG=ja_JP.UTF-8 open -a /Applications/MacVim.app "$@"'
   ;;
 linux*)
@@ -142,6 +142,8 @@ alias sed="gsed"
 alias awk="gawk"
 alias symlinks="find ./ -type l -print0 | xargs -0 ls -plah"
 alias rbs="ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => 3000,  :DocumentRoot => Dir.pwd).start'"
+alias be="bundle exec"
+
 
 # extract http://d.hatena.ne.jp/jeneshicc/20110215/1297778049
 extract () {
