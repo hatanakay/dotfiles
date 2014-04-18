@@ -261,7 +261,7 @@ ssh() {
         remote_ip=$@
         full_host="NONE"
     else
-        full_host=$(sed -n "/^Host ${remote}/,/^  Hostname.*$/p" $HOME/.ssh/config | grep Hostname | cut -d' ' -f4)
+        full_host=$(sed -n "/^Host ${remote}/,/^  HostName.*$/p" $HOME/.ssh/config | grep HostName | cut -d' ' -f4)
         if [[ 0 == "${#full_host}" ]]; then
             remote_ip=$(dig ${remote} +short)
         else
@@ -273,9 +273,15 @@ ssh() {
         set_term_bgcolor 0 102 0    
     fi
 
+    if [[ $full_host =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+        remote_ip=$full_host
+        full_host=$remote
+    fi
+
     if [[ "" == "${remote_ip}" ]]; then
         remote_ip="vagrant"
     fi
+
     local window_name="$(echo ${remote} | awk -F. '{ print $1}')"
     local old_name="$(tmux display-message -p '#W')"
     local renamed=0
