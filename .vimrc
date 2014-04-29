@@ -130,11 +130,11 @@ let g:Powerline_symbols='fancy'
 
 "molokaiの内容を一部修正
 hi Visual ctermbg=19
-hi Normal ctermbg=232
+hi Normal ctermbg=0
 highlight LineNr ctermfg=245 ctermbg=0
 highlight CursorLineNr ctermfg=1 ctermbg=0
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
-hi Identifier ctermfg=151515151515151515151515151515 cterm=none
+hi Identifier ctermfg=120 ctermbg=0
 
 "---------------------------------------------------------------------------
 " 補完関連: neocomplcache neosnippet
