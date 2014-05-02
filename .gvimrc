@@ -49,4 +49,15 @@
   match WhitespaceEOL /\s\+$/
   autocmd WinEnter * match WhitespaceEOL /\s\+$/
 
+" カレントウィンドウにのみ罫線を引く
+augroup cch
+autocmd! cch
+autocmd WinLeave * set nocursorline
+autocmd WinEnter,BufRead * set cursorline
+augroup END
+ 
+hi clear CursorLine
+hi CursorLine gui=underline
+highlight CursorLine ctermbg=black guibg=black
+
 " }}}

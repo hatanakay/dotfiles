@@ -44,7 +44,8 @@ autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
 set title
 " 行番号を表示
 set number
-
+" 東アジアの文字で文脈によって文字幅が異なる文字の幅を指定する
+set ambiwidth=double
 " ルーラーを表示
 set ruler
 "入力中のコマンドをステータスに表示する
@@ -114,6 +115,16 @@ set nobackup
 source ~/.vimrc.bundle
 
 
+"---------------------------------------------------------------------------
+" ruby
+"---------------------------------------------------------------------------
+if has('gui_macvim') && has('kaoriya')
+  let s:ruby_libdir = system("ruby -rrbconfig -e 'print RbConfig::CONFIG[\"libdir\"]'")
+  let s:ruby_libruby = s:ruby_libdir . '/libruby.dylib'
+  if filereadable(s:ruby_libruby)
+    let $RUBY_DLL = s:ruby_libruby
+  endif
+endif
 "---------------------------------------------------------------------------
 " colorscheme
 "---------------------------------------------------------------------------
@@ -189,6 +200,7 @@ autocmd InsertLeave * set nopaste
 "---------------------------------------------------------------------------
 "Unite.vim
 "---------------------------------------------------------------------------
+let g:unite_source_ruby_require_ruby_command = expand("~/.rbenv/shims/ruby")
 "yank 履歴
 "let g:unite_source_history_yank_enable =1
 " insert modeで開始
