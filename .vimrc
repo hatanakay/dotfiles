@@ -177,6 +177,18 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
+" 括弧を自動補完 (改造版)
+inoremap {{ {}<LEFT>
+inoremap [[ []<LEFT>
+inoremap (( ()<LEFT>
+inoremap "" ""<LEFT>
+inoremap '' ''<LEFT>
+vnoremap { "zdi^V{<C-R>z}<ESC>
+vnoremap [ "zdi^V[<C-R>z]<ESC>
+vnoremap ( "zdi^V(<C-R>z)<ESC>
+vnoremap " "zdi^V"<C-R>z^V"<ESC>
+vnoremap ' "zdi'<C-R>z'<ESC>
+ 
 "---------------------------------------------------------------------------
 " quick run
 "---------------------------------------------------------------------------
