@@ -16,6 +16,7 @@ case "${OSTYPE}" in
         antigen bundle osx
         antigen bundle command-not-found
         antigen-bundle zsh-users/zsh-syntax-highlighting
+        antigen-bundle common-aliases
         ;;
     linux*)
         antigen bundle history

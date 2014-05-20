@@ -170,9 +170,19 @@ function termcolor {
       echo
   done
 }
+
 #rbenv install
 rb_install() {
-  CONFIGURE_OPTS="--with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline`" rbenv install $1
+  CONFIGURE_OPTS="--disable-install-rdoc --with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline`" rbenv install $1
 }
+
+#
+# zsh-bd
+#
+if [ -f ~/.zsh/zsh-bd/bd.zsh ]; then
+    source ~/.zsh/zsh-bd/bd.zsh
+fi
+
 ## local settings
 source $HOME/.zshrc.local
+

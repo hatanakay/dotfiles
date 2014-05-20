@@ -136,6 +136,7 @@ alias gfp='git fetch && git pull origin master'
 alias diff='colordiff'
 alias diffs='colordiff --side-by-side --suppress-common-lines -W"`tput cols`"'
 alias gitkeep='find . -type d -empty -print0 |xargs -0 -I % touch %/.'
+alias gro='git fetch origin && git reset --hard origin/master'
 
 #util
 alias sed="gsed"
