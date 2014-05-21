@@ -109,6 +109,7 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 " バックアップファイルを作成しない
 set nobackup
 set noswapfile
+set noundofile
 
 "---------------------------------------------------------------------------
 "neobundle
