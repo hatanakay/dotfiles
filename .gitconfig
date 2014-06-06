@@ -71,7 +71,7 @@
     gn            = grep -n
 [push]
 	default = simple
-[init]
-	templatedir = ~/.gittmp
 [diff]
 	noprefix = true
+[include]
+    path = ~/.gitconfig.local

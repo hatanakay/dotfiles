@@ -12,7 +12,7 @@ if has('kaoriya')
     endif
     if has('mac')
         set guifont=Ricty:h13
-        set guifontwide=MeiryoKe_Gothic:h12
+        set guifontwide=Ricty:h12
         set noimdisableactivate
         map ¥ <leader>
     endif
@@ -55,13 +55,12 @@ let g:airline_theme = 'dark'
 let g:Powerline_symbols='fancy'
 
 "molokaiの内容を一部修正
-hi Visual ctermbg=19
+hi Visual guibg=#0066ff
 hi Normal ctermbg=0
 highlight LineNr ctermfg=245 ctermbg=0
 highlight CursorLineNr ctermfg=1 ctermbg=0
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 hi Identifier ctermfg=120 ctermbg=0
-
 
 "---------------------------------------------------------------------------
 "CursorLine

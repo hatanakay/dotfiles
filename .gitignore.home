@@ -1,0 +1,11 @@
+.DS_Store
+.netrwhist
+*.swp
+*.cache
+*~
+.env
+.env.*
+vendor
+setting.rb
+config.rb
+

@@ -7,7 +7,7 @@ if [ -d $HOME/.phpenv ]; then
 fi
 
 if [ -d $HOME/.golang ]; then
-    export GOPATH=$HOME/.golang
+    export GOPATH=$HOME/develop
     PATH=$GOPATH/bin:$PATH
 fi
 
