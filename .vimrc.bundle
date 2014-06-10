@@ -15,6 +15,7 @@ endif
 
   " surround.vim : テキストを括弧で囲む／削除する
   NeoBundle 'tpope/vim-surround'
+  NeoBundle 'tpope/vim-endwise'
 
   " smartchr.vim : ==などの前後を整形
   NeoBundle 'smartchr'
@@ -39,29 +40,19 @@ endif
 
 " Searching/Moving{{{
   " smooth_scroll.vim : スクロールを賢く
-  "NeoBundle 'Smooth-Scroll'
+  NeoBundle 'Smooth-Scroll'
 
-  " open-browser.vim : カーソルの下のURLを開くor単語を検索エンジンで検索
-  NeoBundle 'tyru/open-browser.vim'
 " }}}
 
 " Programming {{{
   " emmet
   NeoBundle 'mattn/emmet-vim'
+
   " quickrun.vim : 編集中のファイルを簡単に実行できるプラグイン
   NeoBundle 'thinca/vim-quickrun'
 
-  " SQLUtilities : SQL整形、生成ユーティリティ
-  NeoBundle 'SQLUtilities'
-
   " vim-ruby : VimでRubyを扱う際の最も基本的な拡張機能
   NeoBundle 'vim-ruby/vim-ruby'
-
-  " rails.vim : rails的なアレ
-  NeoBundle 'tpope/vim-rails'
-
-  " ソースコード上のメソッド宣言、変数宣言の一覧を表示
-  "NeoBundle 'taglist.vim'
 
 " }}}
 "
@@ -97,12 +88,6 @@ endif
   NeoBundle 'scrooloose/syntastic'
 " }}}
 
-" Buffer {{{
- " minibufexpl.vim : タブエディタ風にバッファ管理ウィンドウを表示
-  "NeoBundle 'minibufexpl.vim'
-  NeoBundle 'bling/vim-bufferline'
-" }}}
-
 " Encording {{{
   NeoBundle 'banyan/recognize_charcode.vim'
 " }}}
@@ -114,21 +99,9 @@ endif
   "terryma/vim-multiple-cursors 
   NeoBundle 'terryma/vim-multiple-cursors'
 
-  "memolist.vim
-  NeoBundle 'glidenote/memolist.vim'
-
   "sudo.vim
   NeoBundle 'sudo.vim'
 
-  "ack.vim
-  NeoBundle 'ack.vim'
-  
-  "nonopaste
-  NeoBundle 'banyan/Nonopaste.vim'
-
-  "http-status
-  NeoBundle "git@github.com:mattn/httpstatus-vim.git"
-  
   " vimshell : vimのshell
   NeoBundle 'Shougo/vimshell.git'
 

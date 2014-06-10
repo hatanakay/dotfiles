@@ -3,8 +3,8 @@
 # ============================================
 Pry.config.pager = false
 Pry.config.editor = 'vim'
-Pry.config.history.should_save = true
-Pry.config.history.file = '~/.pry_history'
+#Pry.config.history.should_save = true
+#Pry.config.history.file = '~/.pry_history'
 Pry.config.hooks.add_hook(:after_session, :say_bye!) { puts "bye" }
 
 ## prompt

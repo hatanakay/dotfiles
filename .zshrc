@@ -143,7 +143,6 @@ alias sed="gsed"
 alias awk="gawk"
 alias symlinks="find ./ -type l -print0 | xargs -0 ls -plah"
 alias rbs="ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => 3000,  :DocumentRoot => Dir.pwd).start'"
-alias be="bundle exec"
 
 
 # extract http://d.hatena.ne.jp/jeneshicc/20110215/1297778049

@@ -8,6 +8,7 @@ fi
 
 if [ -d $HOME/.golang ]; then
     export GOPATH=$HOME/develop
+    export GOROOT=`brew --prefix go`
     PATH=$GOPATH/bin:$PATH
 fi
 

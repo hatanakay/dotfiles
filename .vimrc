@@ -91,6 +91,8 @@ set nocursorcolumn
 highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 " アンダーラインを引く(gui)
 highlight CursorLine gui=underline guifg=NONE guibg=NONE
+"path展開
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 "---------------------------------------------------------------------------
 " 検索の挙動に関する設定:
@@ -110,7 +112,10 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 set nobackup
 set noswapfile
 set noundofile
-
+"---------------------------------------------------------------------------
+" 移動 
+"---------------------------------------------------------------------------
+runtime macros/matchit.vim
 "---------------------------------------------------------------------------
 "neobundle
 "---------------------------------------------------------------------------
@@ -343,8 +348,13 @@ nnoremap <silent> ,mf :<C-u>VimFiler <C-r>=expand(g:memolist_path."/")<CR><CR>
 "---------------------------------------------------------------------------
 " gocode
 "---------------------------------------------------------------------------
-set rtp+=$GOROOT/misc/vim
+set rtp+=$GOROOT/libexec/misc/vim
 "golint
-exe "set rtp+=" . globpath($GOPATH, "/usr/local/opt/go/misc/vim")
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 auto BufWritePre *.go Fmt
+
+"---------------------------------------------------------------------------
+" multiple cursor
+"---------------------------------------------------------------------------
+let g:multi_cursor_use_default_mapping=1
 
