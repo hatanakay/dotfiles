@@ -8,7 +8,7 @@ fi
 
 if [ -d $HOME/.golang ]; then
     export GOPATH=$HOME/develop
-    export GOROOT=`brew --prefix go`
+    export GOROOT="`brew --prefix go`/libexec"
     PATH=$GOPATH/bin:$PATH
 fi
 
@@ -63,14 +63,30 @@ function compare {
 #=============================
 # source auto-fu.zsh
 #=============================
-if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
-    source ~/.zsh/auto-fu.zsh/auto-fu.zsh
-    function zle-line-init () {
-        auto-fu-init
+#if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
+    #source ~/.zsh/auto-fu.zsh/auto-fu.zsh
+    #function zle-line-init () {
+        #auto-fu-init
+    #}
+    #zle -N zle-line-init
+    #zstyle ':completion:*' completer _oldlist _complete
+    #zstyle ':auto-fu:var' postdisplay $''
+#fi
+
+#=============================
+# zsh-autosuggestions
+#=============================
+if [ -f ~/.zsh/zsh-autosuggestions/autosuggestions.zsh ]; then
+    source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
+    # Enable autosuggestions automatically
+    zle-line-init() {
+        zle autosuggest-start
     }
     zle -N zle-line-init
-    zstyle ':completion:*' completer _oldlist _complete
-    zstyle ':auto-fu:var' postdisplay $''
+    # use ctrl+t to toggle autosuggestions(hopefully this wont be needed)
+    bindkey '^T' autosuggest-toggle
+    # use ctrl+f to accept a suggested word
+    bindkey '^F' autosuggest-accept-suggested-word
 fi
 
 #=============================

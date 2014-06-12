@@ -86,6 +86,8 @@ endif
 
   " syntax checking plugins exist for eruby, haml, html, javascript, php, python, ruby and sass.
   NeoBundle 'scrooloose/syntastic'
+  " ログファイルを色づけしてくれる
+  NeoBundle 'vim-scripts/AnsiEsc.vim'
 " }}}
 
 " Encording {{{

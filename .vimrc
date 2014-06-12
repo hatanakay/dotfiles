@@ -220,6 +220,7 @@ autocmd InsertLeave * set nopaste
 "Unite.vim
 "---------------------------------------------------------------------------
 let g:unite_source_ruby_require_ruby_command = expand("~/.rbenv/shims/ruby")
+let g:unite_data_directory='~/.vim/bundle/unite.vim'
 "yank 履歴
 "let g:unite_source_history_yank_enable =1
 " insert modeで開始
@@ -348,7 +349,9 @@ nnoremap <silent> ,mf :<C-u>VimFiler <C-r>=expand(g:memolist_path."/")<CR><CR>
 "---------------------------------------------------------------------------
 " gocode
 "---------------------------------------------------------------------------
-set rtp+=$GOROOT/libexec/misc/vim
+if $GOROOT != ''
+  set rtp+=$GOROOT/misc/vim
+endif
 "golint
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 auto BufWritePre *.go Fmt
