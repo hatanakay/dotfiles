@@ -9,7 +9,7 @@ fi
 if [ -d $HOME/.golang ]; then
     export GOPATH=$HOME/develop
     export GOROOT="`brew --prefix go`/libexec"
-    PATH=$GOPATH/bin:$PATH
+    export PATH=$GOPATH/bin:$PATH
 fi
 
 #rbenvのPATHが後になってしまうので一旦追加...
@@ -63,31 +63,33 @@ function compare {
 #=============================
 # source auto-fu.zsh
 #=============================
-#if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
-    #source ~/.zsh/auto-fu.zsh/auto-fu.zsh
-    #function zle-line-init () {
-        #auto-fu-init
-    #}
-    #zle -N zle-line-init
-    #zstyle ':completion:*' completer _oldlist _complete
-    #zstyle ':auto-fu:var' postdisplay $''
-#fi
+if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
+    source ~/.zsh/auto-fu.zsh/auto-fu.zsh
+    function zle-line-init () {
+        auto-fu-init
+    }
+    zle -N zle-line-init
+    zle -N zle-keymap-select auto-fu-zle-keymap-select
+    setopt autoremoveslash
+    zstyle ':completion:*' completer _oldlist _complete _match _ignored    
+    zstyle ':auto-fu:var' postdisplay $''
+
+fi
 
 #=============================
 # zsh-autosuggestions
 #=============================
-if [ -f ~/.zsh/zsh-autosuggestions/autosuggestions.zsh ]; then
-    source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
-    # Enable autosuggestions automatically
-    zle-line-init() {
-        zle autosuggest-start
-    }
-    zle -N zle-line-init
-    # use ctrl+t to toggle autosuggestions(hopefully this wont be needed)
-    bindkey '^T' autosuggest-toggle
-    # use ctrl+f to accept a suggested word
-    bindkey '^F' autosuggest-accept-suggested-word
-fi
+#if [ -f ~/.zsh/zsh-autosuggestions/autosuggestions.zsh ]; then
+    #source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
+    ## Enable autosuggestions automatically
+    #zle-line-init() {
+        #zle autosuggest-start
+    #}
+    #zle -N zle-line-init
+    #bindkey '^A' autosuggest-toggle
+    #bindkey '^F' vi-forward-blank-word
+    #bindkey '^f' vi-forward-word
+#fi
 
 #=============================
 # local settings
