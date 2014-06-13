@@ -6,7 +6,7 @@ if [ -d $HOME/.phpenv ]; then
     eval "$(phpenv init -)"
 fi
 
-if [ -d $HOME/.golang ]; then
+if [ -x $(which go) ]; then
     export GOPATH=$HOME/develop
     export GOROOT="`brew --prefix go`/libexec"
     export PATH=$GOPATH/bin:$PATH
