@@ -43,10 +43,10 @@ if [ -f /usr/local/etc/profile.d/z.sh ]; then
 fi
 
 #=============================
-# percol
+# peco
 #=============================
-if [ -d $HOME/.zsh/percol-sources ]; then
-    for f (~/.zsh/percol-sources/*) source "${f}"
+if [ -d $HOME/.zsh/peco-sources ]; then
+    for f (~/.zsh/peco-sources/*) source "${f}"
 fi
 
 #=============================

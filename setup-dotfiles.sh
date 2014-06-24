@@ -1,42 +1,31 @@
 #!/bin/bash
 
-export DOTFILES=".zsh zprofile .zshrc .zshrc.alias .zshrc.linux .zshrc.osx .zshrc.antigen .gemrc .gitconfig .irbrc .pryrc .vimrc .vimrc.bundle .tmux.conf"
+export DOTFILES=".zsh .vim zprofile .zshrc .zshrc.alias .zshrc.osx .zshrc.linux .zshrc.osx .zshrc.antigen .gemrc .gitconfig .irbrc .pryrc .vimrc .vimrc.bundle .tmux.conf .antigen .tmux"
 
+#backup
+if [ ! -e ~/dotfiles_backup ]; then
+    mkdir ~/dotfiles_backup
+    for FILE in ${FILELIST};
+    do
+        mv ~/${FILE} $HOME/dotfiles_backup/
+    done
+fi
+
+#link
 for dotfile in $DOTFILES
 do  
     if [ -e $HOME/$dotfile ]; then
-        unlink $HOME/$dotfile
+        rm -rf $HOME/$dotfile
     fi
     ln -s $HOME/dotfiles/$dotfile $HOME/$dotfile
 done
 
-#Directory
-if [ -d $HOME/.vim ]; then
-    unlink $HOME/.vim
-fi
-
-if [ -d $HOME/.antigen ]; then
-    unlink $HOME/.antigen
-fi
-
-if [ -d $HOME/.zsh ]; then
-    unlink $HOME/.zsh
-fi
-
-if [ -d $HOME/.tmux ]; then
-    unlink $HOME/.tmux
-fi
-
-if [ -d $HOME/.gittmp ]; then
-    unlink $HOME/.gittmp
-fi
-
 #git submodule
+cd $HOME/dotfiles
 git submodule init
 git submodule update
 
-ln -s $HOME/dotfiles/.vim $HOME/.vim
-ln -s $HOME/dotfiles/.zsh $HOME/.zsh
-ln -s $HOME/dotfiles/.antigen $HOME/.antigen
-ln -s $HOME/dotfiles/.tmux $HOME/.tmux
-ln -s $HOME/dotfiles/.gittmp $HOME/.gittmp
+
+
+#vim
+vim +NeoBundleInstall! +qall
