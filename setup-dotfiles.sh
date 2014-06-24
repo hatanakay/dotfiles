@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export DOTFILES=".zsh .vim zprofile .zshrc .zshrc.alias .zshrc.osx .zshrc.linux .zshrc.osx .zshrc.antigen .gemrc .gitconfig .irbrc .pryrc .vimrc .vimrc.bundle .tmux.conf .antigen .tmux"
+export DOTFILES=".zsh .vim zprofile .zshrc .zshrc.alias .zshrc.osx .zshrc.linux .zshrc.osx .zshrc.antigen .gemrc .gitconfig .irbrc .pryrc .vimrc .vimrc.bundle .tmux.conf .antigen .tmux .peco"
 
 #backup
 if [ ! -e ~/dotfiles_backup ]; then
