@@ -25,7 +25,9 @@ cd $HOME/dotfiles
 git submodule init
 git submodule update
 
-
+#gitignore
+rm -rf ~/.gitignore
+ln -s $HOME/dotfiles/dot.gitignore $HOME/.gitconfig
 
 #vim
 vim +NeoBundleInstall! +qall

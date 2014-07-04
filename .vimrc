@@ -219,6 +219,7 @@ autocmd InsertLeave * set nopaste
 "---------------------------------------------------------------------------
 "Unite.vim
 "---------------------------------------------------------------------------
+
 let g:unite_source_ruby_require_ruby_command = expand("~/.rbenv/shims/ruby")
 let g:unite_data_directory='~/.vim/bundle/unite.vim'
 "yank 履歴
@@ -248,13 +249,17 @@ nnoremap <silent> ,a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru
 " colorscheme
 nnoremap <silent> ,c :<C-u>Unite colorscheme<CR>
 " .git以下で絞り込み
-nnoremap <silent> ,e  :<C-u>Unite file_rec/async:!<CR>
+if isdirectory(getcwd()."/.git")
+    nnoremap <silent> ,e  :<C-u>Unite file_rec/git<CR>
+else
+    nnoremap <silent> ,e  :<C-u>Unite file_rec/async:!<CR>
+endif
 " 現在のバッファを検索
 nnoremap <silent> ,l  :<C-u>Unite line<CR>
 " outline
 nnoremap <silent> ,o  :<C-u>Unite outline<CR>
 " tags一覧
-"nnoremap <silent> ,t :<C-u>Unite -buffer-name=tags tag<CR>
+nnoremap <silent> ,t :<C-u>Unite -buffer-name=tags tag<CR>
 " yank履歴
 "nnoremap <silent> ,y :<C-u>Unite history/yank<CR>
 
@@ -338,15 +343,6 @@ let g:airline_linecolumn_prefix = ' ⭡ '
 let g:airline_paste_symbol = 'ρ'
 
 "---------------------------------------------------------------------------
-" memolist
-"---------------------------------------------------------------------------
-let g:memolist_path = "~/Dropbox/memo"
-nnoremap <silent> ,mn :<C-u>MemoNew<CR>
-nnoremap <silent> ,ml :<C-u>Unite file:<C-r>=expand(g:memolist_path."/")<CR><CR>
-nnoremap <silent> ,mg :<C-u>Unite grep:<C-r>=expand(g:memolist_path."/")<CR><CR>
-nnoremap <silent> ,mf :<C-u>VimFiler <C-r>=expand(g:memolist_path."/")<CR><CR>
-
-"---------------------------------------------------------------------------
 " gocode
 "---------------------------------------------------------------------------
 if $GOROOT != ''
@@ -361,3 +357,9 @@ auto BufWritePre *.go Fmt
 "---------------------------------------------------------------------------
 let g:multi_cursor_use_default_mapping=1
 
+"---------------------------------------------------------------------------
+" vim-tags
+"---------------------------------------------------------------------------
+let g:vim_tags_project_tags_command = "ctags -f tags -R . 2>/dev/null"
+let g:vim_tags_gems_tags_command = "ctags -R -f Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
+set tags+=tags,Gemfile.lock.tags

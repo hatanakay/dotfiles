@@ -13,6 +13,7 @@
     editor        = vim -c \"set fenc=utf-8\"
     autocrlf      = input                 # CRLFを自動変換
 	precomposeunicode = true
+	excludesfile = ~/.gitignore
 [http]
     sslVerify = false
 [tig "bind"]

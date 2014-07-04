@@ -46,7 +46,7 @@ endif
 
 " Programming {{{
   " emmet
-  NeoBundle 'mattn/emmet-vim'
+  "NeoBundle 'mattn/emmet-vim'
 
   " quickrun.vim : 編集中のファイルを簡単に実行できるプラグイン
   NeoBundle 'thinca/vim-quickrun'
@@ -95,6 +95,9 @@ endif
 " }}}
 
 " Utility {{{
+  "vim-tags
+  NeoBundle 'szw/vim-tags'
+
   "calender vim
   NeoBundle 'itchyny/calendar.vim'
 
