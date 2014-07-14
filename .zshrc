@@ -344,3 +344,9 @@ if [ -z $TMUX ]; then
     tmuxx
   fi
 fi
+
+find_whois_sv(){
+    curl -s http://www.iana.org/domains/root/db/$1.html | grep -Ei "whois server" | awk '{ print $3}'
+}
+
+function ignore() { curl http://www.gitignore.io/api/$@ ;}

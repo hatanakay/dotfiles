@@ -9,6 +9,7 @@ endif
 " Edit {{{
   " NERD_commenter.vim :最強コメント処理 (<Leader>c<space>でコメントをトグル)
   NeoBundle 'scrooloose/nerdcommenter.git'
+  NeoBundle 'scrooloose/nerdtree.git'
 
   " Align : 高機能整形・桁揃えプラグイン
   NeoBundle 'Align'
@@ -95,8 +96,14 @@ endif
 " }}}
 
 " Utility {{{
+  "command-T
+  NeoBundle 'wincent/Command-T' 
+
   "vim-tags
   NeoBundle 'szw/vim-tags'
+
+  "tagbar
+  NeoBundle 'majutsushi/tagbar'
 
   "calender vim
   NeoBundle 'itchyny/calendar.vim'
@@ -133,7 +140,8 @@ endif
 " }}}
 
 " ColorSchema{{{{
-  NeoBundle 'tomasr/molokai'
+  "NeoBundle 'tomasr/molokai'
+  NeoBundle 'fatih/molokai'
   NeoBundle 'nanotech/jellybeans.vim.git'
   NeoBundle 'w0ng/vim-hybrid'
   NeoBundle 'vim-scripts/Wombat'

@@ -7,8 +7,12 @@
 
     "Style": {
         "Basic": ["on_default", "default"],
-        "Selected": ["underline", "on_cyan", "white"],
-        "Query": ["white", "bold"]
+        "Selected": ["underline", "on_magenta", "black"],
+        "Query": ["yellow", "bold"]
+    }, 
+
+    "CustomMatcher": {
+        "Migemo": ["migemogrep", "$QUERY"]
     }
 }
 

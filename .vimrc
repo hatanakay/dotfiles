@@ -125,13 +125,13 @@ source ~/.vimrc.bundle
 "---------------------------------------------------------------------------
 " ruby
 "---------------------------------------------------------------------------
-if has('gui_macvim') && has('kaoriya')
-  let s:ruby_libdir = system("ruby -rrbconfig -e 'print RbConfig::CONFIG[\"libdir\"]'")
-  let s:ruby_libruby = s:ruby_libdir . '/libruby.dylib'
-  if filereadable(s:ruby_libruby)
-    let $RUBY_DLL = s:ruby_libruby
-  endif
-endif
+"if has('gui_macvim') && has('kaoriya')
+  "let s:ruby_libdir = system("ruby -rrbconfig -e 'print RbConfig::CONFIG[\"libdir\"]'")
+  "let s:ruby_libruby = s:ruby_libdir . '/libruby.dylib'
+  "if filereadable(s:ruby_libruby)
+    "let $RUBY_DLL = s:ruby_libruby
+  "endif
+"endif
 "---------------------------------------------------------------------------
 " colorscheme
 "---------------------------------------------------------------------------
@@ -352,6 +352,34 @@ endif
 exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
 auto BufWritePre *.go Fmt
 
+let g:tagbar_type_go = {  
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
 "---------------------------------------------------------------------------
 " multiple cursor
 "---------------------------------------------------------------------------
@@ -363,3 +391,14 @@ let g:multi_cursor_use_default_mapping=1
 let g:vim_tags_project_tags_command = "ctags -f tags -R . 2>/dev/null"
 let g:vim_tags_gems_tags_command = "ctags -R -f Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
 set tags+=tags,Gemfile.lock.tags
+
+
+"---------------------------------------------------------------------------
+" TagBar
+"---------------------------------------------------------------------------
+nnoremap <silent> ,k :<C-u>TagbarToggle<CR>
+
+"---------------------------------------------------------------------------
+" NERDTree
+"---------------------------------------------------------------------------
+nnoremap <silent> ,j :<C-u>NERDTreeToggle<CR>

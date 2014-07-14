@@ -62,6 +62,15 @@ config/secrets.yml
 ####################
 # Other
 ####################
-.env
 tags
 Gemfile.lock.tags
+.DS_Store
+.netrwhist
+*.swp
+*.cache
+*~
+.env
+.env.*
+vendor
+setting.rb
+config.rb

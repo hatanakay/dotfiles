@@ -192,7 +192,7 @@ function termcolor {
 
 #rbenv install
 rb_install() {
-  CONFIGURE_OPTS="--disable-install-rdoc --with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline`" rbenv install $1
+  CONFIGURE_OPTS="--enable-shared --disable-install-rdoc --with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline`" rbenv install $1
 }
 
 #
