@@ -121,7 +121,11 @@ runtime macros/matchit.vim
 "---------------------------------------------------------------------------
 source ~/.vimrc.bundle
 
-
+"---------------------------------------------------------------------------
+" dylib
+"---------------------------------------------------------------------------
+let s:lua_dir = system("brew --prefix lua")
+let $LUA_DLL= s:lua_dir . "/lib/liblua.dylib"
 "---------------------------------------------------------------------------
 " ruby
 "---------------------------------------------------------------------------
@@ -245,7 +249,7 @@ nnoremap <silent> ,m :<C-u>Unite file_mru<CR>
 " 常用セット
 nnoremap <silent> ,u :<C-u>Unite buffer file_mru<CR>
 " 全部乗せ
-nnoremap <silent> ,a :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> ,a :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
 " colorscheme
 nnoremap <silent> ,c :<C-u>Unite colorscheme<CR>
 " .git以下で絞り込み
@@ -343,7 +347,7 @@ let g:airline_linecolumn_prefix = ' ⭡ '
 let g:airline_paste_symbol = 'ρ'
 
 "---------------------------------------------------------------------------
-" gocode
+" golang
 "---------------------------------------------------------------------------
 if $GOROOT != ''
   set rtp+=$GOROOT/misc/vim
@@ -392,13 +396,39 @@ let g:vim_tags_project_tags_command = "ctags -f tags -R . 2>/dev/null"
 let g:vim_tags_gems_tags_command = "ctags -R -f Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
 set tags+=tags,Gemfile.lock.tags
 
-
 "---------------------------------------------------------------------------
 " TagBar
 "---------------------------------------------------------------------------
 nnoremap <silent> ,k :<C-u>TagbarToggle<CR>
 
 "---------------------------------------------------------------------------
-" NERDTree
+" vimfiler
 "---------------------------------------------------------------------------
-nnoremap <silent> ,j :<C-u>NERDTreeToggle<CR>
+command! VimFilerTree call VimFilerTree()
+function VimFilerTree()
+    exec ':VimFiler -buffer-name=explorer -split -simple -winwidth=45 -toggle -no-quit'
+    wincmd t
+    setl winfixwidth
+endfunction
+autocmd! FileType vimfiler call g:my_vimfiler_settings()
+function! g:my_vimfiler_settings()
+    nmap     <buffer><expr><CR> vimfiler#smart_cursor_map("\<Plug>(vimfiler_expand_tree)", "\<Plug>(vimfiler_edit_file)")
+    nnoremap <buffer>s          :call vimfiler#mappings#do_action('my_split')<CR>
+    nnoremap <buffer>v          :call vimfiler#mappings#do_action('my_vsplit')<CR>
+endfunction
+
+let my_action = {'is_selectable' : 1}
+function! my_action.func(candidates)
+    wincmd p
+    exec 'split '. a:candidates[0].action__path
+endfunction
+call unite#custom_action('file', 'my_split', my_action)
+
+let my_action = {'is_selectable' : 1}
+function! my_action.func(candidates)
+    wincmd p
+    exec 'vsplit '. a:candidates[0].action__path
+endfunction
+call unite#custom_action('file', 'my_vsplit', my_action)
+nnoremap <silent> ,j :<C-u>VimFilerTree<CR>
+

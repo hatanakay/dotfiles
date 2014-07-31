@@ -7,8 +7,8 @@
 
     "Style": {
         "Basic": ["on_default", "default"],
-        "Selected": ["underline", "on_magenta", "black"],
-        "Query": ["yellow", "bold"]
+        "Selected": ["underline", "on_red", "white"],
+        "Query": ["cyan", "bold"]
     }, 
 
     "CustomMatcher": {

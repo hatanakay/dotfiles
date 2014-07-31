@@ -9,7 +9,10 @@ endif
 " Edit {{{
   " NERD_commenter.vim :最強コメント処理 (<Leader>c<space>でコメントをトグル)
   NeoBundle 'scrooloose/nerdcommenter.git'
-  NeoBundle 'scrooloose/nerdtree.git'
+
+  " vimfiler
+  " NeoBundle 'scrooloose/nerdtree.git'
+  NeoBundle 'Shougo/vimfiler'
 
   " Align : 高機能整形・桁揃えプラグイン
   NeoBundle 'Align'
@@ -151,10 +154,9 @@ endif
   " unite.vim : - すべてを破壊し、すべてを繋げ - vim scriptで実装されたanythingプラグイン
   NeoBundle 'Shougo/unite.vim'
   NeoBundle 'Shougo/neomru.vim'
-  NeoBundle 'h1mesuke/unite-outline'
-  NeoBundle 'Sixeight/unite-grep'
   NeoBundle 'tsukkee/unite-tag'
   NeoBundle 'choplin/unite-vim_hacks'
+  NeoBundle 'Shougo/unite-outline'
 
 " }}}
 

@@ -6,4 +6,4 @@ function percol-select-ps() {
 
 alias selet-ps='percol-select-ps'
 zle -N percol-select-ps
-bindkey '^xp' percol-select-ps
+bindkey '^x^p' percol-select-ps
