@@ -11,8 +11,8 @@ if has('kaoriya')
         set ambiwidth=double
     endif
     if has('mac')
-        set guifont=Ricty:h13
-        set guifontwide=Ricty:h12
+        set guifont=mplusForPowerline-1m-regular:h13
+        set guifontwide=mplusForPowerline-1m-regular:h12
         set noimdisableactivate
         map ¥ <leader>
     endif
