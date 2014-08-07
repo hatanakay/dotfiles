@@ -24,6 +24,8 @@ alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
 alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias lg="find . -type d -name .svn -prune -o -type f -print | xargs lgrep -n"
 alias tmuxv="tmux new-session \; split-window -h \; split-window -d -d \;"
+alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 
 # Terminal Colorの設定
 export CLICOLOR=1
@@ -200,6 +202,41 @@ rb_install() {
 #
 if [ -f ~/.zsh/zsh-bd/bd.zsh ]; then
     source ~/.zsh/zsh-bd/bd.zsh
+fi
+
+tmuxx(){
+    if ! type tmux >/dev/null 2>&1; then
+        echo 'Error: tmux command not found' 2>&1
+        exit 1
+    fi
+
+    if [ -n "$TMUX" ]; then
+        echo "Error: tmux session has been already attached" 2>&1
+        exit 1
+    fi
+
+    if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then
+        # detached session exists
+        tmux attach && echo "tmux attached session "
+    else
+        if [[ ( $OSTYPE == darwin* ) && ( -x $(which reattach-to-user-namespace 2>/dev/null) ) ]]; then
+            # on OS X force tmux's default command to spawn a shell in the user's namespace
+            tmux_config=$(cat $HOME/.tmux.conf <(echo 'set-option -g default-command "tmux rename-window zsh; reattach-to-user-namespace -l $SHELL"'))
+            tmux -f <(echo "$tmux_config") new-session && echo "tmux created new session supported OS X"
+        else
+            tmux new-session && echo "tmux created new session"
+        fi
+    fi
+}
+
+# tmuxx start
+# http://qiita.com/items/1e1d3053c33f528363d9
+if [ -z $TMUX ]; then
+  if $(tmuxx has-session); then
+    tmuxx attach
+  else
+    tmuxx
+  fi
 fi
 
 ## local settings

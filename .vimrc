@@ -65,6 +65,18 @@ set showmatch
 set visualbell
 "ファイル名補完
 set wildmode=list:longest
+set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
+set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+set wildignore+=*vim/backups*
+set wildignore+=*sass-cache*
+set wildignore+=*DS_Store*
+set wildignore+=vendor/rails/**
+set wildignore+=vendor/cache/**
+set wildignore+=*.gem
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=*.png,*.jpg,*.gif
+
 "全角スペース表示
 highlight link ZenkakuSpace Error
 match ZenkakuSpace /　/
@@ -226,10 +238,11 @@ autocmd InsertLeave * set nopaste
 
 let g:unite_source_ruby_require_ruby_command = expand("~/.rbenv/shims/ruby")
 let g:unite_data_directory='~/.vim/bundle/unite.vim'
-"yank 履歴
-"let g:unite_source_history_yank_enable =1
-" insert modeで開始
-let g:unite_enable_start_insert = 1
+"インサートモードで開始しない
+let g:unite_enable_start_insert = 0
+"file_mruの表示フォーマットを指定。空にすると表示スピードが高速化される
+let g:unite_source_file_mru_filename_format = ''
+
 " 大文字小文字を区別しない
 let g:unite_enable_ignore_case = 1
 let g:unite_enable_smart_case = 1
@@ -404,31 +417,19 @@ nnoremap <silent> ,k :<C-u>TagbarToggle<CR>
 "---------------------------------------------------------------------------
 " vimfiler
 "---------------------------------------------------------------------------
-command! VimFilerTree call VimFilerTree()
-function VimFilerTree()
-    exec ':VimFiler -buffer-name=explorer -split -simple -winwidth=45 -toggle -no-quit'
-    wincmd t
-    setl winfixwidth
-endfunction
-autocmd! FileType vimfiler call g:my_vimfiler_settings()
-function! g:my_vimfiler_settings()
-    nmap     <buffer><expr><CR> vimfiler#smart_cursor_map("\<Plug>(vimfiler_expand_tree)", "\<Plug>(vimfiler_edit_file)")
-    nnoremap <buffer>s          :call vimfiler#mappings#do_action('my_split')<CR>
-    nnoremap <buffer>v          :call vimfiler#mappings#do_action('my_vsplit')<CR>
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default = 1
+
+nnoremap <silent> <Leader>fc :<C-u>VimFilerCurrentDir -split -simple -winwidth=35 -no-quit<CR>
+nnoremap <silent> <Leader>fe :<C-u>VimFilerBufferDir -quit<CR>
+nnoremap <silent> <Leader>fi :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
+
+augroup vimrc
+  autocmd FileType vimfiler call s:vimfiler_my_settings()
+augroup END
+function! s:vimfiler_my_settings()
+  nmap <buffer> q <Plug>(vimfiler_exit)
+  nmap <buffer> Q <Plug>(vimfiler_hide)
 endfunction
 
-let my_action = {'is_selectable' : 1}
-function! my_action.func(candidates)
-    wincmd p
-    exec 'split '. a:candidates[0].action__path
-endfunction
-call unite#custom_action('file', 'my_split', my_action)
-
-let my_action = {'is_selectable' : 1}
-function! my_action.func(candidates)
-    wincmd p
-    exec 'vsplit '. a:candidates[0].action__path
-endfunction
-call unite#custom_action('file', 'my_vsplit', my_action)
-nnoremap <silent> ,j :<C-u>VimFilerTree<CR>
 

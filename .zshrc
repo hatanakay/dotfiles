@@ -310,43 +310,14 @@ ssh() {
 }
 
 
-tmuxx(){
-    if ! type tmux >/dev/null 2>&1; then
-        echo 'Error: tmux command not found' 2>&1
-        exit 1
-    fi
-
-    if [ -n "$TMUX" ]; then
-        echo "Error: tmux session has been already attached" 2>&1
-        exit 1
-    fi
-
-    if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then
-        # detached session exists
-        tmux attach && echo "tmux attached session "
-    else
-        if [[ ( $OSTYPE == darwin* ) && ( -x $(which reattach-to-user-namespace 2>/dev/null) ) ]]; then
-            # on OS X force tmux's default command to spawn a shell in the user's namespace
-            tmux_config=$(cat $HOME/.tmux.conf <(echo 'set-option -g default-command "tmux rename-window zsh; reattach-to-user-namespace -l $SHELL"'))
-            tmux -f <(echo "$tmux_config") new-session && echo "tmux created new session supported OS X"
-        else
-            tmux new-session && echo "tmux created new session"
-        fi
-    fi
-}
-
-# tmuxx start
-# http://qiita.com/items/1e1d3053c33f528363d9
-if [ -z $TMUX ]; then
-  if $(tmuxx has-session); then
-    tmuxx attach
-  else
-    tmuxx
-  fi
-fi
-
 find_whois_sv(){
     curl -s http://www.iana.org/domains/root/db/$1.html | grep -Ei "whois server" | awk '{ print $3}'
 }
 
-function ignore() { curl http://www.gitignore.io/api/$@ ;}
+ignore() { curl http://www.gitignore.io/api/$@ ;}
+
+dic () {
+  w3m "http://ejje.weblio.jp/content/$1" | grep "用例"
+}
+
+
