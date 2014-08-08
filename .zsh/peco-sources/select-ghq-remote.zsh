@@ -1,4 +1,4 @@
-function percol-select-ghq-remote() {
+function peco-select-ghq-remote() {
     local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
     if [ -n "$selected_dir" ]; then
         BUFFER="gh-open ${selected_dir}"
@@ -6,5 +6,5 @@ function percol-select-ghq-remote() {
     fi
     zle clear-screen
 }
-zle -N percol-select-ghq-remote
-bindkey '^x^d' percol-select-ghq-remote
+zle -N peco-select-ghq-remote
+bindkey '^x^d' peco-select-ghq-remote

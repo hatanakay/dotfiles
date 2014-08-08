@@ -14,11 +14,11 @@ function peco-bd () {
 
     if [ -n "$selected" ]; then
         BUFFER="cd ${selected}"
+        zle -N $BUFFER
         CURSOR=$#BUFFER
         zle accept-line
     fi
     zle clear-screen
 }
 zle -N peco-bd
-
 bindkey '^b' peco-bd
