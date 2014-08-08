@@ -1,4 +1,4 @@
-function percol-src () {
+function peco-src () {
     local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
@@ -6,5 +6,5 @@ function percol-src () {
     fi
     zle clear-screen
 }
-zle -N percol-src
-bindkey '^S' percol-src
+zle -N peco-src
+bindkey '^S' peco-src

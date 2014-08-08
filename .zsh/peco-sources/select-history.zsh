@@ -1,5 +1,5 @@
 
-function percol-select-history() {
+function peco-select-history() {
   local tac_cmd
   which gtac &> /dev/null && tac_cmd=gtac || tac_cmd=tac
   BUFFER=$(history | $tac_cmd | cut -d " " -f3-  \
@@ -8,5 +8,5 @@ function percol-select-history() {
   zle -R -c               # refresh
 }
 
-zle -N percol-select-history
-bindkey '^r' percol-select-history
+zle -N peco-select-history
+bindkey '^r' peco-select-history
