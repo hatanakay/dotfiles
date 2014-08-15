@@ -50,7 +50,7 @@ setopt multios           # 複数のリダイレクトやパイプなど、必�
 setopt no_beep           # 補完候補がないときなどにビープ音を鳴らさない。
 setopt no_clobber        # 上書きリダイレクトの禁止
 setopt no_flow_control   # disable C-q, C-s
-setopt noautoremoveslash # 最後がディレクトリ名で終わっている場合末尾の / を自動的に取り除かない
+setopt autoremoveslash # 最後がディレクトリ名で終わっている場合末尾の / を自動的に取り除かない
 setopt nolistbeep        # 補完表示時にビープ音を鳴らさない
 setopt numeric_glob_sort # 辞書順ではなく数字順に並べる。
 setopt pushd_ignore_dups # ディレクトリスタックに同じディレクトリを追加しないようになる
