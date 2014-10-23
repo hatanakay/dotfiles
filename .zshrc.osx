@@ -238,6 +238,13 @@ if [ -z $TMUX ]; then
   fi
 fi
 
+show-current-dir-as-window-name() {
+    tmux set-window-option window-status-format " #I ${PWD:t} " > /dev/null
+}
+ 
+show-current-dir-as-window-name
+add-zsh-hook chpwd show-current-dir-as-window-name
+
 ## local settings
 source $HOME/.zshrc.local
 

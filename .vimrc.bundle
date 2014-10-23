@@ -86,7 +86,8 @@ endif
   NeoBundle 'yuroyoro/vim-scala'
 
   "golang
-  NeoBundle 'Blackrush/vim-gocode'
+  NeoBundle 'google/vim-ft-go'
+  NeoBundle 'vim-jp/vim-go-extra'
 
   " syntax checking plugins exist for eruby, haml, html, javascript, php, python, ruby and sass.
   NeoBundle 'scrooloose/syntastic'
@@ -99,8 +100,8 @@ endif
 " }}}
 
 " Utility {{{
-  "command-T
-  NeoBundle 'wincent/Command-T' 
+  "easy-motion
+  NeoBundle 'Lokaltog/vim-easymotion'
 
   "vim-tags
   NeoBundle 'szw/vim-tags'
@@ -140,6 +141,9 @@ endif
 
   "git
   NeoBundle 'tpope/vim-fugitive'
+
+  "vdebug
+  NeoBundle 'joonty/vdebug.git'
 " }}}
 
 " ColorSchema{{{{
@@ -157,6 +161,7 @@ endif
   NeoBundle 'tsukkee/unite-tag'
   NeoBundle 'choplin/unite-vim_hacks'
   NeoBundle 'Shougo/unite-outline'
+  NeoBundle 'sorah/unite-ghq'
 
 " }}}
 

@@ -132,6 +132,7 @@ runtime macros/matchit.vim
 "neobundle
 "---------------------------------------------------------------------------
 source ~/.vimrc.bundle
+source ~/.vimrc.local
 
 "---------------------------------------------------------------------------
 " dylib
@@ -362,13 +363,7 @@ let g:airline_paste_symbol = 'ρ'
 "---------------------------------------------------------------------------
 " golang
 "---------------------------------------------------------------------------
-if $GOROOT != ''
-  set rtp+=$GOROOT/misc/vim
-endif
-"golint
-exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
-auto BufWritePre *.go Fmt
-
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
 let g:tagbar_type_go = {  
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -405,7 +400,7 @@ let g:multi_cursor_use_default_mapping=1
 "---------------------------------------------------------------------------
 " vim-tags
 "---------------------------------------------------------------------------
-let g:vim_tags_project_tags_command = "ctags -f tags -R . 2>/dev/null"
+let g:vim_tags_project_tags_command = "ctags --tag-relative --recurse --sort=yes  --append=no -f tags 2>/dev/null"
 let g:vim_tags_gems_tags_command = "ctags -R -f Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
 set tags+=tags,Gemfile.lock.tags
 
@@ -417,19 +412,30 @@ nnoremap <silent> ,k :<C-u>TagbarToggle<CR>
 "---------------------------------------------------------------------------
 " vimfiler
 "---------------------------------------------------------------------------
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_safe_mode_by_default = 1
-
-nnoremap <silent> <Leader>fc :<C-u>VimFilerCurrentDir -split -simple -winwidth=35 -no-quit<CR>
-nnoremap <silent> <Leader>fe :<C-u>VimFilerBufferDir -quit<CR>
-nnoremap <silent> <Leader>fi :<C-u>VimFilerBufferDir -split -simple -winwidth=35 -no-quit<CR>
-
-augroup vimrc
-  autocmd FileType vimfiler call s:vimfiler_my_settings()
-augroup END
-function! s:vimfiler_my_settings()
-  nmap <buffer> q <Plug>(vimfiler_exit)
-  nmap <buffer> Q <Plug>(vimfiler_hide)
+set modifiable
+set write
+nnoremap <Space> :<C-u>VimFiler -split -simple -winwidth=35 -no-quit<CR>
+let g:vimfiler_enable_auto_cd = 1
+let g:vimfiler_as_default_explorer=1
+let g:vimfiler_safe_mode_by_default=0
+autocmd! FileType vimfiler call s:my_vimfiler_settings()
+function! s:my_vimfiler_settings()
+  nmap     <buffer><expr><Cr> vimfiler#smart_cursor_map("\<Plug>(vimfiler_execute)", "\<Plug>(vimfiler_edit_file)")
 endfunction
+"---------------------------------------------------------------------------
+" easy motion
+"---------------------------------------------------------------------------
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
+nmap s <Plug>(easymotion-s)
+nmap s <Plug>(easymotion-s2)
+
+let g:EasyMotion_smartcase = 1
+
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+"---------------------------------------------------------------------------
+" Local Settings
+"---------------------------------------------------------------------------
 

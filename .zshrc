@@ -145,6 +145,16 @@ alias awk="gawk"
 alias symlinks="find ./ -type l -print0 | xargs -0 ls -plah"
 alias rbs="ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => 3000,  :DocumentRoot => Dir.pwd).start'"
 
+dsstore_del (){
+    if [ -d $1 ] ; then
+        find $1 -name ".DS_Store" -print -exec rm {} ";"
+    fi
+}
+
+show_env () {
+    echo $PATH | tr ":" "\n"
+}
+
 
 # extract http://d.hatena.ne.jp/jeneshicc/20110215/1297778049
 extract () {
@@ -317,7 +327,7 @@ find_whois_sv(){
 ignore() { curl http://www.gitignore.io/api/$@ ;}
 
 dic () {
-  w3m "http://ejje.weblio.jp/content/$1" | grep "用例"
+  w3m "http://ejje.weblio.jp/content/$1" | grep "用例" | grep -v "showMorePl"
 }
 
 
