@@ -333,6 +333,13 @@ autocmd BufEnter *
 
     let g:startify_bookmarks = [ '~/.vimrc', '~/.vimrc.bundle', '~/.zshrc']
 
+    highlight StartifyBracket ctermfg=008
+    highlight StartifyFooter  ctermfg=050
+    highlight StartifyHeader  ctermfg=008
+    highlight StartifyNumber  ctermfg=012
+    highlight StartifyPath    ctermfg=255
+    highlight StartifySlash   ctermfg=240
+    highlight StartifySpecial ctermfg=250
 "---------------------------------------------------------------------------
 " vimrc を楽に開く&& 再読み込み
 "---------------------------------------------------------------------------
@@ -399,10 +406,9 @@ let g:multi_cursor_use_default_mapping=1
 "---------------------------------------------------------------------------
 " vim-tags
 "---------------------------------------------------------------------------
-let g:vim_tags_project_tags_command = "ctags --tag-relative --recurse --sort=yes  --append=no -f tags 2>/dev/null"
-let g:vim_tags_gems_tags_command = "ctags -R -f Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
+let g:vim_tags_project_tags_command = "/usr/local/bin/ctags --tag-relative --recurse --sort=yes  --append=no -f tags 2>/dev/null"
+let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R -f Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
 set tags+=tags,Gemfile.lock.tags
-
 "---------------------------------------------------------------------------
 " TagBar
 "---------------------------------------------------------------------------

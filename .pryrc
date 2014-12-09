@@ -16,7 +16,6 @@ end
 
 # === EDITOR ===
 Pry.editor = 'vi'
-
 # == Pry-Nav - Using pry as a debugger ==
 Pry.commands.alias_command 'c', 'continue' rescue nil
 Pry.commands.alias_command 's', 'step' rescue nil
@@ -24,7 +23,10 @@ Pry.commands.alias_command 'n', 'next' rescue nil
 
 # === CUSTOM PROMPT ===
 # This prompt shows the ruby version (useful for RVM)
-Pry.prompt = [proc { |obj, nest_level, _| "#{RUBY_VERSION} (#{obj}):#{nest_level} > " }, proc { |obj, nest_level, _| "#{RUBY_VERSION} (#{obj}):#{nest_level} * " }]
+Pry.prompt = [proc { |obj, nest_level, _| 
+  "#{RUBY_VERSION} (#{obj}):#{nest_level} > " }, 
+  proc { |obj, nest_level, _| "#{RUBY_VERSION} (#{obj}):#{nest_level} * " }
+]
 
 # === Listing config ===
 # Better colors - by default the headings for methods are too 
@@ -36,6 +38,16 @@ Pry.config.ls.heading_color = :magenta
 Pry.config.ls.public_method_color = :green
 Pry.config.ls.protected_method_color = :yellow
 Pry.config.ls.private_method_color = :bright_black
+
+Pry.config.prompt_name = File.basename(Dir.pwd)
+Pry.config.pager = true
+Pry.config.color = true
+Pry.config.history.should_save = true
+
+Pry.prompt = [proc { |obj, nest_level, _| 
+  "#{RUBY_VERSION} (#{obj}):#{nest_level} > " }, 
+  proc { |obj, nest_level, _| "#{RUBY_VERSION} (#{obj}):#{nest_level} * " }
+]
 
 # == PLUGINS ===
 # awesome_print gem: great syntax colorized printing

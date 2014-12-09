@@ -43,17 +43,7 @@ set lines=50
 "---------------------------------------------------------------------------
 " colorscheme
 "---------------------------------------------------------------------------
-autocmd ColorScheme * highlight Identifier ctermfg=210
 colorscheme molokai
-
-let g:molokai_original = 1
-let g:Powerline_theme = 'dark'
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_colorscheme = 'molokai'
-let g:Powerline_symbols = 'compatible'
-let g:airline_theme = 'dark'
-let g:Powerline_symbols='fancy'
-
 "molokaiの内容を一部修正
 hi Visual guibg=#0066ff
 hi Normal ctermbg=0
