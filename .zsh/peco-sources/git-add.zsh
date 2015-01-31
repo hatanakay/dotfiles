@@ -1,5 +1,5 @@
-unction peco-select-gitadd() {
-    local SELECTED_FILE_TO_ADD="$(git status --porcelain | \
+unction peco-gitadd() {
+    local SELECTED_FILE_TO_ADD="$(git status --porcelain -s | \
                                   peco --query "$LBUFFER" | \
                                   awk -F ' ' '{print $NF}')"
     if [ -n "$SELECTED_FILE_TO_ADD" ]; then
@@ -9,5 +9,4 @@ unction peco-select-gitadd() {
     zle accept-line
     # zle clear-screen
 }
-zle -N peco-select-gitadd
-bindkey "^x^g" peco-select-gitadd
+zle -N peco-gitadd

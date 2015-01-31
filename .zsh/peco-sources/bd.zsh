@@ -21,4 +21,3 @@ function peco-bd () {
     zle clear-screen
 }
 zle -N peco-bd
-bindkey '^b' peco-bd

@@ -1,10 +1,9 @@
-function peco-select-ghq-remote() {
+function peco-src () {
     local selected_dir=$(ghq list --full-path | peco --query "$LBUFFER")
     if [ -n "$selected_dir" ]; then
-        BUFFER="gh-open ${selected_dir}"
+        BUFFER="cd ${selected_dir}"
         zle accept-line
     fi
     zle clear-screen
 }
-zle -N peco-select-ghq-remote
-bindkey '^x^d' peco-select-ghq-remote
+zle -N peco-src

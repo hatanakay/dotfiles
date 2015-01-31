@@ -3,4 +3,3 @@ function peco-dir-open-vim () {
     zle clear-screen
 }
 zle -N peco-dir-open-vim
-bindkey '^x^v' peco-dir-open-vim
