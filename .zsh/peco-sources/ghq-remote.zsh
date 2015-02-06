@@ -7,3 +7,4 @@ function peco-ghq-remote() {
     zle clear-screen
 }
 zle -N peco-ghq-remote
+bindkey '^f' peco-ghq-remote
