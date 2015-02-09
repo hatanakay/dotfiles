@@ -14,5 +14,3 @@ function peco-git-recent-all-branches () {
     zle clear-screen
 }
 zle -N peco-git-recent-all-branches
-
-bindkey '^x^b' peco-git-recent-all-branches

@@ -6,4 +6,4 @@ function peco-pkill() {
         echo "Killed ${pid}"
     done
 }
-alias pk="peco-pkill"
+zle -N peco-pkill

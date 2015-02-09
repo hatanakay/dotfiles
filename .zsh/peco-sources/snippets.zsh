@@ -5,4 +5,3 @@ function peco-snippets() {
 }
 
 zle -N peco-snippets
-bindkey '^x^s' peco-snippets
