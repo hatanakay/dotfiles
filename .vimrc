@@ -445,7 +445,9 @@ map <Leader>k <Plug>(easymotion-k)
 "---------------------------------------------------------------------------
 let g:openbrowser_github_always_used_branch='master'
 :function! OpenWithVisual()
-    :normal V
+    call setpos("'<", getpos("."))
+    call setpos("'>", getpos("."))
+    normal! gv
     :'<,'>OpenGithubFile
 :endfunction
 command! Gh :call OpenWithVisual()
