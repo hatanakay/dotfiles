@@ -441,6 +441,19 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
 "---------------------------------------------------------------------------
+" Open Brower Github
+"---------------------------------------------------------------------------
+let g:openbrowser_github_always_used_branch='master'
+:function! OpenWithVisual()
+    call setpos("'<", getpos("."))
+    call setpos("'>", getpos("."))
+    normal! gv
+    :'<,'>OpenGithubFile
+:endfunction
+command! Gh :call OpenWithVisual()
+nnoremap <C-l> :call OpenWithVisual()<CR>
+
+"---------------------------------------------------------------------------
 " Local Settings
 "---------------------------------------------------------------------------
 source ~/.vimrc.local

@@ -45,6 +45,7 @@ call neobundle#end()
   NeoBundle 'Shougo/neosnippet.git'
   NeoBundle 'Shougo/neosnippet-snippets'
 
+  NeoBundle 'ujihisa/neco-look'
 " }}}
 
 " Searching/Moving{{{
@@ -105,6 +106,8 @@ call neobundle#end()
 " }}}
 
 " Utility {{{
+  "benchmark
+  NeoBundle 'mattn/benchvimrc-vim'
   "easy-motion
   NeoBundle 'Lokaltog/vim-easymotion'
 
@@ -146,6 +149,10 @@ call neobundle#end()
 
   "git
   NeoBundle 'tpope/vim-fugitive'
+
+  "open-github
+  NeoBundle 'tyru/open-browser.vim'
+  NeoBundle 'tyru/open-browser-github.vim'
 
   "vdebug
   NeoBundle 'joonty/vdebug.git'
