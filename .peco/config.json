@@ -1,13 +1,17 @@
 {
-
+    "keymap": {
+        "C-j": "peco.SelectNext",
+        "C-k": "peco.ToggleSelectionAndSelectNext"
+    },
     "Style": {
         "Basic": ["on_default", "default"],
         "Selected": ["underline", "on_red", "white"],
-        "Query": ["cyan", "bold"]
-    }, 
-
+        "SavedSelection": ["on_yellow", "black"],
+        "Query": ["cyan", "bold"], 
+        "Matched": ["red", "on_blue", "bold"]
+    },
+    "Prompt": ">", 
     "CustomMatcher": {
         "Migemo": ["migemogrep", "$QUERY"]
     }
 }
-

@@ -74,3 +74,5 @@ Gemfile.lock.tags
 vendor
 setting.rb
 config.rb
+/icons
+/error

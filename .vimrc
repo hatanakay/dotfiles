@@ -423,7 +423,7 @@ let g:multi_cursor_use_default_mapping=1
 "---------------------------------------------------------------------------
 " vim-tags
 "---------------------------------------------------------------------------
-let g:vim_tags_project_tags_command = "/usr/local/bin/ctags --tag-relative --recurse --sort=yes  --append=no -f tags 2>/dev/null"
+let g:vim_tags_project_tags_command = "/usr/local/bin/ctags --tag-relative --recurse --sort=yes  --append=no -f tags --exclude=tmp  2>/dev/null"
 let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R -f Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
 set tags+=tags,Gemfile.lock.tags
 "---------------------------------------------------------------------------

@@ -7,3 +7,4 @@ function peco-vim () {
     zle clear-screen
 }
 zle -N peco-vim
+bindkey '^v' peco-vim
