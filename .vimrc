@@ -148,6 +148,14 @@ let $LUA_DLL= s:lua_dir . "/lib/liblua.dylib"
     "let $RUBY_DLL = s:ruby_libruby
   "endif
 "endif
+" .や::を入力したときにオムニ補完が有効になるようにする
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
+" 環境変数RSENSE_HOMEに'/usr/local/bin/rsense'を指定しても動く
+let g:neocomplete#sources#rsense#home_directory = '/usr/local/bin/rsense'
 "---------------------------------------------------------------------------
 " colorscheme
 "---------------------------------------------------------------------------
@@ -210,7 +218,7 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \: "\<TAB>"
 
 let g:neosnippet#snippets_directory =
-          \'~/.vim/bundle/vim-snippet/snippets'
+          \'~/.vim/bundle/neosnippet-snippets/neosnippets'
 
 " For snippet_complete marker.
 if has('conceal')
@@ -280,8 +288,6 @@ nnoremap <silent> ,m :<C-u>Unite file_mru<CR>
 nnoremap <silent> ,u :<C-u>Unite buffer file_mru<CR>
 " 全部乗せ
 nnoremap <silent> ,a :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
-" colorscheme
-nnoremap <silent> ,c :<C-u>Unite colorscheme<CR>
 " .git以下で絞り込み
 if isdirectory(getcwd()."/.git")
     nnoremap <silent> ,e  :<C-u>Unite file_rec/git<CR>
@@ -378,15 +384,19 @@ let g:airline_left_sep = '⮀'
 let g:airline_left_alt_sep = '⮁'
 let g:airline_right_sep = '⮂'
 let g:airline_right_alt_sep = '⮃'
-let g:airline_branch_prefix = ' ⭠ '
-let g:airline_readonly_symbol = ' ⭤ '
-let g:airline_linecolumn_prefix = ' ⭡ '
-let g:airline_paste_symbol = 'ρ'
+"let g:airline_branch_prefix = ' ⭠ '
+"let g:airline_readonly_symbol = ' ⭤ '
+"let g:airline_linecolumn_prefix = ' ⭡ '
+"let g:airline_paste_symbol = 'ρ'
 
 "---------------------------------------------------------------------------
 " golang
 "---------------------------------------------------------------------------
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
+set rtp^=$GOPATH/src/github.com/nsf/gocode/vim
+if $GOROOT != ''
+  set rtp+=$GOROOT/misc/vim
+endif
 let g:tagbar_type_go = {  
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -414,6 +424,7 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+let g:go_fmt_command = "goimports"
 
 "---------------------------------------------------------------------------
 " multiple cursor

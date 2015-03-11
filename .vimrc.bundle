@@ -44,9 +44,12 @@ call neobundle#end()
   "NeoBundle 'Shougo/neocomplcache-snippets-complete'
   NeoBundle 'Shougo/neosnippet.git'
   NeoBundle 'Shougo/neosnippet-snippets'
-  NeoBundle 'honza/vim-snippets'
-
   NeoBundle 'ujihisa/neco-look'
+
+  NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : {
+              \ 'insert' : 1,
+              \ 'filetypes': 'ruby',
+              \ }}
 " }}}
 
 " Searching/Moving{{{
@@ -93,6 +96,7 @@ call neobundle#end()
   NeoBundle 'yuroyoro/vim-scala'
 
   "golang
+  "NeoBundle 'fatih/vim-go'
   NeoBundle 'google/vim-ft-go'
   NeoBundle 'vim-jp/vim-go-extra'
 

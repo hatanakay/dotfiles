@@ -31,7 +31,7 @@ setopt auto_cd           # 指定したコマンド名がなく、ディレク�
 setopt auto_list         # 補完候補が複数ある時に、一覧表示する
 setopt auto_menu         # 補完キー（Tab,  Ctrl+I) を連打するだけで順に補完候補を自動で補完する
 setopt auto_param_keys   # カッコの対応などを自動的に補完する
-#setopt auto_param_slash  # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
+#setopt auto_param_slash # ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
 setopt auto_pushd        # cd でTabを押すとdir list を表示
 setopt brace_ccl         # {a-c} を a b c に展開する機能を使えるようにする
 setopt complete_aliases  # エイリアスを設定したコマンドでも補完機能を使えるようにする
@@ -50,7 +50,7 @@ setopt multios           # 複数のリダイレクトやパイプなど、必�
 setopt no_beep           # 補完候補がないときなどにビープ音を鳴らさない。
 setopt no_clobber        # 上書きリダイレクトの禁止
 setopt no_flow_control   # disable C-q, C-s
-setopt autoremoveslash # 最後がディレクトリ名で終わっている場合末尾の / を自動的に取り除かない
+setopt autoremoveslash   # 最後がディレクトリ名で終わっている場合末尾の / を自動的に取り除かない
 setopt nolistbeep        # 補完表示時にビープ音を鳴らさない
 setopt numeric_glob_sort # 辞書順ではなく数字順に並べる。
 setopt pushd_ignore_dups # ディレクトリスタックに同じディレクトリを追加しないようになる
