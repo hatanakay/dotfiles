@@ -9,13 +9,19 @@ case "${OSTYPE}" in
         antigen bundle brew
         antigen bundle ruby
         antigen bundle rbenv
+        antigen bundle gem
+        antigen bundle rake
+        antigen bundle common-aliases
         antigen-bundle bundler
         antigen bundle git
+        antigen bundle git-extras
         antigen-bundle gnu-utils
         antigen bundle osx
+        antigen bundle z
         antigen bundle command-not-found
         antigen-bundle zsh-users/zsh-syntax-highlighting
         antigen-bundle common-aliases
+        antigen bundle zsh-users/zsh-completions
         ;;
     linux*)
         antigen bundle history

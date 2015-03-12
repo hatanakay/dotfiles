@@ -63,6 +63,7 @@ config/secrets.yml
 # Other
 ####################
 tags
+gotags
 Gemfile.lock.tags
 .DS_Store
 .netrwhist
@@ -76,3 +77,4 @@ setting.rb
 config.rb
 /icons
 /error
+/.bundle
