@@ -124,6 +124,21 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 set nobackup
 set noswapfile
 set noundofile
+
+" 指定のデータをレジスタに登録する
+function! s:Clip(data)
+  let @*=a:data
+  echo "clipped: " . a:data
+endfunction
+" 現在開いているファイルのパスをレジスタへ
+command! -nargs=0 ClipPath call s:Clip(expand('%:p'))
+" 現在開いているファイルのファイル名をレジスタへ
+command! -nargs=0 ClipFile call s:Clip(expand('%:t'))
+" 現在開いているファイルのディレクトリパスをレジスタへ
+command! -nargs=0 ClipDir  call s:Clip(expand('%:p:h'))
+
+nnoremap <C-y> :ClipPath<CR>
+
 "---------------------------------------------------------------------------
 " 移動 
 "---------------------------------------------------------------------------
@@ -302,6 +317,7 @@ nnoremap <silent> ,o  :<C-u>Unite outline<CR>
 nnoremap <silent> ,t :<C-u>Unite -buffer-name=tags tag<CR>
 " yank履歴
 "nnoremap <silent> ,y :<C-u>Unite history/yank<CR>
+nnoremap <silent>,s :<C-u>Unite ghq<CR>
 
 " unite grep に ag(The Silver Searcher) を使う
 "
