@@ -8,7 +8,7 @@
         "Selected": ["underline", "on_red", "white"],
         "SavedSelection": ["on_yellow", "black"],
         "Query": ["white", "bold"], 
-        "Matched": ["red", "on_black", "bold"]
+        "Matched": ["yellow", "on_black", "bold"]
     },
     "Prompt": ">", 
     "CustomMatcher": {
