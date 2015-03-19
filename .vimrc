@@ -315,9 +315,10 @@ nnoremap <silent> ,l  :<C-u>Unite line<CR>
 nnoremap <silent> ,o  :<C-u>Unite outline<CR>
 " tags一覧
 nnoremap <silent> ,t :<C-u>Unite -buffer-name=tags tag<CR>
-" yank履歴
 "nnoremap <silent> ,y :<C-u>Unite history/yank<CR>
 nnoremap <silent>,s :<C-u>Unite ghq<CR>
+"vimfilerで最近使ったディレクトリへ移動
+nnoremap <silent>,d :<C-u>Unite -buffer-name=files -default-action=lcd directory_mru<CR>
 
 " unite grep に ag(The Silver Searcher) を使う
 "
@@ -358,19 +359,12 @@ autocmd BufEnter *
 " vim-startify
 "---------------------------------------------------------------------------
 "startify
-    let g:startify_custom_header = [ 
-                \ '     __  __                            ________     __ __      ',
-                \ '    /\ \/\ \    __                    /\____   \   /\ \\ \     ',
-                \ '    \ \ \ \ \  /\_\     ___ ___       \/___/  /    \ \ \\ \    ',
-                \ '     \ \ \ \ \ \/\ \   / __` __`\         /  /      \ \ \\ \_  ',
-                \ '      \ \ \_/ \ \ \ \ /\ \/\ \/\ \       /  /    __  \ \__  __\',
-                \ '       \ `\___/  \ \_\\ \_\ \_\ \_\     /\_/    /\_\  \/_/\_\_/',
-                \ '        `\/__/    \/_/ \/_/\/_/\/_/     \//     \/_/     \/_/  ',
-                \ '',
-                \ '',
-                \ ]
+if executable('figlet')
+    let g:startify_custom_header =
+                \ map(split(system('figlet -f roman vim'), '\n'), '"   ". v:val') + ['','']
+endif
 
-    let g:startify_bookmarks = [ '~/.vimrc', '~/.vimrc.bundle', '~/.zshrc']
+    let g:startify_bookmarks = [ '~/.vimrc', '~/.vimrc.bundle', '~/.vimrc.local', '~/.zshrc', '~/.zshrc.osx']
 
     highlight StartifyBracket ctermfg=008
     highlight StartifyFooter  ctermfg=050
@@ -463,10 +457,11 @@ nnoremap <silent> ,k :<C-u>TagbarToggle<CR>
 "---------------------------------------------------------------------------
 set modifiable
 set write
-nnoremap <Space> :<C-u>VimFiler -split -simple -winwidth=35 -no-quit<CR>
 let g:vimfiler_enable_auto_cd = 1
 let g:vimfiler_as_default_explorer=1
 let g:vimfiler_safe_mode_by_default=0
+
+nnoremap <Space> :<C-u>VimFiler -split -simple -winwidth=35 -no-quit<CR>
 autocmd! FileType vimfiler call s:my_vimfiler_settings()
 function! s:my_vimfiler_settings()
   nmap     <buffer><expr><Cr> vimfiler#smart_cursor_map("\<Plug>(vimfiler_execute)", "\<Plug>(vimfiler_edit_file)")
