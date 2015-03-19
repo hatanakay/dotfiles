@@ -11,7 +11,11 @@
         "Matched": ["yellow", "on_black", "bold"]
     },
     "Prompt": ">", 
-    "CustomMatcher": {
-        "Migemo": ["migemogrep", "$QUERY"]
+    "CustomFilter": {
+        "Migemo": {
+            "Cmd": "migemogrep",
+            "Args": ["$QUERY"]
+
+        }
     }
 }
