@@ -94,7 +94,10 @@ call neobundle#end()
 
   " scala
   NeoBundle 'yuroyoro/vim-scala'
-
+  
+  " json
+  NeoBundle 'elzr/vim-json'
+  
   "golang
   "NeoBundle 'fatih/vim-go'
   NeoBundle 'google/vim-ft-go'
