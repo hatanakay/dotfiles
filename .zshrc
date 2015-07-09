@@ -144,6 +144,7 @@ alias sed="gsed"
 alias awk="gawk"
 alias symlinks="find ./ -type l -print0 | xargs -0 ls -plah"
 alias rbs="ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => 3000,  :DocumentRoot => Dir.pwd).start'"
+alias xmlpp="python -c 'import sys;import xml.dom.minidom;s=sys.stdin.read();print xml.dom.minidom.parseString(s).toprettyxml()'"
 
 dsstore_del (){
     if [ -d $1 ] ; then

@@ -37,6 +37,12 @@ nnoremap gO :normal! O<ESC>j
 "Ctrl-a Ctrl-x で常に10進として扱う
 set nf=""
 
+"p レジスタ0を
+vnoremap <silent> p "0p
+"貼り付けたテキストを素早く選択する
+noremap gV `[v`]
+"不要なウィンドウのポップアップを抑制する
+map q: :q
 "---------------------------------------------------------------------------
 " 表示に関する設定:
 "---------------------------------------------------------------------------
@@ -117,6 +123,7 @@ set ignorecase
 set wrapscan
 " Esc連打で検索時にハイライトを消す
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
+
 "---------------------------------------------------------------------------
 " ファイル操作に関する設定:
 "---------------------------------------------------------------------------
@@ -143,6 +150,8 @@ nnoremap <C-y> :ClipPath<CR>
 " 移動 
 "---------------------------------------------------------------------------
 runtime macros/matchit.vim
+nnoremap <CR> G
+nnoremap <BS> gg
 "---------------------------------------------------------------------------
 "neobundle
 "---------------------------------------------------------------------------
@@ -221,7 +230,6 @@ let g:neocomplcache_text_mode_filetypes = {'text': 1, 'javascript': 1, 'markdown
 
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
@@ -445,7 +453,7 @@ let g:multi_cursor_use_default_mapping=1
 " vim-tags
 "---------------------------------------------------------------------------
 let g:vim_tags_project_tags_command = "/usr/local/bin/ctags --tag-relative --recurse --sort=yes  --append=no -f tags --exclude=tmp  2>/dev/null"
-let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R -f Gemfile.lock.tags `bundle show --paths` 2>/dev/null"
+let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R -f Gemfile.lock.tags `bundle show --paths --sort=yes` 2>/dev/null"
 set tags+=tags,Gemfile.lock.tags
 "---------------------------------------------------------------------------
 " TagBar

@@ -19,7 +19,7 @@ typeset -gxU PATH R_HOME GOPATH
 
 # osx alias
 alias pbc='pbcopy'
-alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+alias vi='env LANG=ja_JP.UTF-8 reattach-to-user-namespace /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
 alias vim='env LANG=ja_JP.UTF-8 reattach-to-user-namespace /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias lg="find . -type d -name .svn -prune -o -type f -print | xargs lgrep -n"

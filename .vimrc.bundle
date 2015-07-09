@@ -9,7 +9,6 @@ endif
 
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
 
 " Edit {{{
   " NERD_commenter.vim :最強コメント処理 (<Leader>c<space>でコメントをトグル)
@@ -45,6 +44,7 @@ call neobundle#end()
   NeoBundle 'Shougo/neosnippet.git'
   NeoBundle 'Shougo/neosnippet-snippets'
   NeoBundle 'ujihisa/neco-look'
+  NeoBundle 'mattn/sonictemplate-vim'
 
   NeoBundleLazy 'supermomonga/neocomplete-rsense.vim', { 'autoload' : {
               \ 'insert' : 1,
@@ -59,8 +59,10 @@ call neobundle#end()
 " }}}
 
 " Programming {{{
+  " abolish
+  NeoBundle 'tpope/vim-abolish'
   " emmet
-  "NeoBundle 'mattn/emmet-vim'
+  NeoBundle 'mattn/emmet-vim'
 
   " quickrun.vim : 編集中のファイルを簡単に実行できるプラグイン
   NeoBundle 'thinca/vim-quickrun'
@@ -114,6 +116,7 @@ call neobundle#end()
 " }}}
 
 " Utility {{{
+  NeoBundle 'haya14busa/incsearch.vim'
   "benchmark
   NeoBundle 'mattn/benchvimrc-vim'
   "easy-motion
@@ -185,4 +188,5 @@ call neobundle#end()
 
 " }}}
 
+call neobundle#end()
 filetype plugin indent on
