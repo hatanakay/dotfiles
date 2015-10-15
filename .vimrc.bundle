@@ -107,6 +107,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
   " syntax checking plugins exist for eruby, haml, html, javascript, php, python, ruby and sass.
   NeoBundle 'scrooloose/syntastic'
+
   " ログファイルを色づけしてくれる
   NeoBundle 'vim-scripts/AnsiEsc.vim'
 " }}}
@@ -116,9 +117,15 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " }}}
 
 " Utility {{{
+  "gitgutter 
+  NeoBundle 'airblade/vim-gitgutter'
+
+  "incsearch
   NeoBundle 'haya14busa/incsearch.vim'
+
   "benchmark
   NeoBundle 'mattn/benchvimrc-vim'
+
   "easy-motion
   NeoBundle 'Lokaltog/vim-easymotion'
 
