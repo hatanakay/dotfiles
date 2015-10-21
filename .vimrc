@@ -330,7 +330,12 @@ nnoremap <silent>,d :<C-u>Unite -buffer-name=files -default-action=lcd directory
 " unite grep に ag(The Silver Searcher) を使う
 "
 let g:unite_source_grep_default_opts = '-Hn --color=never'
-if executable('pt')
+if executable('hw')
+    let g:unite_source_grep_command = 'hw'
+    let g:unite_source_grep_default_opts = '--no-group --no-color'
+    let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_grep_max_candidates = 200
+elseif executable('pt')
     let g:unite_source_grep_command = 'pt'
     let g:unite_source_grep_default_opts = '--nocolor --nogroup'
     let g:unite_source_grep_recursive_opt = ''
