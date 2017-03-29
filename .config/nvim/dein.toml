@@ -1,0 +1,113 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# ==========================================================
+# colorscheme
+# ==========================================================
+
+[[plugins]]
+repo = 'tomasr/molokai'
+
+# ==========================================================
+# basic
+# ==========================================================
+
+[[plugins]]
+repo = 'scrooloose/nerdcommenter'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'Shougo/vimfiler'
+
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+repo = 'kana/vim-smartchr'
+hook_add='''
+    inoremap <buffer> <expr> = smartchr#loop(' = ',  ' == ',  '=')
+    inoremap <buffer> <expr> <S-=> smartchr#loop(' + ',  '+')
+    inoremap <buffer> <expr> - smartchr#loop(' - ',  '-')
+    inoremap <buffer> <expr> ,  smartchr#loop(',  ',  ', ')
+    inoremap <buffer> <expr> . smartchr#loop('.',  '<%=  %>',  '<%  %>')
+'''
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'banyan/recognize_charcode.vim'
+
+[[plugins]]
+repo = 'haya14busa/incsearch.vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'tyru/open-browser-github.vim'
+
+# ==========================================================
+# development
+# ==========================================================
+
+[[plugins]]
+repo = 'google/vim-ft-go'
+
+[[plugins]]
+repo = 'vim-jp/vim-go-extra'
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+# ==========================================================
+# denite
+# ==========================================================
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+
+# ==========================================================
+# powerline
+# ==========================================================
+
+[[plugins]]
+repo = 'majutsushi/tagbar'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'gcmt/taboo.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+if = "!has('nvim')"
+build = 'make'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+# ==========================================================
+# neocomplete
+# ==========================================================
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'

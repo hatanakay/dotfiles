@@ -1,0 +1,259 @@
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:$PATH
+export R_HOME=/Library/Frameworks/R.framework/Resources
+
+if [ -d $HOME/.phpenv ]; then
+    export PATH=$HOME/.phpenv/shims:$HOME/.phpenv/bin:$PATH
+    eval "$(phpenv init -)"
+fi
+
+if [ -x $(which go) ]; then
+    export GOPATH=$HOME/develop
+    export GOROOT="`brew --prefix go`/libexec"
+    export PATH=$GOPATH/bin:$PATH
+fi
+
+if [ -d /usr/local/opt/pyenv ]; then
+    export PATH="/usr/local/opt/pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
+
+#rbenvのPATHが後になってしまうので一旦追加...
+source ~/.zprofile
+
+typeset -gxU PATH R_HOME GOPATH
+
+# osx alias
+alias pbc='pbcopy'
+alias vi='env LANG=ja_JP.UTF-8 reattach-to-user-namespace /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
+alias vim='env LANG=ja_JP.UTF-8 reattach-to-user-namespace /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+alias lg="find . -type d -name .svn -prune -o -type f -print | xargs lgrep -n"
+alias tmuxv="tmux new-session \; split-window -h \; split-window -d -d \;"
+alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+
+# Terminal Colorの設定
+export CLICOLOR=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
+# vim
+export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+
+# z
+if [ -f /usr/local/etc/profile.d/z.sh ]; then
+  _Z_CMD=z
+  source /usr/local/etc/profile.d/z.sh
+  precmd() {
+    _z --add "$(pwd -P)"
+  }
+  compctl -U -K _z_zsh_tab_completion "$_Z_CMD"
+fi
+
+#=============================
+# peco
+#=============================
+if [ -d $HOME/.zsh/peco-sources ]; then
+    for f (~/.zsh/peco-sources/*) source "${f}"
+fi
+
+#=============================
+# compare for github
+#=============================
+function compare {
+  local CURRENT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+  # http://ghe.tokyo.pb/lolipop/lolipop-api/compare/muu-easy-order
+
+  open "$(git remote -v | head -n 1 | sed -e 's|.*git@\(.*\):\(.*\)\.git.*|http://\1/\2|g')/compare/$CURRENT_BRANCH"
+}
+
+
+#=============================
+# source auto-fu.zsh
+#=============================
+if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
+    source ~/.zsh/auto-fu.zsh/auto-fu.zsh
+    function zle-line-init () {
+        auto-fu-init
+    }
+    zle -N zle-line-init
+    zle -N zle-keymap-select auto-fu-zle-keymap-select
+    zstyle ':completion:*' completer _oldlist _complete _match _ignored    
+    zstyle ':auto-fu:var' postdisplay $''
+
+fi
+
+#=============================
+# zsh-autosuggestions
+#=============================
+#if [ -f ~/.zsh/zsh-autosuggestions/autosuggestions.zsh ]; then
+    #source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
+    ## Enable autosuggestions automatically
+    #zle-line-init() {
+        #zle autosuggest-start
+    #}
+    #zle -N zle-line-init
+    #bindkey '^A' autosuggest-toggle
+    #bindkey '^F' vi-forward-blank-word
+    #bindkey '^f' vi-forward-word
+#fi
+
+#=============================
+# local settings
+#=============================
+if [ -f $HOME/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
+
+#=============================
+# sudo.vim   http://blog.monoweb.info/article/2011120320.html
+#=============================
+sudo() {
+  local args
+  case $1 in
+    vi|vim)
+      args=()
+      for arg in $@[2,-1]
+      do
+        if [ $arg[1] = '-' ]; then
+          args[$(( 1+$#args ))]=$arg
+        else
+          args[$(( 1+$#args ))]="sudo:$arg"
+        fi
+      done
+      command vim $args
+      ;;
+    *)
+      command sudo $@
+      ;;
+  esac
+}
+
+#===
+# npm
+# ===
+COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
+COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
+export COMP_WORDBREAKS
+
+if type complete &>/dev/null; then
+  _npm_completion () {
+    local si="$IFS"
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+                           COMP_LINE="$COMP_LINE" \
+                           COMP_POINT="$COMP_POINT" \
+                           npm completion -- "${COMP_WORDS[@]}" \
+                           2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  complete -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 npm completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion () {
+    local cword line point words si
+    read -Ac words
+    read -cn cword
+    let cword-=1
+    read -l line
+    read -ln point
+    si="$IFS"
+    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+                       COMP_LINE="$line" \
+                       COMP_POINT="$point" \
+                       npm completion -- "${words[@]}" \
+                       2>/dev/null)) || return $?
+    IFS="$si"
+  }
+  compctl -K _npm_completion npm
+fi
+###-end-npm-completion-###
+
+#weechat
+function weechat {
+  if [ -x `which weechat-curses` ]; then
+    if ! (ps aux | grep '[w]eechat-curses' 2>&1 > /dev/null); then
+      tmux new-window -n 'weechat' -t ${WEECHAT_TMUX_WINNUM:-9} 'TERM=screen-256color weechat-curses' 
+    fi
+  fi
+}
+
+function termcolor {
+  for fgbg in 38 48; do
+      for color in {000..255}; do
+          echo -en "\e[${fgbg};5;${color}m${color} \e[0m"
+          [ $((`expr $color + 1` % 16)) -eq 0 ] && echo
+      done
+      echo
+  done
+}
+
+#rbenv install
+rb_install() {
+  CONFIGURE_OPTS="--enable-shared --disable-install-rdoc --with-openssl-dir=`brew --prefix openssl` --with-readline-dir=`brew --prefix readline`" rbenv install $1
+}
+
+#
+# zsh-bd
+#
+if [ -f ~/.zsh/zsh-bd/bd.zsh ]; then
+    source ~/.zsh/zsh-bd/bd.zsh
+fi
+
+tmuxx(){
+    if ! type tmux >/dev/null 2>&1; then
+        echo 'Error: tmux command not found' 2>&1
+        exit 1
+    fi
+
+    if [ -n "$TMUX" ]; then
+        echo "Error: tmux session has been already attached" 2>&1
+        exit 1
+    fi
+
+    if tmux has-session >/dev/null 2>&1 && tmux list-sessions | grep -qE '.*]$'; then
+        # detached session exists
+        tmux attach && echo "tmux attached session "
+    else
+        if [[ ( $OSTYPE == darwin* ) && ( -x $(which reattach-to-user-namespace 2>/dev/null) ) ]]; then
+            # on OS X force tmux's default command to spawn a shell in the user's namespace
+            tmux_config=$(cat $HOME/.tmux.conf <(echo 'set-option -g default-command "tmux rename-window zsh; reattach-to-user-namespace -l $SHELL"'))
+            tmux -f <(echo "$tmux_config") new-session && echo "tmux created new session supported OS X"
+        else
+            tmux new-session && echo "tmux created new session"
+        fi
+    fi
+}
+
+# tmuxx start
+# http://qiita.com/items/1e1d3053c33f528363d9
+if [ -z $TMUX ]; then
+  if $(tmuxx has-session); then
+    tmuxx attach
+  else
+    #tmuxx
+    tmuxx
+  fi
+fi
+
+show-current-dir-as-window-name() {
+    window_name=$(tmux display-message -p '#W')
+    if [[ ! $window_name =~ "ssh|weechat" ]]; then
+        tmux set-window-option window-status-format " #I ${PWD:t} " > /dev/null
+    fi
+}
+ 
+show-current-dir-as-window-name
+add-zsh-hook chpwd show-current-dir-as-window-name
+
+## local settings
+source $HOME/.zshrc.local
+
