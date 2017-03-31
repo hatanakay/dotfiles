@@ -22,9 +22,6 @@ repo = 'tpope/vim-surround'
 repo = 'bronson/vim-trailing-whitespace'
 
 [[plugins]]
-repo = 'Shougo/vimfiler'
-
-[[plugins]]
 repo = 'tpope/vim-endwise'
 
 [[plugins]]
@@ -77,6 +74,16 @@ repo = 'cespare/vim-toml'
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
+
+[[plugins]]
+repo = 'nixprime/cpsm'
+build = 'env PY3=ON ./install.sh'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
 
 # ==========================================================
 # powerline

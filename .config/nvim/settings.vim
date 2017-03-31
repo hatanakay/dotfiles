@@ -157,8 +157,8 @@ augroup END
 " vimrc を楽に開く&& 再読み込み
 "---------------------------------------------------------------------------
 " open .vimrc
-command! Ev edit $MYNVIMRC
-command! Rv source $MYNVIMRC
+command! Ev edit "~/.config/nvim/settings.vimr"
+command! Rv source "~/.config/nvim/init.vim"
 
 "---------------------------------------------------------------------------
 " golang
@@ -208,21 +208,6 @@ set tags+=tags,Gemfile.lock.tags
 " TagBar
 "---------------------------------------------------------------------------
 nnoremap <silent> ,k :<C-u>TagbarToggle<CR>
-
-"---------------------------------------------------------------------------
-" vimfiler
-"---------------------------------------------------------------------------
-set modifiable
-set write
-let g:vimfiler_enable_auto_cd = 1
-let g:vimfiler_as_default_explorer=1
-let g:vimfiler_safe_mode_by_default=0
-
-nnoremap <Space> :<C-u>VimFiler -split -simple -winwidth=35 -no-quit<CR>
-autocmd! FileType vimfiler call s:my_vimfiler_settings()
-function! s:my_vimfiler_settings()
-  nmap     <buffer><expr><Cr> vimfiler#smart_cursor_map("\<Plug>(vimfiler_execute)", "\<Plug>(vimfiler_edit_file)")
-endfunction
 
 "---------------------------------------------------------------------------
 " easy motion
@@ -340,11 +325,38 @@ let g:gitgutter_eager = 0
 " denite.nvim
 "---------------------------------------------------------------------------
 let g:python3_host_prog  = expand("/usr/local/bin/python3")
+
+call denite#custom#option('default', 'prompt', '>> :')
+call denite#custom#option('default', 'vertical_preview', 1)
+call denite#custom#option('default', 'short_source_names', 1)
+call denite#custom#option('list', 'mode', 'normal')
+call denite#custom#option('list', 'winheight', 12)
+
+call denite#custom#var('grep', 'command', ['pt'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'final_opts', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'default_opts',
+      \ ['--follow', '--nocolor', '--nogroup'])
+call denite#custom#var('file_rec', 'command',
+      \ ['pt', '--follow', '--nocolor', '--nogroup', ''])
+call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+call denite#custom#var('file_rec/git', 'command',
+    \ ['git', 'ls-files', '-co', '--exclude-standard'])
+
+nnoremap <silent> ,e :<C-u>Denite
+    \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 nnoremap <silent> ,g   :<C-u>Denite grep<CR>
 nnoremap <silent> ,cg  :<C-u>DeniteCursorWord grep<CR>
 nnoremap <silent> ,l   :<C-u>Denite line<CR>
 nnoremap <silent> ,b   :<C-u>Denite buffer<CR>
+nnoremap <silent> ,d   :<C-u>Denite directory_rec -default-action=cd<CR>
 nnoremap <silent> ,m   :<C-u>Denite file_mru<CR>
 nnoremap <silent> ,y   :<C-u>Denite neoyank<CR>
+nnoremap <silent> ,o   :<C-u>Denite outline<CR>
 nnoremap <silent> ,r   :<C-u>Denite -resume<CR>
+nnoremap <silent> ,j   :<C-u>Denite jump change file_point<CR>
+
+call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
+call denite#custom#map('insert', "<C-p>", '<denite:move_to_previous_line>')
 
