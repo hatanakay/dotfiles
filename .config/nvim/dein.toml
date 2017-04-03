@@ -85,6 +85,10 @@ repo = 'Shougo/neomru.vim'
 [[plugins]]
 repo = 'Shougo/neoyank.vim'
 
+[[plugins]]
+repo  =  'Jagua/vim-denite-ghq'
+
+
 # ==========================================================
 # powerline
 # ==========================================================

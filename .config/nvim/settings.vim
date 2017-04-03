@@ -157,7 +157,7 @@ augroup END
 " vimrc を楽に開く&& 再読み込み
 "---------------------------------------------------------------------------
 " open .vimrc
-command! Ev edit "~/.config/nvim/settings.vimr"
+command! Ev edit "~/.config/nvim/settings.vim"
 command! Rv source "~/.config/nvim/init.vim"
 
 "---------------------------------------------------------------------------
@@ -254,12 +254,6 @@ let g:gitgutter_eager = 0
 autocmd ColorScheme * highlight Identifier ctermfg=210
 colorscheme molokai
 let g:molokai_original = 1
-let g:Powerline_theme = 'dark'
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_colorscheme = 'molokai'
-let g:Powerline_symbols = 'compatible'
-let g:airline_theme = 'dark'
-let g:Powerline_symbols='fancy'
 
 "molokaiの内容を一部修正
 hi Visual ctermbg=19
@@ -301,15 +295,18 @@ if has('multi_byte')
     let g:airline_powerline_fonts = 1
 endif
 
-let g:unite_force_overwrite_statusline = 0
-let g:vimfiler_force_overwrite_statusline = 0
+let g:airline_theme = 'dark'
+let g:airline#extensions#tabline#enabled  =  2
+let g:airline#extensions#tabline#fnamemod  =  ':t'
+let g:airline#extensions#tabline#left_sep  =  ' '
+let g:airline#extensions#tabline#left_alt_sep  =  '|'
+let g:airline#extensions#tabline#right_sep  =  ' '
+let g:airline#extensions#tabline#right_alt_sep  =  '|'
+let g:airline_left_sep  =  ' '
+let g:airline_left_alt_sep  =  '|'
+let g:airline_right_sep  =  ' '
+let g:airline_right_alt_sep  =  '|'
 
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-"
-"
 "---------------------------------------------------------------------------
 " json
 "---------------------------------------------------------------------------
@@ -325,7 +322,7 @@ let g:gitgutter_eager = 0
 " denite.nvim
 "---------------------------------------------------------------------------
 let g:python3_host_prog  = expand("/usr/local/bin/python3")
-
+call denite#custom#source('file_rec', 'matcher', ['matcher_cpsm'])
 call denite#custom#option('default', 'prompt', '>> :')
 call denite#custom#option('default', 'vertical_preview', 1)
 call denite#custom#option('default', 'short_source_names', 1)
@@ -344,7 +341,7 @@ call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 call denite#custom#var('file_rec/git', 'command',
     \ ['git', 'ls-files', '-co', '--exclude-standard'])
 
-nnoremap <silent> ,e :<C-u>Denite
+nnoremap <silent> ,f :<C-u>Denite
     \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 nnoremap <silent> ,g   :<C-u>Denite grep<CR>
 nnoremap <silent> ,cg  :<C-u>DeniteCursorWord grep<CR>
@@ -356,6 +353,8 @@ nnoremap <silent> ,y   :<C-u>Denite neoyank<CR>
 nnoremap <silent> ,o   :<C-u>Denite outline<CR>
 nnoremap <silent> ,r   :<C-u>Denite -resume<CR>
 nnoremap <silent> ,j   :<C-u>Denite jump change file_point<CR>
+nnoremap <silent> ,e   :<C-u>Denite ghq<CR>
+nnoremap <silent> ,z   :<C-u>Denite z -default-action=cd<CR>
 
 call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
 call denite#custom#map('insert', "<C-p>", '<denite:move_to_previous_line>')
