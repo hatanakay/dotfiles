@@ -335,12 +335,17 @@ call denite#custom#var('grep', 'final_opts', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'default_opts',
       \ ['--follow', '--nocolor', '--nogroup'])
-call denite#custom#var('file_rec', 'command',
-      \ ['pt', '--follow', '--nocolor', '--nogroup', ''])
+"call denite#custom#var('file_rec', 'command',
+      "\ ['pt', '--follow', '--nocolor', '--nogroup', ''])
 call denite#custom#alias('source', 'file_rec/git', 'file_rec')
 call denite#custom#var('file_rec/git', 'command',
     \ ['git', 'ls-files', '-co', '--exclude-standard'])
 
+call denite#custom#var("file_rec", "command",
+            \ [ "find", "-L", ":directory",
+            \ "-path", "*/.svn/*", "-prune", "-o",
+            \ '-type', 'l', '-print', '-o',
+            \ '-type', 'f', '-print'])
 nnoremap <silent> ,f :<C-u>Denite
     \ `finddir('.git', ';') != '' ? 'file_rec/git' : 'file_rec'`<CR>
 nnoremap <silent> ,g   :<C-u>Denite grep<CR>
@@ -358,4 +363,38 @@ nnoremap <silent> ,z   :<C-u>Denite z -default-action=cd<CR>
 
 call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
 call denite#custom#map('insert', "<C-p>", '<denite:move_to_previous_line>')
+
+"---------------------------------------------------------------------------
+" vim-startify
+"---------------------------------------------------------------------------
+"startify
+if executable('figlet')
+    let g:startify_custom_header =
+                \ map(split(system('figlet -f roman neovim'), '\n'), '"   ". v:val') + ['','']
+endif
+
+let g:startify_bookmarks = [ '~/.config/nvim/init.vim', '~/.config/nvim/settings.vim', '~/.config/nvim/dein.toml', '~/.zshrc', '~/.zshrc.osx']
+
+highlight StartifyBracket ctermfg=008
+highlight StartifyFooter  ctermfg=050
+highlight StartifyHeader  ctermfg=008
+highlight StartifyNumber  ctermfg=012
+highlight StartifyPath    ctermfg=255
+highlight StartifySlash   ctermfg=240
+highlight StartifySpecial ctermfg=250
+
+"---------------------------------------------------------------------------
+" deoplete
+"---------------------------------------------------------------------------
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 0
+let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#enable_camel_case = 0
+let g:deoplete#enable_ignore_case = 0
+let g:deoplete#enable_refresh_always = 0
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
+
 

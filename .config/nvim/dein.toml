@@ -26,13 +26,6 @@ repo = 'tpope/vim-endwise'
 
 [[plugins]]
 repo = 'kana/vim-smartchr'
-hook_add='''
-    inoremap <buffer> <expr> = smartchr#loop(' = ',  ' == ',  '=')
-    inoremap <buffer> <expr> <S-=> smartchr#loop(' + ',  '+')
-    inoremap <buffer> <expr> - smartchr#loop(' - ',  '-')
-    inoremap <buffer> <expr> ,  smartchr#loop(',  ',  ', ')
-    inoremap <buffer> <expr> . smartchr#loop('.',  '<%=  %>',  '<%  %>')
-'''
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
@@ -51,6 +44,9 @@ repo = 'tyru/open-browser.vim'
 
 [[plugins]]
 repo = 'tyru/open-browser-github.vim'
+
+[[plugins]]
+repo = 'mhinz/vim-startify'
 
 # ==========================================================
 # development
@@ -89,6 +85,9 @@ repo = 'Shougo/neoyank.vim'
 repo  =  'Jagua/vim-denite-ghq'
 
 
+[[plugins]]
+repo  =  'hatanakay/vim-denite-z'
+
 # ==========================================================
 # powerline
 # ==========================================================
@@ -122,3 +121,23 @@ repo = 'thinca/vim-quickrun'
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+
+[[plugins]]
+repo = 'Shougo/neoinclude.vim'
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+
+[[plugins]]
+repo = 'zchee/deoplete-go'
+
+[[plugins]]
+repo = 'Shougo/deoplete-rct'
+
+[[plugins]]
+repo = 'osyo-manga/vim-monster'
+
+
