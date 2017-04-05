@@ -11,6 +11,8 @@ repo = 'tomasr/molokai'
 # ==========================================================
 # basic
 # ==========================================================
+[[plugins]]
+repo = 'scrooloose/nerdtree'
 
 [[plugins]]
 repo = 'scrooloose/nerdcommenter'
@@ -47,6 +49,9 @@ repo = 'tyru/open-browser-github.vim'
 
 [[plugins]]
 repo = 'mhinz/vim-startify'
+
+[[plugins]]
+repo = 'vim-scripts/cmdalias.vim'
 
 # ==========================================================
 # development
@@ -87,6 +92,9 @@ repo  =  'Jagua/vim-denite-ghq'
 
 [[plugins]]
 repo  =  'hatanakay/vim-denite-z'
+
+[[plugins]]
+repo  =  'hatanakay/vim-denite-ghq-open'
 
 # ==========================================================
 # powerline

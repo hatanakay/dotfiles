@@ -31,11 +31,7 @@ nnoremap gO :normal! O<ESC>j
 "Ctrl-a Ctrl-x で常に10進として扱う
 set nf=""
 "p レジスタ0を
-vnoremap p "0P
-"貼り付けたテキストを素早く選択する
-noremap gV `[v`]
-"不要なウィンドウのポップアップを抑制する
-map q: :q
+vnoremap <silent> p "0p
 
 "---------------------------------------------------------------------------
 " 表示に関する設定:
@@ -154,13 +150,6 @@ augroup Shebang
 augroup END
 
 "---------------------------------------------------------------------------
-" vimrc を楽に開く&& 再読み込み
-"---------------------------------------------------------------------------
-" open .vimrc
-command! Ev edit "~/.config/nvim/settings.vim"
-command! Rv source "~/.config/nvim/init.vim"
-
-"---------------------------------------------------------------------------
 " golang
 "---------------------------------------------------------------------------
 autocmd FileType go autocmd BufWritePre <buffer> Fmt
@@ -275,18 +264,6 @@ vnoremap ( "zdi^V(<C-R>z)<ESC>
 vnoremap " "zdi^V"<C-R>z^V"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
  
-""---------------------------------------------------------------------------
-" Open Brower Github
-"---------------------------------------------------------------------------
-let g:openbrowser_github_always_used_branch='master'
-:function! OpenWithVisual()
-    call setpos("'<", getpos("."))
-    call setpos("'>", getpos("."))
-    normal! gv
-    :'<,'>OpenGithubFile
-:endfunction
-command! Gh :call OpenWithVisual()
-nnoremap <C-l> :call OpenWithVisual()<CR>
 
 "---------------------------------------------------------------------------
 " vim-airline
@@ -321,6 +298,12 @@ let g:gitgutter_eager = 0
 "---------------------------------------------------------------------------
 " denite.nvim
 "---------------------------------------------------------------------------
+:function! TreeCWD()
+    :NERDTreeClose
+    :NERDTreeCWD
+    wincmd p
+:endfunction
+
 let g:python3_host_prog  = expand("/usr/local/bin/python3")
 call denite#custom#source('file_rec', 'matcher', ['matcher_cpsm'])
 call denite#custom#option('default', 'prompt', '>> :')
@@ -352,17 +335,18 @@ nnoremap <silent> ,g   :<C-u>Denite grep<CR>
 nnoremap <silent> ,cg  :<C-u>DeniteCursorWord grep<CR>
 nnoremap <silent> ,l   :<C-u>Denite line<CR>
 nnoremap <silent> ,b   :<C-u>Denite buffer<CR>
-nnoremap <silent> ,d   :<C-u>Denite directory_rec -default-action=cd<CR>
+nnoremap <silent> ,d   :<C-u>Denite directory_rec -default-action=cd<CR>:call TreeCWD()<CR>
 nnoremap <silent> ,m   :<C-u>Denite file_mru<CR>
 nnoremap <silent> ,y   :<C-u>Denite neoyank<CR>
 nnoremap <silent> ,o   :<C-u>Denite outline<CR>
 nnoremap <silent> ,r   :<C-u>Denite -resume<CR>
 nnoremap <silent> ,j   :<C-u>Denite jump change file_point<CR>
-nnoremap <silent> ,e   :<C-u>Denite ghq<CR>
-nnoremap <silent> ,z   :<C-u>Denite z -default-action=cd<CR>
+nnoremap <silent> ,e   :<C-u>Denite ghq -default-action=cd<CR>:call TreeCWD()<CR>
+nnoremap <silent> ,z   :<C-u>Denite z -default-action=cd<CR>:call TreeCWD()<CR>
 
 call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
 call denite#custom#map('insert', "<C-p>", '<denite:move_to_previous_line>')
+
 
 "---------------------------------------------------------------------------
 " vim-startify
@@ -398,3 +382,26 @@ let g:deoplete#omni_patterns = {}
 let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
 
 
+"---------------------------------------------------------------------------
+" NERDTree
+"---------------------------------------------------------------------------
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+map <Space> :NERDTreeToggle<CR>
+
+let g:NERDTreeChDirMode=2
+let g:NERDTreeChDirMode=1
+let g:NERDTreeShowBookmarks = 1
+let g:NERDTreeMinimalUI = 25
+let g:NERDTreeWinSize = 1
+let g:NERDTreeCascadeSingleChildDir = 0
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeRespectWildIgnore = 0
+let g:NERDTreeAutoDeleteBuffer = 0
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeQuitOnOpen = 1
+let NERDTreeIgnore = [
+	\ '\.git$', '\.hg$', '\.svn$', '\.stversions$', '\.pyc$', '\.svn$',
+	\ '\.DS_Store$', '\.sass-cache$', '__pycache__$', '\.egg-info$'
+	\ ]
