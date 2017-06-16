@@ -69,6 +69,9 @@ repo = 'scrooloose/syntastic'
 [[plugins]]
 repo = 'cespare/vim-toml'
 
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
 # ==========================================================
 # denite
 # ==========================================================
@@ -89,12 +92,9 @@ repo = 'Shougo/neoyank.vim'
 [[plugins]]
 repo  =  'Jagua/vim-denite-ghq'
 
-
 [[plugins]]
 repo  =  'hatanakay/vim-denite-z'
 
-[[plugins]]
-repo  =  'hatanakay/vim-denite-ghq-open'
 
 # ==========================================================
 # powerline

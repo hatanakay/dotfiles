@@ -24,20 +24,26 @@ typeset -gxU PATH R_HOME GOPATH
 
 # osx alias
 alias pbc='pbcopy'
-alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
 alias vi=nvim
 alias vim=nvim
 alias lg="find . -type d -name .svn -prune -o -type f -print | xargs lgrep -n"
 alias tmuxv="tmux new-session \; split-window -h \; split-window -d -d \;"
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+alias gtags='gtags --gtagsconf=/usr/local/etc/gtags.conf --gtagslabel=pygments'
 
 # Terminal Colorの設定
+export TERM=xterm-256color
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
+### global
+export GTAGSCONF=/usr/local/etc/gtags.conf
+export GTAGSLABEL=pygments
+
 # vim
-export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+#export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+export EDITOR=nvim
 
 # z
 if [ -f /usr/local/etc/profile.d/z.sh ]; then

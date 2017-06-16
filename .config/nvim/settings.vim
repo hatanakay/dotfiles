@@ -33,6 +33,15 @@ set nf=""
 "p レジスタ0を
 vnoremap <silent> p "0p
 
+" IME ON OFF
+if has('mac')
+  let g:imeoff = 'osascript -e "tell application \"System Events\" to key code 102"'
+  augroup MyIMEGroup
+    autocmd!
+    autocmd InsertLeave * :call system(g:imeoff)
+  augroup END
+endif
+
 "---------------------------------------------------------------------------
 " 表示に関する設定:
 "---------------------------------------------------------------------------
@@ -75,21 +84,10 @@ set wildignore+=*.png,*.jpg,*.gif
 "全角スペース表示
 highlight link ZenkakuSpace Error
 match ZenkakuSpace /　/
-" ターミナルタイプによるカラー設定
-if &term =~ "xterm-256color" || "screen-256color"
-  " 256色
-  set t_Co=256
-  set t_Sf=[3%dm
-  set t_Sb=[4%dm
-elseif &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
-  set t_Co=16
-  set t_Sf=[3%dm
-  set t_Sb=[4%dm
-elseif &term =~ "xterm-color"
-  set t_Co=8
-  set t_Sf=[3%dm
-  set t_Sb=[4%dm
-endif
+set t_Co=256
+set t_Sf=[3%dm
+set t_Sb=[4%dm
+
 " カレント行ハイライトON
 set cursorline
 set nocursorcolumn
@@ -240,9 +238,22 @@ let g:gitgutter_eager = 0
 "---------------------------------------------------------------------------
 " colorscheme
 "---------------------------------------------------------------------------
+
+set t_Co=256
+set t_Sf=[3%dm
+set t_Sb=[4%dm
+if has('patch-7.4.1778')
+  set guicolors
+endif
+if has('nvim')
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
 autocmd ColorScheme * highlight Identifier ctermfg=210
 colorscheme molokai
 let g:molokai_original = 1
+set termguicolors
+set background=dark
 
 "molokaiの内容を一部修正
 hi Visual ctermbg=19
@@ -394,7 +405,6 @@ let g:NERDTreeChDirMode=2
 let g:NERDTreeChDirMode=1
 let g:NERDTreeShowBookmarks = 1
 let g:NERDTreeMinimalUI = 25
-let g:NERDTreeWinSize = 1
 let g:NERDTreeCascadeSingleChildDir = 0
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeRespectWildIgnore = 0
