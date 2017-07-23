@@ -17,6 +17,9 @@ inoremap , ,<Space>
 "  Insert mode中で単語単位/行単位の削除をアンドゥ可能にする
 inoremap <C-u>  <C-g>u<C-u>
 inoremap <C-w>  <C-g>u<C-w>
+" jj で インサートから抜ける
+inoremap <silent> jj <ESC>
+
 au FileType ruby set ts=2 sw=2 expandtab
 au FileType php  set ts=4 sw=4 expandtab
 "syntax Hilight
@@ -32,15 +35,6 @@ nnoremap gO :normal! O<ESC>j
 set nf=""
 "p レジスタ0を
 vnoremap <silent> p "0p
-
-" IME ON OFF
-if has('mac')
-  let g:imeoff = 'osascript -e "tell application \"System Events\" to key code 102"'
-  augroup MyIMEGroup
-    autocmd!
-    autocmd InsertLeave * :call system(g:imeoff)
-  augroup END
-endif
 
 "---------------------------------------------------------------------------
 " 表示に関する設定:
@@ -84,10 +78,21 @@ set wildignore+=*.png,*.jpg,*.gif
 "全角スペース表示
 highlight link ZenkakuSpace Error
 match ZenkakuSpace /　/
-set t_Co=256
-set t_Sf=[3%dm
-set t_Sb=[4%dm
-
+" ターミナルタイプによるカラー設定
+if &term =~ "xterm-256color" || "screen-256color"
+  " 256色
+  set t_Co=256
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+elseif &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
+  set t_Co=16
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+elseif &term =~ "xterm-color"
+  set t_Co=8
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
+endif
 " カレント行ハイライトON
 set cursorline
 set nocursorcolumn
@@ -238,22 +243,9 @@ let g:gitgutter_eager = 0
 "---------------------------------------------------------------------------
 " colorscheme
 "---------------------------------------------------------------------------
-
-set t_Co=256
-set t_Sf=[3%dm
-set t_Sb=[4%dm
-if has('patch-7.4.1778')
-  set guicolors
-endif
-if has('nvim')
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-endif
-
 autocmd ColorScheme * highlight Identifier ctermfg=210
 colorscheme molokai
 let g:molokai_original = 1
-set termguicolors
-set background=dark
 
 "molokaiの内容を一部修正
 hi Visual ctermbg=19
@@ -316,7 +308,7 @@ let g:gitgutter_eager = 0
 :endfunction
 
 let g:python3_host_prog  = expand("/usr/local/bin/python3")
-call denite#custom#source('file_rec', 'matcher', ['matcher_cpsm'])
+call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 call denite#custom#option('default', 'prompt', '>> :')
 call denite#custom#option('default', 'vertical_preview', 1)
 call denite#custom#option('default', 'short_source_names', 1)
@@ -358,6 +350,15 @@ nnoremap <silent> ,z   :<C-u>Denite z -default-action=cd<CR>:call TreeCWD()<CR>
 call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
 call denite#custom#map('insert', "<C-p>", '<denite:move_to_previous_line>')
 
+
+
+nnoremap <leader>a :DeniteCursorWord -buffer-name=gtags_context gtags_context<cr>
+nnoremap <leader>d :DeniteCursorWord -buffer-name=gtags_def gtags_def<cr>
+nnoremap <leader>r :DeniteCursorWord -buffer-name=gtags_ref gtags_ref<cr>
+nnoremap <leader>g :DeniteCursorWord -buffer-name=gtags_grep gtags_grep<cr>
+nnoremap <leader>t :Denite -buffer-name=gtags_completion gtags_completion<cr>
+nnoremap <leader>f :Denite -buffer-name=gtags_file gtags_file<cr>
+nnoremap <leader>p :Denite -buffer-name=gtags_path gtags_path<cr>
 
 "---------------------------------------------------------------------------
 " vim-startify
@@ -415,3 +416,36 @@ let NERDTreeIgnore = [
 	\ '\.git$', '\.hg$', '\.svn$', '\.stversions$', '\.pyc$', '\.svn$',
 	\ '\.DS_Store$', '\.sass-cache$', '__pycache__$', '\.egg-info$'
 	\ ]
+"---------------------------------------------------------------------------
+" Open Brower Github
+"---------------------------------------------------------------------------
+let g:openbrowser_github_always_used_branch='master'
+let g:openbrowser_github_url_exists_check='ignore'
+:function! OpenWithVisual()
+    call setpos("'<", getpos("."))
+    call setpos("'>", getpos("."))
+    normal! gv
+    :'<,'>OpenGithubFile
+:endfunction
+command! Gh :call OpenWithVisual()
+nnoremap <C-l> :call OpenWithVisual()<CR>
+
+"---------------------------------------------------------------------------
+" markdown preview
+"---------------------------------------------------------------------------
+let g:quickrun_config = {}
+let g:quickrun_config.markdown = {
+            \ 'outputter' : 'null',
+            \ 'command'   : 'open',
+            \ 'cmdopt'    : '-a',
+            \ 'args'      : 'Marked',
+            \ 'exec'      : '%c %o %a %s',
+            \ }
+
+"---------------------------------------------------------------------------
+" Align vim
+"---------------------------------------------------------------------------
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)

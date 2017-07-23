@@ -58,6 +58,9 @@ repo = 'vim-scripts/cmdalias.vim'
 # ==========================================================
 
 [[plugins]]
+repo = 'junegunn/vim-easy-align'
+
+[[plugins]]
 repo = 'google/vim-ft-go'
 
 [[plugins]]
@@ -70,7 +73,13 @@ repo = 'scrooloose/syntastic'
 repo = 'cespare/vim-toml'
 
 [[plugins]]
-repo = 'bronson/vim-trailing-whitespace'
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'tyru/open-browser-github.vim'
+
+[[plugins]]
+repo = 'tpope/vim-markdown'
 
 # ==========================================================
 # denite
@@ -95,6 +104,8 @@ repo  =  'Jagua/vim-denite-ghq'
 [[plugins]]
 repo  =  'hatanakay/vim-denite-z'
 
+[[plugins]]
+repo = 'ozelentok/denite-gtags'
 
 # ==========================================================
 # powerline
