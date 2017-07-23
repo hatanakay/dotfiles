@@ -26,6 +26,7 @@ setopt hist_ignore_all_dups
 #=============================
 autoload -U compinit #補完機能
 compinit
+autoload -Uz zmv
 
 setopt auto_cd           # 指定したコマンド名がなく、ディレクトリ名と一致した場合 cd する
 setopt auto_list         # 補完候補が複数ある時に、一覧表示する
@@ -146,6 +147,8 @@ alias symlinks="find ./ -type l -print0 | xargs -0 ls -plah"
 alias rbs="ruby -rwebrick -e'WEBrick::HTTPServer.new(:Port => 3000,  :DocumentRoot => Dir.pwd).start'"
 alias xmlpp="python -c 'import sys;import xml.dom.minidom;s=sys.stdin.read();print xml.dom.minidom.parseString(s).toprettyxml()'"
 
+alias zmv='noglob zmv -W'
+
 dsstore_del (){
     if [ -d $1 ] ; then
         find $1 -name ".DS_Store" -print -exec rm {} ";"
@@ -190,7 +193,7 @@ case "${OSTYPE}" in
 # Mac(Unix)
 darwin*)
     # ここに設定
-    [ -f ~/dotfiles/.zshrc.osx ] && source ~/dotfiles/.zshrc.osx
+    [ -f ~/dotfiles/.zshrc.osx ] && source ~/.zshrc.osx
     ;;
 # Linux
 linux*)
@@ -216,7 +219,7 @@ lstat(){
             fi
         else
             command gstat --printf "%A:%a %U:%G %.19y %n \n" $@
-        fi 
+        fi
     fi
 }
 #=============================
@@ -280,9 +283,9 @@ ssh() {
             remote_ip=$(dig ${full_host} +short)
         fi
     fi
-    
+
     if is_production "$remote"; then
-        set_term_bgcolor 0 102 0    
+        set_term_bgcolor 0 102 0
     fi
 
     if [[ $full_host =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
@@ -301,15 +304,15 @@ ssh() {
     if [[ $remote != -* ]]; then
         renamed=1
         if [[ "NONE" == "${full_host}" ]]; then
-            tmux rename-window "ssh(${remote_ip})"; 
+            tmux rename-window "ssh(${remote_ip})";
         else
             if [[ 0 == ${#full_host} ]]; then
                 full_host=$@
             fi
             if is_production "$remote"; then
-               tmux rename-window "ssh:#[fg=yellow]${full_host}#[fg=default](#[fg=red]${remote_ip}#[fg=default])"; 
+               tmux rename-window "ssh:#[fg=yellow]${full_host}#[fg=default](#[fg=red]${remote_ip}#[fg=default])";
             else
-               tmux rename-window "ssh:#[fg=white]${full_host}#[fg=default](#[fg=colour153]${remote_ip}#[fg=default])"; 
+               tmux rename-window "ssh:#[fg=white]${full_host}#[fg=default](#[fg=colour153]${remote_ip}#[fg=default])";
             fi
         fi
     fi
@@ -332,3 +335,4 @@ dic () {
 }
 
 
+export PATH="/usr/local/opt/mysql@5.5/bin:$PATH"

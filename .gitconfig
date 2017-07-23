@@ -76,3 +76,11 @@
 	noprefix = true
 [include]
     path = ~/.gitconfig.local
+[ghq]
+    root=~/develop/src
+[gh-open]
+    ghe-host = git.pepabo.com
+    ghe-protocol = https
+[hub]
+    host = git.pepabo.com
+    protocol = https
