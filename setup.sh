@@ -13,12 +13,19 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Link dotfiles"
-dotfiles="zsh/.zshrc zsh/.zshrc.antigen zsh/.zshrc.linux zsh/.zshrc.local zsh/.zshrc.osx tmux/.tmux.conf"
+mkdir -p $HOME/develop/{bin, src}
+mkdir -p $HOME/.zsh
+
+dotfiles="zsh/.zshrc zsh/.zshrc.antigen zsh/.zshrc.linux zsh/.zshrc.local zsh/.zshrc.osx tmux/.tmux.conf git/.gitconfig"
 for file in $dotfiles
 do
 	ln -sf $file $HOME/`basename $file`
 done
 
 ln -sf $HOME/dotfiles/.config $HOME/.config 
+ln -sf $HOME/dotfiles/.config/zsh/.antigen $HOME/.antigen 
+ln -sf $HOME/dotfiles/.config/zsh/.auto-fu.zsh $HOME/.auto-fu.zsh
 
-
+echo "other Settings"
+pip3 install neovim
+go get github.com/monochromegane/mdt/...

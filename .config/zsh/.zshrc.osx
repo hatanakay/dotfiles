@@ -76,8 +76,8 @@ function compare {
 #=============================
 # source auto-fu.zsh
 #=============================
-if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
-    source ~/.zsh/auto-fu.zsh/auto-fu.zsh
+if [ -f ~/.auto-fu.zsh/auto-fu.zsh ]; then
+    source ~/.auto-fu.zsh/auto-fu.zsh
     function zle-line-init () {
         auto-fu-init
     }
@@ -87,21 +87,6 @@ if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
     zstyle ':auto-fu:var' postdisplay $''
 
 fi
-
-#=============================
-# zsh-autosuggestions
-#=============================
-#if [ -f ~/.zsh/zsh-autosuggestions/autosuggestions.zsh ]; then
-    #source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
-    ## Enable autosuggestions automatically
-    #zle-line-init() {
-        #zle autosuggest-start
-    #}
-    #zle -N zle-line-init
-    #bindkey '^A' autosuggest-toggle
-    #bindkey '^F' vi-forward-blank-word
-    #bindkey '^f' vi-forward-word
-#fi
 
 #=============================
 # local settings

@@ -18,7 +18,7 @@ node
 openssl
 peco
 python3
-ricty
+ricty --with-powerline --vim-powerline
 the_platinum_searcher
 tig
 tmux
