@@ -12,15 +12,11 @@ case "${OSTYPE}" in
         antigen bundle gem
         antigen bundle rake
         antigen bundle common-aliases
-        antigen-bundle bundler
         antigen bundle git
         antigen bundle git-extras
-        antigen-bundle gnu-utils
         antigen bundle osx
         antigen bundle z
         antigen bundle command-not-found
-        antigen-bundle zsh-users/zsh-syntax-highlighting
-        antigen-bundle common-aliases
         antigen bundle zsh-users/zsh-completions
         ;;
     linux*)
@@ -28,8 +24,8 @@ case "${OSTYPE}" in
         antigen bundle command-not-found
 esac    
 
-antigen-theme frisk
+antigen theme frisk
 
 # Tell antigen that you're done.
-antigen-apply
+antigen apply
 

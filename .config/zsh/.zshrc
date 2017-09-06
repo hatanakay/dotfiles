@@ -1,5 +1,6 @@
 source $HOME/.zshrc.antigen
 bindkey -e
+
 #=============================
 # history
 #=============================

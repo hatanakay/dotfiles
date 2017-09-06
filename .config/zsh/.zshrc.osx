@@ -12,6 +12,11 @@ if [ -x $(which go) ]; then
     export PATH=$GOPATH/bin:$PATH
 fi
 
+if [ -d /usr/local/opt/pyenv ]; then
+    export PATH="/usr/local/opt/pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
+
 #rbenvのPATHが後になってしまうので一旦追加...
 source ~/.zprofile
 
@@ -19,20 +24,26 @@ typeset -gxU PATH R_HOME GOPATH
 
 # osx alias
 alias pbc='pbcopy'
-alias vi='env LANG=ja_JP.UTF-8 reattach-to-user-namespace /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias ctags='/Applications/MacVim.app/Contents/MacOS/ctags "$@"'
-alias vim='env LANG=ja_JP.UTF-8 reattach-to-user-namespace /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+alias vi=nvim
+alias vim=nvim
 alias lg="find . -type d -name .svn -prune -o -type f -print | xargs lgrep -n"
 alias tmuxv="tmux new-session \; split-window -h \; split-window -d -d \;"
 alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+alias gtags='gtags --gtagsconf=/usr/local/etc/gtags.conf --gtagslabel=pygments'
 
 # Terminal Colorの設定
+export TERM=xterm-256color
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
+### global
+export GTAGSCONF=/usr/local/etc/gtags.conf
+export GTAGSLABEL=pygments
+
 # vim
-export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+#export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
+export EDITOR=nvim
 
 # z
 if [ -f /usr/local/etc/profile.d/z.sh ]; then
@@ -65,8 +76,8 @@ function compare {
 #=============================
 # source auto-fu.zsh
 #=============================
-if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
-    source ~/.zsh/auto-fu.zsh/auto-fu.zsh
+if [ -f ~/.auto-fu.zsh/auto-fu.zsh ]; then
+    source ~/.auto-fu.zsh/auto-fu.zsh
     function zle-line-init () {
         auto-fu-init
     }
@@ -76,21 +87,6 @@ if [ -f ~/.zsh/auto-fu.zsh/auto-fu.zsh ]; then
     zstyle ':auto-fu:var' postdisplay $''
 
 fi
-
-#=============================
-# zsh-autosuggestions
-#=============================
-#if [ -f ~/.zsh/zsh-autosuggestions/autosuggestions.zsh ]; then
-    #source ~/.zsh/zsh-autosuggestions/autosuggestions.zsh
-    ## Enable autosuggestions automatically
-    #zle-line-init() {
-        #zle autosuggest-start
-    #}
-    #zle -N zle-line-init
-    #bindkey '^A' autosuggest-toggle
-    #bindkey '^F' vi-forward-blank-word
-    #bindkey '^f' vi-forward-word
-#fi
 
 #=============================
 # local settings

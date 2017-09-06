@@ -1,6 +1,6 @@
 [user]
     name = hatanakay
-    email = hatanaka.yoichi@gmail.com
+    email = yoichi@pepabo.com
 [color]
     ui = auto
     diff = auto
@@ -76,3 +76,7 @@
 	noprefix = true
 [include]
     path = ~/.gitconfig.local
+[hub]
+	host = git.pepabo.com
+[ghq "ghe"]
+	host = git.pepabo.com

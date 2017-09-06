@@ -1,0 +1,162 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# ==========================================================
+# colorscheme
+# ==========================================================
+
+[[plugins]]
+repo = 'tomasr/molokai'
+
+# ==========================================================
+# basic
+# ==========================================================
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+repo = 'scrooloose/nerdcommenter'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+repo = 'kana/vim-smartchr'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'banyan/recognize_charcode.vim'
+
+[[plugins]]
+repo = 'haya14busa/incsearch.vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'tyru/open-browser-github.vim'
+
+[[plugins]]
+repo = 'mhinz/vim-startify'
+
+[[plugins]]
+repo = 'vim-scripts/cmdalias.vim'
+
+# ==========================================================
+# development
+# ==========================================================
+
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+
+[[plugins]]
+repo = 'google/vim-ft-go'
+
+[[plugins]]
+repo = 'vim-jp/vim-go-extra'
+
+[[plugins]]
+repo = 'scrooloose/syntastic'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'tyru/open-browser-github.vim'
+
+[[plugins]]
+repo = 'tpope/vim-markdown'
+
+# ==========================================================
+# denite
+# ==========================================================
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+
+[[plugins]]
+repo = 'nixprime/cpsm'
+build = 'env PY3=ON ./install.sh'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+
+[[plugins]]
+repo  =  'Jagua/vim-denite-ghq'
+
+[[plugins]]
+repo  =  'hatanakay/vim-denite-z'
+
+[[plugins]]
+repo = 'ozelentok/denite-gtags'
+
+# ==========================================================
+# powerline
+# ==========================================================
+
+[[plugins]]
+repo = 'majutsushi/tagbar'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'gcmt/taboo.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+if = "!has('nvim')"
+build = 'make'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+# ==========================================================
+# neocomplete
+# ==========================================================
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+
+[[plugins]]
+repo = 'Shougo/neoinclude.vim'
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+
+[[plugins]]
+repo = 'zchee/deoplete-go'
+
+[[plugins]]
+repo = 'Shougo/deoplete-rct'
+
+[[plugins]]
+repo = 'osyo-manga/vim-monster'
+
+
