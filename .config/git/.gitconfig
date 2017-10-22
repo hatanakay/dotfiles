@@ -76,7 +76,5 @@
 	noprefix = true
 [include]
     path = ~/.gitconfig.local
-[hub]
-	host = git.pepabo.com
-[ghq "ghe"]
-	host = git.pepabo.com
+[ghq]
+    root = ~/develop/src

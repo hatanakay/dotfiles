@@ -1,0 +1,35 @@
+
+# tap repositories and their packages
+
+tap homebrew/core
+brew colordiff
+brew coreutils
+brew docker
+brew docker-compose
+brew docker-machine
+brew gawk
+brew ghq
+brew git
+brew global --with-ctags --with-pygments
+brew gnu-sed
+brew go
+brew jq
+brew neovim
+brew nkf
+brew peco
+brew python3
+brew reattach-to-user-namespace
+brew the_platinum_searcher
+brew tmux
+brew z
+brew zsh
+
+tap caskroom/cask
+cask docker
+
+tap rcmdnk/file
+brew brew-file
+
+tap sanemat/font
+brew ricty --with-powerline
+

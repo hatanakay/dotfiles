@@ -81,6 +81,9 @@ repo = 'tyru/open-browser-github.vim'
 [[plugins]]
 repo = 'tpope/vim-markdown'
 
+[[plugins]]
+repo = 'mattn/emmet-vim'
+
 # ==========================================================
 # denite
 # ==========================================================

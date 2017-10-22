@@ -19,13 +19,27 @@ mkdir -p $HOME/.zsh
 dotfiles="zsh/.zshrc zsh/.zshrc.antigen zsh/.zshrc.linux zsh/.zshrc.local zsh/.zshrc.osx tmux/.tmux.conf git/.gitconfig"
 for file in $dotfiles
 do
-	ln -sf $file $HOME/`basename $file`
+	ln -sf $HOME/dotfiles/.config/$file $HOME/`basename $file`
 done
 
-ln -sf $HOME/dotfiles/.config $HOME/.config 
-ln -sf $HOME/dotfiles/.config/zsh/.antigen $HOME/.antigen 
-ln -sf $HOME/dotfiles/.config/zsh/.auto-fu.zsh $HOME/.auto-fu.zsh
+ln -s $HOME/dotfiles/.config $HOME/.config 
 
 echo "other Settings"
-pip3 install neovim
-go get github.com/monochromegane/mdt/...
+pip3 install neovim powerline-status
+go get -u github.com/nsf/gocode
+
+echo "osx settings"
+mv ~/Applications/.localized ~/Applications/.localized.bk
+mv ~/Desktop/.localized ~/Desktop/.localized.bk
+mv ~/Downloads/.localized ~/Downloads/.localized.bk
+mv ~/Public/.localized ~/Public/.localized.bk
+mv ~/Pictures/.localized ~/Pictures/.localized.bk
+mv ~/Music/.localized ~/Music/.localized.bk
+mv ~/Movies/.localized ~/Movies/.localized.bk
+mv ~/Documents/.localized ~/Documents/.localized.bk
+
+defaults write NSGlobalDomain InitialKeyRepeat -int 12
+defaults write NSGlobalDomain KeyRepeat -int 1
+
+
+

@@ -1,4 +1,4 @@
-source $HOME/.antigen/antigen.zsh
+source $HOME/.config/zsh/antigen/antigen.zsh
 
 # Bundles from the default repo
 antigen use oh-my-zsh

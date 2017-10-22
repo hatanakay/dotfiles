@@ -1,22 +1,11 @@
 export PATH=$HOME/bin:/usr/local/bin:/usr/bin:$PATH
 export R_HOME=/Library/Frameworks/R.framework/Resources
 
-if [ -d $HOME/.phpenv ]; then
-    export PATH=$HOME/.phpenv/shims:$HOME/.phpenv/bin:$PATH
-    eval "$(phpenv init -)"
-fi
-
 if [ -x $(which go) ]; then
     export GOPATH=$HOME/develop
     export GOROOT="`brew --prefix go`/libexec"
     export PATH=$GOPATH/bin:$PATH
 fi
-
-if [ -d /usr/local/opt/pyenv ]; then
-    export PATH="/usr/local/opt/pyenv/bin:$PATH"
-    eval "$(pyenv init -)"
-fi
-
 #rbenvのPATHが後になってしまうので一旦追加...
 source ~/.zprofile
 
@@ -58,8 +47,8 @@ fi
 #=============================
 # peco
 #=============================
-if [ -d $HOME/.zsh/peco-sources ]; then
-    for f (~/.zsh/peco-sources/*) source "${f}"
+if [ -d $HOME/dotfiles/.config/zsh/peco-sources ]; then
+    for f (~/.config/zsh/peco-sources/*) source "${f}"
 fi
 
 #=============================
@@ -76,8 +65,8 @@ function compare {
 #=============================
 # source auto-fu.zsh
 #=============================
-if [ -f ~/.auto-fu.zsh/auto-fu.zsh ]; then
-    source ~/.auto-fu.zsh/auto-fu.zsh
+if [ -f ~/dotfiles/.config/zsh/auto-fu.zsh/auto-fu.zsh ]; then
+    source ~/dotfiles/.config/zsh/auto-fu.zsh/auto-fu.zsh
     function zle-line-init () {
         auto-fu-init
     }
