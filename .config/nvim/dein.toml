@@ -61,13 +61,19 @@ repo = 'vim-scripts/cmdalias.vim'
 repo = 'junegunn/vim-easy-align'
 
 [[plugins]]
-repo = 'google/vim-ft-go'
+repo = 'fatih/vim-go'
+on_ft='go'
+[[plugins]]
+repo = 'zchee/deoplete-go'
+build = 'make'
+on_ft = 'go'
+depends = ['deoplete.nvim']
+hook_source = '''
+    let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
+'''
 
 [[plugins]]
-repo = 'vim-jp/vim-go-extra'
-
-[[plugins]]
-repo = 'scrooloose/syntastic'
+repo = 'w0rp/ale'
 
 [[plugins]]
 repo = 'cespare/vim-toml'
@@ -87,12 +93,20 @@ repo = 'mattn/emmet-vim'
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
 
+[[plugins]]
+repo = 'jsfaint/gen_tags.vim'
+
 # ==========================================================
 # denite
 # ==========================================================
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
+
+[[plugins]]
+repo = 'Shougo/unite.vim'
+depends = 'neomru.vim'
+on_source = 'denite.nvim'
 
 [[plugins]]
 repo = 'nixprime/cpsm'
@@ -112,6 +126,10 @@ repo  =  'hatanakay/vim-denite-z'
 
 [[plugins]]
 repo = 'ozelentok/denite-gtags'
+
+[[plugins]]
+repo = 'Shougo/unite-outline'
+on_source = 'unite.vim'
 
 # ==========================================================
 # powerline

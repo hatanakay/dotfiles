@@ -35,7 +35,6 @@ nnoremap gO :normal! O<ESC>j
 set nf=""
 "p レジスタ0を
 vnoremap <silent> p "0p
-
 "---------------------------------------------------------------------------
 " 表示に関する設定:
 "---------------------------------------------------------------------------
@@ -167,7 +166,7 @@ set rtp^=$GOPATH/src/github.com/nsf/gocode/vim
 if $GOROOT != ''
   set rtp+=$GOROOT/misc/vim
 endif
-let g:tagbar_type_go = {  
+let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
         \ 'p:package',
@@ -195,6 +194,39 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 let g:go_fmt_command = "goimports"
+au FileType go set noexpandtab
+au FileType go set shiftwidth=4
+au FileType go set softtabstop=4
+au FileType go set tabstop=4
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+let g:go_snippet_engine = "neosnippet"
+
+"---------------------------------------------------------------------------
+" PHP
+"---------------------------------------------------------------------------
+"" Maps additional php extensions
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+if has("autocmd")
+  augroup module
+    autocmd BufRead,BufNewFile *.module set filetype=php
+    autocmd BufRead,BufNewFile *.install set filetype=php
+    autocmd BufRead,BufNewFile *.test set filetype=php
+    autocmd BufRead,BufNewFile *.inc set filetype=php
+    autocmd BufRead,BufNewFile *.profile set filetype=php
+    autocmd BufRead,BufNewFile *.view set filetype=php
+  augroup END
+endif
+let g:deoplete#ignore_sources = get(g:, 'deoplete#ignore_sources', {})
+let g:deoplete#ignore_sources.php = ['phpcd', 'omni']
 
 "---------------------------------------------------------------------------
 " vim-tags
@@ -273,13 +305,17 @@ vnoremap [ "zdi^V[<C-R>z]<ESC>
 vnoremap ( "zdi^V(<C-R>z)<ESC>
 vnoremap " "zdi^V"<C-R>z^V"<ESC>
 vnoremap ' "zdi'<C-R>z'<ESC>
- 
+
 
 "---------------------------------------------------------------------------
 " vim-airline
 "---------------------------------------------------------------------------
 let g:airline_theme = 'powerlineish'
-let g:airline#extensions#tabline#enabled  =  1
+let g:airline_section_z = airline#section#create(['windowswap',  '%3p%% ',  'linenr',  ':%3v'])
+let g:airline#extensions#hunks#enabled = 0
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#error_symbol = 'E:'
+let g:airline#extensions#ale#warning_symbol = 'W:'
 
 "---------------------------------------------------------------------------
 " json
@@ -442,4 +478,42 @@ nmap ga <Plug>(EasyAlign)
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
+
+"---------------------------------------------------------------------------
+" ale
+"---------------------------------------------------------------------------
+" エラー行に表示するマーク
+let g:ale_sign_error = '⨉'
+let g:ale_sign_warning = '⚠'
+" エラー行にカーソルをあわせた際に表示されるメッセージフォーマット
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" エラー表示の列を常時表示
+let g:ale_sign_column_always = 1
+
+" ファイルを開いたときにlint実行
+let g:ale_lint_on_enter = 1
+" ファイルを保存したときにlint実行
+let g:ale_lint_on_save = 1
+" 編集中のlintはしない
+let g:ale_lint_on_text_changed = 'never'
+
+" lint結果をロケーションリストとQuickFixには表示しない
+" 出てると結構うざいしQuickFixを書き換えられるのは困る
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 0
+let g:ale_open_list = 0
+let g:ale_keep_list_window_open = 0
+
+" ALE用プレフィックス
+nmap [ale] <Nop>
+map <C-k> [ale]
+" エラー行にジャンプ
+nmap <silent> [ale]<C-P> <Plug>(ale_previous)
+nmap <silent> [ale]<C-N> <Plug>(ale_next)
+
+"---------------------------------------------------------------------------
+" gen_tags.vim
+"---------------------------------------------------------------------------
+let g:gen_tags#ctags_auto_gen = 1
+let g:gen_tags#gtags_auto_gen = 1
 
