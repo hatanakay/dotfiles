@@ -1,0 +1,11 @@
+{
+    "Keymap": {
+        "C-g": "peco.Cancel",
+        "C-v": "peco.SelectNextPage"
+
+    },
+    "Style": {
+        "Selected": ["underline", "on_green", "black"],
+        "Query": ["red", "underline"]
+    }
+}

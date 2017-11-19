@@ -116,6 +116,13 @@ set wrapscan
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 "---------------------------------------------------------------------------
+" vimrc を楽に開く&& 再読み込み
+"---------------------------------------------------------------------------
+" open .vimrc
+command! Ev edit /Users/yoichi/dotfiles/.config/nvim/settings.vim
+command! Rv source $MYVIMRC
+
+"---------------------------------------------------------------------------
 " ファイル操作に関する設定:
 "---------------------------------------------------------------------------
 " バックアップファイルを作成しない
@@ -271,21 +278,8 @@ vnoremap ' "zdi'<C-R>z'<ESC>
 "---------------------------------------------------------------------------
 " vim-airline
 "---------------------------------------------------------------------------
-if has('multi_byte')
-    let g:airline_powerline_fonts = 1
-endif
-
-let g:airline_theme = 'dark'
-let g:airline#extensions#tabline#enabled  =  2
-let g:airline#extensions#tabline#fnamemod  =  ':t'
-let g:airline#extensions#tabline#left_sep  =  ' '
-let g:airline#extensions#tabline#left_alt_sep  =  '|'
-let g:airline#extensions#tabline#right_sep  =  ' '
-let g:airline#extensions#tabline#right_alt_sep  =  '|'
-let g:airline_left_sep  =  ' '
-let g:airline_left_alt_sep  =  '|'
-let g:airline_right_sep  =  ' '
-let g:airline_right_alt_sep  =  '|'
+let g:airline_theme = 'powerlineish'
+let g:airline#extensions#tabline#enabled  =  1
 
 "---------------------------------------------------------------------------
 " json
@@ -338,14 +332,14 @@ nnoremap <silent> ,g   :<C-u>Denite grep<CR>
 nnoremap <silent> ,cg  :<C-u>DeniteCursorWord grep<CR>
 nnoremap <silent> ,l   :<C-u>Denite line<CR>
 nnoremap <silent> ,b   :<C-u>Denite buffer<CR>
-nnoremap <silent> ,d   :<C-u>Denite directory_rec -default-action=cd<CR>:call TreeCWD()<CR>
+nnoremap <silent> ,d   :<C-u>Denite directory_rec -default-action=cd<CR>
 nnoremap <silent> ,m   :<C-u>Denite file_mru<CR>
 nnoremap <silent> ,y   :<C-u>Denite neoyank<CR>
 nnoremap <silent> ,o   :<C-u>Denite outline<CR>
 nnoremap <silent> ,r   :<C-u>Denite -resume<CR>
 nnoremap <silent> ,j   :<C-u>Denite jump change file_point<CR>
-nnoremap <silent> ,e   :<C-u>Denite ghq -default-action=cd<CR>:call TreeCWD()<CR>
-nnoremap <silent> ,z   :<C-u>Denite z -default-action=cd<CR>:call TreeCWD()<CR>
+nnoremap <silent> ,e   :<C-u>Denite ghq -default-action=cd<CR>
+nnoremap <silent> ,z   :<C-u>Denite z -default-action=cd<CR>
 
 call denite#custom#map('insert', "<C-n>", '<denite:move_to_next_line>')
 call denite#custom#map('insert', "<C-p>", '<denite:move_to_previous_line>')
@@ -383,23 +377,15 @@ highlight StartifySpecial ctermfg=250
 " deoplete
 "---------------------------------------------------------------------------
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_delay = 0
-let g:deoplete#auto_complete_start_length = 1
-let g:deoplete#enable_camel_case = 0
-let g:deoplete#enable_ignore_case = 0
-let g:deoplete#enable_refresh_always = 0
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.ruby = ['[^. *\t]\.\w*', '\h\w*::']
-
-
+inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+            \ neosnippet#expandable_or_jumpable() ?
+            \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 "---------------------------------------------------------------------------
 " NERDTree
 "---------------------------------------------------------------------------
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 map <Space> :NERDTreeToggle<CR>
 
 let g:NERDTreeChDirMode=2
@@ -449,3 +435,11 @@ let g:quickrun_config.markdown = {
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+"---------------------------------------------------------------------------
+" deoplete
+"---------------------------------------------------------------------------
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+

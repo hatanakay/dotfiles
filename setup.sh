@@ -13,7 +13,7 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Link dotfiles"
-mkdir -p $HOME/develop/{bin, src}
+mkdir -p $HOME/develop/{bin,src}
 mkdir -p $HOME/.zsh
 
 dotfiles="zsh/.zshrc zsh/.zshrc.antigen zsh/.zshrc.linux zsh/.zshrc.local zsh/.zshrc.osx tmux/.tmux.conf git/.gitconfig"
