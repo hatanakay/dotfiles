@@ -337,7 +337,6 @@ let g:gitgutter_eager = 0
     wincmd p
 :endfunction
 
-let g:python3_host_prog  = expand("/usr/local/bin/python3")
 call denite#custom#source('file_rec', 'matchers', ['matcher_cpsm'])
 call denite#custom#option('default', 'prompt', '>> :')
 call denite#custom#option('default', 'vertical_preview', 1)
